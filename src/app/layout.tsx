@@ -7,6 +7,11 @@ export const metadata: Metadata = {
     default: 'Природні Мандри',
     template: '%s | Природні Мандри',
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
   description: 'Еко-мандри, історії та мандрівники України.',
   openGraph: {
     title: 'Природні Мандри',

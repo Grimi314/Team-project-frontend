@@ -1,4 +1,10 @@
 {
+   "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@tanstack/react-query": "^5.101.2",
     "axios": "^1.18.1",
