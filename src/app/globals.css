@@ -50,7 +50,7 @@ body {
   margin: 0;
   font-family: var(--font-main), Arial, sans-serif;
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background-color:#eef8ee;
 }
 
 button,

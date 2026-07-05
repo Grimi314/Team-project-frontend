@@ -1,6 +1,17 @@
 import type { Metadata } from 'next';
 import { AppProviders } from '@/providers/appProviders';
 import './globals.css';
+import Header from './components/header/header';
+
+import { Montserrat } from 'next/font/google';
+import './globals.css';
+
+const montserrat = Montserrat({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -24,9 +35,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="uk">
+    <html lang="uk" className={montserrat.variable}>
       <body>
         <AppProviders>
+          <Header></Header>
           <main>{children}</main>
         </AppProviders>
       </body>

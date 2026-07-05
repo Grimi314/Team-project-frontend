@@ -1,0 +1,117 @@
+.container {
+max-width: 375px;
+min-width: 320px;
+padding: 16px 20px 16px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.logo{
+    height: 36px;
+    width: 124px;
+    fill: black;
+    color: black;
+}
+
+
+.menu{
+   width: 24px;
+   height: 24px;
+   fill: #000;
+   
+   
+}
+
+.button{
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, 0.05);
+  
+}
+
+.buttonEddStory{
+    display: none;
+}
+
+.wrapper {
+  margin: 4px 0;
+
+}
+
+.navList{
+    display: none;
+}
+
+@media screen and (min-width: 768px){
+.container {
+        max-width: 768px;
+        padding: 16px 32px ;
+    
+    }
+
+.buttonEddStory {
+display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid #4a9849;
+border-radius: 6px;
+
+width: 196px;
+height: 32px;
+background-color: #4a9849;
+
+
+font-weight: 500;
+font-size: 16px;
+line-height: 1.5;
+color: #fff;
+font-family: "Montserrat", sans-serif;
+}
+
+.buttonContainer{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+   
+}
+}
+
+@media screen and (min-width: 1440px){
+.container {
+max-width: 1440px;
+padding: 16px 64px;
+
+    }
+
+.navList{
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-direction: row;
+gap: 32px;
+list-style-type: none;
+}
+
+.navListItem{
+font-weight: 400;
+font-size: 18px;
+line-height: 1.5;
+color: #1b391b;
+font-family: "Montserrat", sans-serif;
+}
+
+.wrapper{
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+}
