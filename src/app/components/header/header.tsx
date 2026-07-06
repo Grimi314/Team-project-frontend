@@ -1,9 +1,25 @@
+'use client';
+import { useAuthStore } from '@/auth/model/authStore';
+import { logoutUser } from '@/auth/api/authApi';
+
 import Link from 'next/link';
 import css from './header.module.css';
 import { Icon } from '../icon/icon';
 
+import AuthBlock from './authBlock';
+
 export default function Header() {
   const travellerId = null;
+
+  const { user, isAuth, logout } = useAuthStore();
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } finally {
+      logout();
+    }
+  };
 
   return (
     <header className={css.container}>
@@ -36,13 +52,29 @@ export default function Header() {
         </ul>
 
         <div className={css.buttonContainer}>
-          <Link href={'/stories/enw'} className={css.buttonEddStory}>
-            Опублікувати статтю
-          </Link>
+          {true ? (
+            <>
+              <Link href={'/stories/enw'} className={css.buttonEddStory}>
+                Опублікувати статтю
+              </Link>
 
-          <button className={css.button}>
-            <Icon icon="icon-menu" className={css.menu} />
-          </button>
+              <button className={css.button}>
+                <Icon icon="icon-menu" className={css.menu} />
+              </button>
+
+              <AuthBlock />
+            </>
+          ) : (
+            <>
+              <Link href={'/api/auth'} className={css.buttonLogin}>
+                Вхід
+              </Link>
+
+              <Link href={'/api/auth'} className={css.buttonRegister}>
+                Реєстрація
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>

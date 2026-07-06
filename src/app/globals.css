@@ -48,7 +48,7 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-main), Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: var(--color-text);
   background-color:#eef8ee;
 }

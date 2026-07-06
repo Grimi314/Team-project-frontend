@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { AppProviders } from '@/providers/appProviders';
 import './globals.css';
 import Header from './components/header/header';
+import { AuthProvider } from '../providers/AuthProvider';
 
 import { Montserrat } from 'next/font/google';
 import './globals.css';
@@ -39,7 +40,9 @@ export default function RootLayout({
       <body>
         <AppProviders>
           <Header></Header>
-          <main>{children}</main>
+          <AuthProvider>
+            <main>{children}</main>
+          </AuthProvider>
         </AppProviders>
       </body>
     </html>
