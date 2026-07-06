@@ -1,0 +1,36 @@
+  .TravellerInfoContainer {
+    padding-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .avatarWrapper {
+    position: relative; 
+    width: 113px;     
+    height: 113px;
+    overflow: hidden;   
+    border-radius: 50%;
+  }
+  
+  .avatar {
+    object-fit: cover;  
+  }
+  
+  .infoBlock {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 130%;
+    letter-spacing: -0.01em;
+  }
+
+  .count {
+    font-weight: 400;
+    line-height: 150%;
+  }
