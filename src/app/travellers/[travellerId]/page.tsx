@@ -1,5 +1,6 @@
 import { Header } from '../../components/header/header'
 import { TravellerInfo } from '../../components/TravellerInfo/TravellerInfo'
+import { PageTitle } from '@/app/components/PageTitle/PageTitle';
 import { Footer } from '../../components/footer/footer'
 
 export default async function TravellerPage({
@@ -14,6 +15,7 @@ export default async function TravellerPage({
         <Header />
         <main>
             <TravellerInfo travellerId={travellerId} />
+            <PageTitle titleText="Статті Мандрівника" />
         </main>
         <Footer />
     </>

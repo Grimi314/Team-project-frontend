@@ -1,24 +1,25 @@
 import Image from 'next/image';
 import styles from './TravellerInfo.module.css';
+import axios from 'axios';
 
 interface TravellerInfoProps {
   travellerId: string;
 }
 
+interface TravellerData {
+  avatarUrl: string;
+  name: string;
+  articlesAmount: number;
+}
+
 export const TravellerInfo = async ({ travellerId }: TravellerInfoProps) => {
-  let user = null;
+  let user: TravellerData | null = null;
 
   try {
-    const res = await fetch(`http://localhost:3000/api/users/${travellerId}`, {
-      cache: 'no-store',
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      user = data.user;
-    }
+    const res = await axios.get(`http://localhost:3000/api/users/${travellerId}`);
+    user = res.data.user;
   } catch (error) {
-    console.error('Помилка завантаження! ДОДАТИ LAYOUT!', error);
+    console.error('Помилка завантаження мандрівника:', error);
   }
 
   if (!user) return <p>Мандрівника не знайдено. ДОДАТИ LAYOUT!</p>;
@@ -32,6 +33,7 @@ export const TravellerInfo = async ({ travellerId }: TravellerInfoProps) => {
           fill
           className={styles.avatar}
           sizes="64px"
+          priority
         />
       </div>
       <div className={styles.infoBlock}>
