@@ -1,0 +1,90 @@
+.card {
+  background-color: #e8f4ec; 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.imageWrapper {
+  min-width: 335px;
+  min-height: 335px;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meta {
+  font-weight: 600;
+  font-size: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot {
+  color: #666;
+}
+
+.ratingContainer {
+    display: flex;
+    gap: 2px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.viewBtn {
+  flex-grow: 1;
+  background-color: #d8ebd9;
+  color: #1a2e1e;
+  border: 1px solid #b8dbba;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.viewBtn:hover {
+  background-color: #c5dfc6;
+}
+
+.saveBtn {
+  background-color: #d8ebd9;
+  border: 1px solid #b8dbba;
+  color: #1a2e1e;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.saveBtn:hover {
+  background-color: #c5dfc6;
+}

@@ -1,7 +1,8 @@
 import { Header } from '../../components/header/header'
 import { TravellerInfo } from '../../components/TravellerInfo/TravellerInfo'
 import { PageTitle } from '@/app/components/PageTitle/PageTitle';
-import { Footer } from '../../components/footer/footer'
+import { Footer } from '../../components/footer/footer';
+import { TravellersStories } from '../../components/TravellersStories/TravellersStories';
 
 export default async function TravellerPage({
   params,
@@ -16,6 +17,7 @@ export default async function TravellerPage({
         <main>
             <TravellerInfo travellerId={travellerId} />
             <PageTitle titleText="Статті Мандрівника" />
+            <TravellersStories travellerId={travellerId} />
         </main>
         <Footer />
     </>
