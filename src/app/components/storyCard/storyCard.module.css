@@ -1,0 +1,170 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #def2de;
+  font-family: var(--font-main), Arial, sans-serif;
+}
+
+.image,
+.imageFallback {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.image {
+  object-fit: cover;
+  background-color: #d5e8d5;
+}
+
+.imageFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #a7d5a3, #dff0df);
+  color: rgba(27, 57, 27, 0.7);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 12px;
+  padding: 16px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1b391b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.author {
+  font-weight: 600;
+}
+
+.dot {
+  font-size: 16px;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.metaIcon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.title {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #1b391b;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.actions {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.primaryAction,
+.bookmarkAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  color: #1b391b;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primaryAction {
+  flex: 1 1 auto;
+  padding: 6px 12px;
+}
+
+.bookmarkAction {
+  flex: 0 0 48px;
+  padding: 6px;
+}
+
+.primaryAction:hover,
+.primaryAction:focus-visible,
+.bookmarkAction:hover,
+.bookmarkAction:focus-visible {
+  background: #4a9849;
+  border-color: #4a9849;
+  color: #fff;
+  outline: none;
+}
+
+.primaryAction:active,
+.bookmarkAction:active {
+  background: #254c24;
+  border-color: #254c24;
+  color: #fff;
+}
+
+.primaryAction[aria-disabled='true'],
+.bookmarkAction:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.primaryAction:focus-visible,
+.bookmarkAction:focus-visible {
+  box-shadow: 0 0 0 2px rgba(74, 152, 73, 0.2);
+}
+
+.actionIcon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+@media (min-width: 1280px) {
+  .meta {
+    font-size: 16px;
+  }
+
+  .dot {
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .primaryAction,
+  .bookmarkAction {
+    font-size: 20px;
+  }
+}
