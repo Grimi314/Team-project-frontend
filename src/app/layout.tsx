@@ -5,7 +5,6 @@ import Header from './components/header/header';
 import { AuthProvider } from '../providers/AuthProvider';
 
 import { Montserrat } from 'next/font/google';
-import './globals.css';
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
@@ -36,8 +35,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="uk" className={montserrat.variable}>
-      <body>
+    <html lang="uk">
+      <body className={montserrat.variable}>
         <AppProviders>
           <Header></Header>
           <AuthProvider>
