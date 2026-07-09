@@ -1,0 +1,244 @@
+.container {
+    padding: 0 20px;
+    min-width: 320px;
+    max-width: 375px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.logo {
+    height: 36px;
+    width: 124px;
+    fill: black;
+    color: black;
+    margin: 16px 0;
+}
+
+.logoButtonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+
+.closeButton{
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: all 250ms ease;
+
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    color: #fff;
+    background-color: #4a9849;
+    border: 1px solid #4a9849;
+}
+
+.closeButton:active {
+    border: 1px solid rgba(255, 255, 255, 0);
+    background-color: #254c24;
+    color: #fff;
+    fill: #fff;
+
+    .closeIcon{
+        fill: #fff;
+    }
+}
+
+.closeIcon{
+    fill: #000;
+    width: 24px;
+    height: 24px;
+    transition: all 250ms ease;
+    
+}
+
+
+.navList{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    list-style-type: none;
+    margin-bottom: 266px;
+}
+
+.navListItem{
+font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1b391b;
+
+}
+
+.buttonEddStory {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4a9849;
+    border-radius: 6px;
+    margin:0 auto;
+
+width: 335px;
+    
+    height: 32px;
+    background-color: #4a9849;
+
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+}
+
+.buttonEddStory:hover,
+.buttonEddStory:focus {
+    background-color: #def2de;
+    border: 1px solid #4a9849;
+    color: #1b391b;
+}
+
+.buttonEddStory:active {
+    color: #fff;
+    background-color: #4a9849;
+    border: 1px solid #4a9849;
+}
+
+.buttonEddStory:disabled {
+    opacity: 0.3;
+}
+
+
+.modalWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+}
+
+.buttonLogin {
+    display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 6px;
+   width: 335px;
+        
+        height: 32px;
+    
+        background-color: rgba(0, 0, 0, 0.05);
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1.5;
+        color: #1b391b;
+    transition: all 250ms ease;
+}
+
+.buttonRegister {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #4a9849;
+    border-radius: 6px;
+width: 335px;
+
+    height: 32px;
+    background-color: #4a9849;
+
+    transition: all 250ms ease;
+}
+
+
+.buttonRegister:hover,
+.buttonRegister:focus {
+    background-color: #def2de;
+    border: 1px solid #4a9849;
+    color: #1b391b;
+}
+
+.buttonRegister:active {
+    color: #fff;
+    background-color: #4a9849;
+    border: 1px solid #4a9849;
+}
+
+.buttonRegister:disabled {
+    opacity: 0.3;
+}
+
+.buttonLogin:hover,
+.buttonLogin:focus {
+    color: #fff;
+    background-color: #4a9849;
+    border: 1px solid #4a9849;
+}
+
+.buttonLogin:active {
+    border: 1px solid rgba(255, 255, 255, 0);
+    background-color: #254c24;
+    color: #fff;
+}
+
+.modalAuthBlockTablet{
+    display: none;
+}
+
+
+@media screen and (min-width: 768px) {
+    .container {
+        padding: 0 32px 92px 32px;
+        min-width: 768px;
+        position: relative;
+    }
+    .modalWrapper{
+        position: absolute;
+        top: 20px;
+        right: 80px;
+        flex-direction: row;
+    }
+
+    .buttonEddStory{
+    width: 196px;
+        height: 32px;
+    }
+
+    .buttonLogin{
+    width: 56px;
+        height: 32px;
+    }
+
+    .buttonRegister{
+    width: 114px;
+        height: 32px;
+    }
+
+    .modalAuthBlock{
+       display: none;
+    }
+
+        .modalAuthBlockTablet {
+            display: flex;
+            
+            justify-self: center;
+        }
+
+
+}
+
+
+
+
+

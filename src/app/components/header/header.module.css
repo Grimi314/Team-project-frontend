@@ -5,6 +5,11 @@ padding: 16px 20px 16px 20px;
 display: flex;
 align-items: center;
 justify-content: space-between;
+margin: 0 auto;
+}
+
+.desktopAuthBlock {
+    display: none;
 }
 
 .logo{
@@ -129,6 +134,13 @@ font-family: "Montserrat", sans-serif;
 }
 
 @media screen and (min-width: 1440px){
+    .desktopAuthBlock {
+            display: block;
+        }
+
+    .button {
+            display: none;
+        }
 .container {
 max-width: 1440px;
 padding: 16px 64px;
@@ -215,3 +227,15 @@ font-family: "Montserrat", sans-serif;
 
 
 
+
+.button:active {
+    border: 1px solid rgba(255, 255, 255, 0);
+    background-color: #254c24;
+    color: #fff;
+
+
+    .menu{
+        fill: #fff;
+    }
+
+}

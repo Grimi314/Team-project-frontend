@@ -1,6 +1,8 @@
 'use client';
 import { useAuthStore } from '@/auth/model/authStore';
 import { logoutUser } from '@/auth/api/authApi';
+import HeaderModal from './heder-modal/header-modal';
+import { useState } from 'react';
 
 import Link from 'next/link';
 import css from './header.module.css';
@@ -12,6 +14,10 @@ export default function Header() {
   const travellerId = null;
 
   const { user, isAuth, logout } = useAuthStore();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
 
   const handleLogout = async () => {
     try {
@@ -21,7 +27,9 @@ export default function Header() {
     }
   };
 
-  return (
+  return true ? (
+    <HeaderModal onClose={closeMenu} />
+  ) : (
     <header className={css.container}>
       <Link href="/">
         <Icon icon="icon-Company-Logo" className={css.logo} />
@@ -40,7 +48,7 @@ export default function Header() {
             </Link>
           </li>
           <li className={css.navListItem}>
-            <Link href=" /travellers" prefetch={false}>
+            <Link href="/travellers" prefetch={false}>
               Еко-Мандрівники
             </Link>
           </li>
@@ -52,17 +60,19 @@ export default function Header() {
         </ul>
 
         <div className={css.buttonContainer}>
-          {true ? (
+          {isAuth ? (
             <>
               <Link href={'/stories/enw'} className={css.buttonEddStory}>
                 Опублікувати статтю
               </Link>
 
-              <button className={css.button}>
+              <button className={css.button} onClick={openMenu}>
                 <Icon icon="icon-menu" className={css.menu} />
               </button>
 
-              <AuthBlock />
+              <div className={css.desktopAuthBlock}>
+                <AuthBlock />
+              </div>
             </>
           ) : (
             <>
