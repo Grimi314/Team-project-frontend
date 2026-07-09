@@ -1,0 +1,217 @@
+.container {
+max-width: 375px;
+min-width: 320px;
+padding: 16px 20px 16px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.logo{
+    height: 36px;
+    width: 124px;
+    fill: black;
+    color: black;
+}
+
+
+.menu{
+   width: 24px;
+   height: 24px;
+   fill: #000;
+   
+   
+}
+
+.button{
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: all 250ms ease;
+  
+}
+
+
+
+.buttonEddStory{
+    display: none;
+    transition: all 250ms ease;
+}
+
+.buttonRegister{
+    display: none;
+    transition: all 250ms ease;
+}
+
+.buttonLogin{
+    display: none;
+    transition: all 250ms ease;
+}
+
+.wrapper {
+  margin: 4px 0;
+
+}
+
+.navList{
+    display: none;
+}
+
+@media screen and (min-width: 768px){
+.container {
+        max-width: 768px;
+        padding: 16px 32px ;
+    
+    }
+
+.buttonEddStory {
+display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid #4a9849;
+border-radius: 6px;
+
+width: 196px;
+height: 32px;
+background-color: #4a9849;
+
+
+font-weight: 500;
+font-size: 16px;
+line-height: 1.5;
+color: #fff;
+font-family: "Montserrat", sans-serif;
+}
+
+
+.buttonLogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    width: 65px;
+    height: 38px;
+
+    background-color: rgba(0, 0, 0, 0.05);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #1b391b;
+}
+
+.buttonRegister {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #4a9849;
+    border-radius: 6px;
+    width: 137px;
+    height: 38px;
+    background-color: #4a9849;
+}
+
+.buttonContainer{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+   
+}
+}
+
+@media screen and (min-width: 1440px){
+.container {
+max-width: 1440px;
+padding: 16px 64px;
+
+    }
+
+.navList{
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-direction: row;
+gap: 32px;
+list-style-type: none;
+}
+
+.navListItem{
+font-weight: 400;
+font-size: 18px;
+line-height: 1.5;
+color: #1b391b;
+font-family: "Montserrat", sans-serif;
+}
+
+.wrapper{
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.button{
+    display: none;
+}
+
+}
+
+
+
+.buttonEddStory:hover,
+.buttonEddStory:focus{
+    background-color: #def2de;
+    border: 1px solid #4a9849;
+    color: #1b391b;
+}
+
+.buttonEddStory:active{
+    color: #fff;
+    background-color: #4a9849;
+    border: 1px solid #4a9849;
+}
+
+.buttonEddStory:disabled{
+    opacity: 0.3;
+}
+
+.buttonRegister:hover,
+.buttonRegister:focus {
+    background-color: #def2de;
+    border: 1px solid #4a9849;
+    color: #1b391b;
+}
+
+.buttonRegister:active {
+    color: #fff;
+    background-color: #4a9849;
+    border: 1px solid #4a9849;
+}
+
+.buttonRegister:disabled {
+    opacity: 0.3;
+}
+
+.buttonLogin:hover,
+.buttonLogin:focus{
+    color: #fff;
+        background-color: #4a9849;
+        border: 1px solid #4a9849;
+}
+
+.buttonLogin:active{
+    border: 1px solid rgba(255, 255, 255, 0);
+    background-color: #254c24;
+    color: #fff;
+}
+
+
+
