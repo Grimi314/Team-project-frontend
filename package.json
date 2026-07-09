@@ -1,23 +1,30 @@
 {
    "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@tanstack/react-query": "^5.101.2",
-    "axios": "^1.18.1",
-    "clsx": "^2.1.1",
-    "formik": "^2.4.9",
-    "modern-normalize": "^3.0.1",
-    "react-hot-toast": "^2.6.0",
-    "swiper": "^14.0.1",
-    "yup": "^1.7.1",
-    "zustand": "^5.0.14"
-  },
-  "devDependencies": {
-    "eslint-config-prettier": "^10.1.8",
-    "prettier": "^3.9.4"
-  }
+      "dev": "next dev --turbopack",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint"
+   },
+   "dependencies": {
+      "@tanstack/react-query": "^5.101.2",
+      "axios": "^1.18.1",
+      "clsx": "^2.1.1",
+      "formik": "^2.4.9",
+      "modern-normalize": "^3.0.1",
+      "next": "^16.2.10",
+      "react": "^19.2.7",
+      "react-dom": "^19.2.7",
+      "react-hot-toast": "^2.6.0",
+      "swiper": "^14.0.1",
+      "yup": "^1.7.1",
+      "zustand": "^5.0.14"
+   },
+   "devDependencies": {
+      "@types/node": "^26.1.0",
+      "@types/react": "^19.2.17",
+      "@types/react-dom": "^19.2.3",
+      "eslint-config-prettier": "^10.1.8",
+      "prettier": "^3.9.4",
+      "typescript": "^6.0.3"
+   }
 }
