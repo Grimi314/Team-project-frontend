@@ -108,12 +108,13 @@
 
   .flexContainerAbout {
     display: flex;
+    gap: 24px;
 
     justify-content: space-between;
   }
 
   .aboutImage {
-    width: 644px;
+    width: auto;
     height: auto;
   }
 
