@@ -1,6 +1,6 @@
 .container {
-max-width: 375px;
-min-width: 320px;
+width: 375px;
+
 padding: 16px 20px 16px 20px;
 display: flex;
 align-items: center;
@@ -15,8 +15,7 @@ margin: 0 auto;
 .logo{
     height: 36px;
     width: 124px;
-    fill: black;
-    color: black;
+    fill: #1B391B;
 }
 
 
@@ -71,7 +70,7 @@ border: 1px solid rgba(0, 0, 0, 0.15);
 
 @media screen and (min-width: 768px){
 .container {
-        max-width: 768px;
+       width: 768px;
         padding: 16px 32px ;
     
     }
@@ -142,7 +141,7 @@ font-family: "Montserrat", sans-serif;
             display: none;
         }
 .container {
-max-width: 1440px;
+width: 1440px;
 padding: 16px 64px;
 
     }

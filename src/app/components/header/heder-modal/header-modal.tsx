@@ -73,7 +73,7 @@ export default function HeaderModal({ onClose }: HeaderModalType) {
         </li>
       </ul>
       <div className={css.modalWrapper}>
-        {true ? (
+        {isAuth ? (
           <>
             <Link href={'/stories/enw'} className={css.buttonEddStory}>
               Опублікувати статтю
@@ -95,9 +95,11 @@ export default function HeaderModal({ onClose }: HeaderModalType) {
         )}
       </div>
 
-      <div className={css.modalAuthBlockTablet}>
-        <AuthBlock />
-      </div>
+      {isAuth && (
+        <div className={css.modalAuthBlockTablet}>
+          <AuthBlock />
+        </div>
+      )}
     </div>
   );
 }

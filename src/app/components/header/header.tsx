@@ -27,7 +27,7 @@ export default function Header() {
     }
   };
 
-  return true ? (
+  return isMenuOpen ? (
     <HeaderModal onClose={closeMenu} />
   ) : (
     <header className={css.container}>
@@ -66,10 +66,6 @@ export default function Header() {
                 Опублікувати статтю
               </Link>
 
-              <button className={css.button} onClick={openMenu}>
-                <Icon icon="icon-menu" className={css.menu} />
-              </button>
-
               <div className={css.desktopAuthBlock}>
                 <AuthBlock />
               </div>
@@ -85,6 +81,10 @@ export default function Header() {
               </Link>
             </>
           )}
+
+          <button className={css.button} onClick={openMenu}>
+            <Icon icon="icon-menu" className={css.menu} />
+          </button>
         </div>
       </nav>
     </header>

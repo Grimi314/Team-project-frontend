@@ -9,8 +9,7 @@
 .logo {
     height: 36px;
     width: 124px;
-    fill: black;
-    color: black;
+fill: #1B391B;
     margin: 16px 0;
 }
 
@@ -195,6 +194,8 @@ width: 335px;
 .modalAuthBlockTablet{
     display: none;
 }
+
+
 
 
 @media screen and (min-width: 768px) {
