@@ -1,0 +1,29 @@
+.StoriesListSection {
+    margin: 32px 0 64px 0;
+}
+
+.storiesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    list-style: none; 
+    padding: 0;
+    margin-left: 0;
+    margin-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+    .storiesGrid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .storiesGrid {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+
+    .StoriesListSection {
+    margin: 48px 0 72px 0;
+}
+}

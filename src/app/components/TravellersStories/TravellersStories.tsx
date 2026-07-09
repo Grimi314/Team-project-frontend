@@ -7,7 +7,7 @@ interface TravellersStoriesProps {
 
 export function TravellersStories({ travellerId }: TravellersStoriesProps) {
   return (
-    <section className={styles.section}>
+    <section className={styles.StoriesListSection}>
       <StoriesList travellerId={travellerId} />
     </section>
   );

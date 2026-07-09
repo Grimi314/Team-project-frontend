@@ -43,7 +43,7 @@ export default function StoryCard({ story }: StoryCardProps) {
         <h3 className={styles.title}>{story.title}</h3>
 
         <div className={styles.actions}>
-          <Link href={`/articles/${story._id}`} className={styles.viewBtn}>
+          <Link href={`/stories/${story._id}`} className={styles.viewBtn}>
             Переглянути статтю
           </Link>
           

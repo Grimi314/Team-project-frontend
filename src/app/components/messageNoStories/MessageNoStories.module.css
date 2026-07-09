@@ -1,0 +1,47 @@
+.NoStoriesContainer {
+    margin-top: 40px;
+    border-radius: 24px;
+    padding: 40px 16px;
+    background-color: #DEF2DE;
+    max-width: 533px;
+}
+
+.NoStoriesText {
+    color: black;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 140%;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+}
+
+.NoStoriesBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 6px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: #4A9849;
+}
+
+@media screen and (min-width: 768px) {
+    .NoStoriesContainer {
+    padding: 40px 32px;
+}
+
+.NoStoriesBtn {
+    width: 163px;
+}
+
+}
+
+@media screen and (min-width: 1440px) {
+.NoStoriesBtn {
+    width: 198px;
+}
+}
