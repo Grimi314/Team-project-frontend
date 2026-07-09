@@ -12,7 +12,7 @@
 
 html {
   height: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 html,
@@ -49,9 +49,9 @@ html {
 
 body {
   margin: 0;
- background-color: #eef8ee;
+  background-color: #eef8ee;
   color: var(--color-text);
-  background-color:#eef8ee;
+  background-color: #eef8ee;
 }
 
 button,
@@ -68,23 +68,20 @@ img {
   max-width: 100%;
 }
 
-.container{
+.container {
   padding: 0 20px;
-  
 }
 
-@media screen and (min-width: 768px){
-.container{
-  padding: 0 32px;
-}
-}
-
-
-
-@media screen and (min-width: 1440px){
+@media screen and (min-width: 768px) {
   .container {
-      padding: 0 64px;
-    }
+    padding: 0 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    padding: 0 64px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -92,4 +89,3 @@ img {
     color-scheme: dark;
   }
 }
-
