@@ -1,0 +1,48 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--color-bg);
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 24px 24px 20px;
+  background: var(--color-white);
+}
+
+.logo {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-bottom: 12px;
+  color: var(--color-primary);
+}
+
+.logoIcon {
+  width: 100px;
+  height: 30px;
+}
+
+.copyright {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-family: var(--font-main);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* tablet: 768px+ */
+@media (min-width: 768px) {
+  .card {
+    padding: 32px 40px 24px;
+  }
+}
