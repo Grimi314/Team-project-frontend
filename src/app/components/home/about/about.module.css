@@ -1,5 +1,5 @@
 .aboutSection {
-  padding-top: 48px;
+  padding-top: 88px;
   padding-bottom: 48px;
 }
 
@@ -30,8 +30,14 @@
 .aboutContent {
   display: flex;
   flex-direction: column;
-  margin-bottom: 24px;
+
   gap: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutTextWrapper {
+    margin-bottom: 32px;
+  }
 }
 
 .heroAboutText {
@@ -75,7 +81,7 @@
   }
 
   .aboutSection {
-    padding-top: 64px;
+    padding-top: 104px;
     padding-bottom: 64px;
   }
 }
@@ -122,10 +128,10 @@
 
   .aboutTextWrapper {
     width: 686px;
+    padding-top: 76px;
   }
 
   .aboutImageWrapper {
-    transform: translateY(-70px);
     display: block;
 
     width: 100%;
