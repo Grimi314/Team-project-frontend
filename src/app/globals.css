@@ -1,6 +1,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Кольори — за макетом UI Kit (Природні мандри) */
+  --color-primary: #4a9849;
+  --color-primary-dark: #3d7e3c;
+  --color-bg: #faf6ef;
+  --color-white: #ffffff;
+  --color-text: #1f2421;
+  --color-text-secondary: #6b6f6a;
+  --color-border: #e1ddd3;
+  --color-error: #d64545;
+
+  --font-main: var(--font-montserrat), Arial, sans-serif;
+  --font-heading: var(--font-montserrat), Arial, sans-serif;
+
+  --radius-button: 6px;
+  --radius-input: 8px;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Montserrat } from 'next/font/google';
 import { AppProviders } from '@/providers/appProviders';
 import './globals.css';
 import Header from './components/header/header';
@@ -12,6 +13,12 @@ const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
   variable: '--font-montserrat',
   display: 'swap',
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-montserrat',
 });
 
 export const metadata: Metadata = {
@@ -36,8 +43,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="uk" className={montserrat.variable}>
-      <body>
+    <html lang="uk">
+      <body className={montserrat.variable}>
         <AppProviders>
           <Header></Header>
           <AuthProvider>
