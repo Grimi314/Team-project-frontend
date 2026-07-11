@@ -3,8 +3,8 @@
   --foreground: #171717;
 
   /* Кольори — за макетом UI Kit (Природні мандри) */
-  --color-primary: #254c24;
-  --color-primary-dark: #162d15;
+  --color-primary: #4a9849;
+  --color-primary-dark: #3d7e3c;
   --color-bg: #faf6ef;
   --color-white: #ffffff;
   --color-text: #1f2421;
@@ -15,7 +15,7 @@
   --font-main: var(--font-montserrat), Arial, sans-serif;
   --font-heading: var(--font-montserrat), Arial, sans-serif;
 
-  --radius-button: 8px;
+  --radius-button: 6px;
   --radius-input: 8px;
 }
 
@@ -88,4 +88,3 @@ img {
     color-scheme: dark;
   }
 }
-
