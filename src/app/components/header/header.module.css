@@ -68,6 +68,13 @@ border: 1px solid rgba(0, 0, 0, 0.15);
     display: none;
 }
 
+.navText {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1b391b;
+}
+
 @media screen and (min-width: 768px){
 .container {
        width: 768px;

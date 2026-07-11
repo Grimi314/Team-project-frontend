@@ -69,7 +69,14 @@ fill: #1B391B;
     gap: 32px;
     align-items: center;
     list-style-type: none;
-    margin-bottom: 266px;
+     margin-bottom: 266px;
+}
+
+.navText {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1b391b;
 }
 
 .navListItem{

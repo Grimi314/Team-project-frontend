@@ -38,22 +38,26 @@ export default function Header() {
       <nav className={css.wrapper}>
         <ul className={css.navList}>
           <li className={css.navListItem}>
-            <Link href="/" prefetch={false}>
+            <Link className={css.navText} href="/" prefetch={false}>
               Головна
             </Link>
           </li>
           <li className={css.navListItem}>
-            <Link href="/stories" prefetch={false}>
+            <Link className={css.navText} href="/stories" prefetch={false}>
               Статті
             </Link>
           </li>
           <li className={css.navListItem}>
-            <Link href="/travellers" prefetch={false}>
+            <Link className={css.navText} href="/travellers" prefetch={false}>
               Еко-Мандрівники
             </Link>
           </li>
           <li className={css.navListItem}>
-            <Link href={`/traveller/${travellerId}`} prefetch={false}>
+            <Link
+              className={css.navText}
+              href={`/traveller/${travellerId}`}
+              prefetch={false}
+            >
               Мій Профіль
             </Link>
           </li>
