@@ -4,7 +4,7 @@ import { logoutUser } from '@/auth/api/authApi';
 
 import Link from 'next/link';
 import css from './header.module.css';
-import { Icon } from '../icon/icon';
+import { AppIcon } from '../icon/appIcon';
 
 import AuthBlock from './authBlock';
 
@@ -24,7 +24,7 @@ export default function Header() {
   return (
     <header className={css.container}>
       <Link href="/">
-        <Icon icon="icon-Company-Logo" className={css.logo} />
+        <AppIcon icon="icon-Company-Logo" className={css.logo} />
       </Link>
 
       <nav className={css.wrapper}>
@@ -59,7 +59,7 @@ export default function Header() {
               </Link>
 
               <button className={css.button}>
-                <Icon icon="icon-menu" className={css.menu} />
+                <AppIcon icon="icon-menu" className={css.menu} />
               </button>
 
               <AuthBlock />
