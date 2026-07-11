@@ -5,10 +5,11 @@
 .title {
   font-family: var(--font-heading);
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-primary);
   text-align: center;
   margin: 0 0 8px;
+  margin-bottom: 24px;
 }
 
 .subtitle {
