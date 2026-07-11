@@ -19,10 +19,12 @@ type LoginValues = {
 
 const validationSchema = Yup.object({
   email: Yup.string()
+    .trim("Email не повинен містити пробіли на початку/в кінці")
     .email('Введіть коректний email')
     .max(64, 'Максимум 64 символи')
     .required("Обов'язкове поле"),
   password: Yup.string()
+    .trim("Пароль не повинен містити пробіли на початку/в кінці")
     .min(8, 'Мінімум 8 символів')
     .max(128, 'Максимум 128 символів')
     .required("Обов'язкове поле"),
@@ -34,7 +36,10 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (values: LoginValues) => api.post(endpoints.auth.login, values),
+    mutationFn: async (values: LoginValues) => {
+      const { data } = await api.post(endpoints.auth.login, values);
+      return data;
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['currentUser'] });
       router.push('/');
@@ -52,7 +57,11 @@ export default function LoginPage() {
     initialValues: { email: '', password: '' },
     validationSchema,
     validateOnBlur: true,
-    onSubmit: values => mutate(values),
+    onSubmit: values =>
+      mutate({
+        email: values.email.trim(),
+        password: values.password.trim(),
+      }),
   });
 
   const emailError = formik.touched.email && formik.errors.email;
@@ -65,12 +74,16 @@ export default function LoginPage() {
       <div className={styles.wrap}>
         <h1 className={styles.title}>Вхід</h1>
         <p className={styles.subtitle}>
-          Вітаємо знову у спільноті мандрівників!
+          Вітаємо знову у спільноті
+          <br />
+          мандрівників!
         </p>
 
         <form className={styles.form} onSubmit={formik.handleSubmit} noValidate>
-          <label className={styles.field} htmlFor="email">
-            <span className={styles.label}>Пошта*</span>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="email">
+              Пошта*
+            </label>
             <input
               id="email"
               name="email"
@@ -85,10 +98,12 @@ export default function LoginPage() {
             {emailError && (
               <span className={styles.errorText}>{formik.errors.email}</span>
             )}
-          </label>
+          </div>
 
-          <label className={styles.field} htmlFor="password">
-            <span className={styles.label}>Пароль*</span>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="password">
+              Пароль*
+            </label>
             <div className={styles.passwordBox}>
               <input
                 id="password"
@@ -134,7 +149,7 @@ export default function LoginPage() {
             {passwordError && (
               <span className={styles.errorText}>{formik.errors.password}</span>
             )}
-          </label>
+          </div>
 
           <button type="submit" className={styles.submit} disabled={isPending}>
             {isPending ? 'Входимо...' : 'Увійти'}

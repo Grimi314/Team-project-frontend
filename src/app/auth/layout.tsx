@@ -6,8 +6,8 @@ export default function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={styles.wrapper}>
-      <section className={styles.card}>
+    <div className={styles.page}>
+      <header className={styles.navbar}>
         <Link
           href="/"
           className={styles.logo}
@@ -15,11 +15,13 @@ export default function AuthLayout({
         >
           <Icon icon="icon-company-logo" className={styles.logoIcon} />
         </Link>
+      </header>
 
-        {children}
+      <main className={styles.content}>{children}</main>
 
+      <footer className={styles.footer}>
         <p className={styles.copyright}>© 2025 Природні Мандри</p>
-      </section>
+      </footer>
     </div>
   );
 }

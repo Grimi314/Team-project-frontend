@@ -4,20 +4,31 @@
 
 .title {
   font-family: var(--font-heading);
-  font-size: 28px;
   font-weight: 700;
-  color: var(--color-primary);
+  /* 52px — точне значення з макету (Display/xl), завелике для вузької картки
+     на мобільному, тож тут зменшено; на 768px+ повертаю точний розмір */
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  color: #000000;
   text-align: center;
-  margin: 0 0 8px;
-  margin-bottom: 24px;
+  margin: 0 0 24px;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 52px;
+  }
 }
 
 .subtitle {
   font-family: var(--font-main);
-  font-size: 14px;
-  color: var(--color-text-secondary);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
   text-align: center;
-  margin: 0 0 28px;
+  color: #000000;
+  margin: 0 0 32px;
 }
 
 .form {
@@ -33,9 +44,11 @@
 }
 
 .label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-text);
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  color: #000000;
 }
 
 .input {
@@ -96,7 +109,11 @@
 
 .submit {
   margin-top: 8px;
-  padding: 13px 0;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   border-radius: var(--radius-button);
   background: var(--color-primary);
