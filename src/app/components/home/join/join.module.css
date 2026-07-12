@@ -1,0 +1,105 @@
+.joinSection {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.joinTitle {
+  font-weight: 700;
+  font-size: 26px;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.joinDescription {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+
+  line-height: 1.5;
+  color: #ffffff;
+  width: 303px;
+  margin-bottom: 32px;
+}
+
+.joinLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+
+  max-width: 100%;
+  height: 48px;
+  background: #4a9849;
+  font-weight: 500;
+  font-size: 16px;
+
+  line-height: 1.5;
+  color: #ffffff;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.joinContent {
+  background-image: url('/join-mobile.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .joinDescription {
+    width: 672px;
+  }
+
+  .joinTitle {
+    font-size: 32px;
+  }
+
+  .joinLink {
+    width: 168px;
+  }
+
+  .joinContent {
+    background-image: url('/join-tablet.jpg');
+    border-radius: 12px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .joinTitle {
+    font-size: 48px;
+    width: 768px;
+  }
+
+  .joinDescription {
+    font-size: 20px;
+    width: 768px;
+  }
+
+  .joinContent {
+    padding-left: 64px;
+    padding-top: 62.66px;
+    padding-bottom: 63.34px;
+    background-image: url('/join-desktop.jpg');
+  }
+
+  .joinSection {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .joinLink {
+    font-size: 20px;
+    width: 204px;
+  }
+}
