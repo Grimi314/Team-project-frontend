@@ -1,17 +1,5 @@
-import Image from 'next/image';
 import css from './authBlock.module.css';
 import { AppIcon } from '../icon/appIcon';
-
-type AuthBlockProps = {
-  user: {
-    name?: string;
-    avatar?: string;
-  };
-  onLogout: () => void;
-};
-
-// { user, onLogout }: AuthBlockProps
-// onClick = { onLogout };
 
 export default function AuthBlock() {
   return (
