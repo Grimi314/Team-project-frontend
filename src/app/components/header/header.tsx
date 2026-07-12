@@ -42,11 +42,7 @@ export default function Header() {
             </Link>
           </li>
           <li className={css.navListItem}>
-            <Link
-              className={css.navText}
-              href="/profile"
-              prefetch={false}
-            >
+            <Link className={css.navText} href="/profile" prefetch={false}>
               Мій Профіль
             </Link>
           </li>
