@@ -1,7 +1,7 @@
 'use client';
 import { useAuthStore } from '@/auth/model/authStore';
 import HeaderModal from './heder-modal/header-modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 import css from './header.module.css';
@@ -15,6 +15,20 @@ export default function Header() {
 
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1440) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return isMenuOpen ? (
     <HeaderModal onClose={closeMenu} />

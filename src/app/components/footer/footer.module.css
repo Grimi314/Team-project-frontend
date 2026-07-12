@@ -7,19 +7,20 @@
 }
 
 .container{
-    min-width: 320px;
-    max-width: 375px;
-    padding: 0 20px;
+    width: 100%;
     background-color: #def2de;
 }
 
 .footer{
     color: #1b391b;
-    padding: 48px 0;
- display: flex;
- flex-direction: column;
- align-items: center;
-
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 48px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .iconList{
@@ -100,8 +101,12 @@ font-weight: 400;
     }
 
     .container{
+        width: 100%;
+    }
+
+    .footer {
         max-width: 768px;
-        padding: 0 32px;
+        padding: 80px 32px;
     }
     .logo{
         margin-bottom: 0;
@@ -144,8 +149,12 @@ font-weight: 400;
 
 
     .container {
+        width: 100%;
+    }
+
+    .footer {
         max-width: 1440px;
-        padding: 0 64px;
+        padding: 80px 64px;
     }
 
   
