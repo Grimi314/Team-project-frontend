@@ -1,135 +1,140 @@
 .aboutSection {
-    padding-top: 48px;
-    padding-bottom: 48px;
+  padding-top: 88px;
+  padding-bottom: 48px;
 }
 
 .heroAbout {
-    font-weight: 700;
-    font-size: 28px;
-    font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  font-family: 'Montserrat', sans-serif;
 
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: #1b391b;
-    margin-bottom: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #1b391b;
+  margin-bottom: 24px;
 }
 
 .aboutText {
-    font-weight: 400;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    line-height: 1.5;
-    color: #1b391b;
-    margin-bottom: 0px;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.5;
+  color: #1b391b;
+  margin-bottom: 0px;
 }
 
 .aboutTextMargin {
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .aboutContent {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 24px;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutTextWrapper {
+    margin-bottom: 32px;
+  }
 }
 
 .heroAboutText {
-    font-weight: 700;
-    font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-    color: #1b391b;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #1b391b;
 }
 
 .aboutTextContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .aboutImage {
-    width: 335px;
-    height: 410px;
+  width: 335px;
+  height: 410px;
 
-    border-radius: 12px;
+  border-radius: 12px;
 }
 
 @media screen and (min-width: 768px) {
-    .heroAbout {
-        font-size: 44px;
-    }
+  .heroAbout {
+    font-size: 44px;
+  }
 
-    .aboutContent {
-        flex-direction: row;
-    }
+  .aboutContent {
+    flex-direction: row;
+  }
 
-    .aboutTextContainer {
-        width: 100%;
-        max-width: 340px;
-    }
+  .aboutTextContainer {
+    width: 100%;
+    max-width: 340px;
+  }
 
-    .aboutImage {
-        width: 704px;
-    }
+  .aboutImage {
+    width: 704px;
+  }
 
-    .aboutSection {
-        padding-top: 64px;
-        padding-bottom: 64px;
-    }
+  .aboutSection {
+    padding-top: 104px;
+    padding-bottom: 64px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-    .aboutTextMargin {
-        width: 644px;
-    }
+  .aboutTextMargin {
+    width: 644px;
+  }
+  .aboutSection {
+    padding-top: 112px;
+    padding-bottom: 112px;
+  }
 
-    .aboutSection {
-        padding-top: 112px;
-        padding-bottom: 112px;
-    }
+  .heroAbout {
+    font-size: 52px;
+  }
 
-    .heroAbout {
-        font-size: 52px;
-    }
+  .aboutText {
+    font-size: 20px;
+  }
 
-    .aboutText {
-        font-size: 20px;
-    }
+  .heroAboutText {
+    font-size: 26px;
+  }
 
-    .heroAboutText {
-        font-size: 26px;
-    }
+  .aboutTextDesctop {
+    font-size: 18px;
+    width: 310px;
+  }
 
-    .aboutTextDesctop {
-        font-size: 18px;
-        width: 310px;
-    }
+  .flexContainerAbout {
+    display: flex;
+    gap: 24px;
 
-    .flexContainerAbout {
-        display: flex;
-        gap: 24px;
+    justify-content: space-between;
+  }
 
-        justify-content: space-between;
-    }
+  .aboutImage {
+    width: 100%;
+    height: 100%;
 
-    .aboutImage {
-        width: 100%;
-        height: 100%;
+    display: block;
+  }
 
-        display: block;
-    }
+  .aboutTextWrapper {
+    width: 686px;
+    padding-top: 76px;
+  }
 
-    .aboutTextWrapper {
-        width: 686px;
-    }
+  .aboutImageWrapper {
+    display: block;
 
-    .aboutImageWrapper {
-        transform: translateY(-70px);
-        display: block;
-
-        width: 100%;
-        height: 686px;
-    }
+    width: 100%;
+    height: 686px;
+  }
 }

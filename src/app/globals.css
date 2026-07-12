@@ -1,6 +1,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Кольори — за макетом UI Kit (Природні мандри) */
+  --color-primary: #4a9849;
+  --color-primary-dark: #3d7e3c;
+  --color-bg: #faf6ef;
+  --color-white: #ffffff;
+  --color-text: #1f2421;
+  --color-text-secondary: #6b6f6a;
+  --color-border: #e1ddd3;
+  --color-error: #d64545;
+
+  --font-main: var(--font-montserrat), Arial, sans-serif;
+  --font-heading: var(--font-montserrat), Arial, sans-serif;
+
+  --radius-button: 6px;
+  --radius-input: 8px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,7 +28,7 @@
 
 html {
   height: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 html,
@@ -51,9 +67,9 @@ html {
 
 body {
   margin: 0;
- background-color: #eef8ee;
+  background-color: #eef8ee;
   color: var(--color-text);
-  background-color:#eef8ee;
+  background-color: #eef8ee;
 }
 
 button,
@@ -70,23 +86,20 @@ img {
   max-width: 100%;
 }
 
-.container{
+.container {
   padding: 0 20px;
-  
 }
 
-@media screen and (min-width: 768px){
-.container{
-  padding: 0 32px;
-}
-}
-
-
-
-@media screen and (min-width: 1440px){
+@media screen and (min-width: 768px) {
   .container {
-      padding: 0 64px;
-    }
+    padding: 0 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    padding: 0 64px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -94,4 +107,3 @@ img {
     color-scheme: dark;
   }
 }
-
