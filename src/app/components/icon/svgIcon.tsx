@@ -5,8 +5,8 @@ type Icon = {
 
 export function Icon({ icon, className }: Icon) {
   return (
-    <svg className={className}>
-      <use href={`/icons/sprite.svg#${icon}`} />
+    <svg>
+      <use href={`/icons/sprite.svg#${icon}`} className={className} />
     </svg>
   );
 }

@@ -1,9 +1,11 @@
-import Hero from './components/home/hero/hero';
+import About from './components/home/about/about';
+import Join from './components/home/join/join';
 
-export default function () {
+export default function Home() {
   return (
-    <>
-      <Hero />
-    </>
+    <main>
+      <About />
+      <Join />
+    </main>
   );
 }
