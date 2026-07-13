@@ -1,0 +1,89 @@
+:root {
+  --transition-default: 250ms linear;
+}
+
+.card {
+  display: block;
+  background: var(--color-mantis-lighter);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  max-width: 335px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-sizing: border-box;
+  transition:
+    transform var(--transition-default),
+    box-shadow var(--transition-default);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.profileLink {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: 1px solid transparent;
+  border-color: var(--color-scheme-2-border);
+  border-radius: 6px;
+  background: var(--opacity-neutral-darkest-5);
+  color: var(--color-scheme-2-text);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  min-width: 287px;
+  cursor: pointer;
+  transition: all var(--transition-default);
+}
+
+.profileLink:hover:not(:disabled) {
+  border-color: var(--opacity-neutral-darkest-5);
+  background: var(--color-mantis-dark);
+  color: var(--color-white);
+}
+
+.profileLink:active:not(:disabled) {
+  background: var(--color-mantis-darker);
+  color: var(--color-white);
+  border-color: var(--opacity-transparent);
+}
+
+@media only screen and (max-width: 374px) {
+  .profileLink {
+    min-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .profileLink {
+    width: 171px;
+    min-width: 171px;
+    min-height: 48px;
+    height: auto;
+    padding: 0px 12px;
+    font-size: 16px;
+    line-height: 120%;
+
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .profileLink {
+    min-width: 262px;
+    font-size: 20px;
+  }
+}

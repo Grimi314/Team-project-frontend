@@ -9,6 +9,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const checkAuth = async () => {
+      const hasCookieToken = document.cookie
+        .split(';')
+        .some((item) => item.trim().startsWith('token='));
+      if (!hasCookieToken) {
+        setUser(null);
+        return; // Якщо куки немає, запит на сервер навіть не відправляється!
+      }
       try {
         const data = await getCurrentUser();
 
