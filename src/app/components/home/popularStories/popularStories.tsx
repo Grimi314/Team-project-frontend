@@ -82,7 +82,7 @@ export default function PopularStories() {
             >
               {popularStories.map((story) => (
                 <SwiperSlide key={story.id}>
-                  <StoryCard story={story} tab="own" />
+                  <StoryCard story={story} tab="saved" />
                 </SwiperSlide>
               ))}
             </Swiper>

@@ -40,6 +40,20 @@
 .arrowSlider {
   width: 24px;
   height: 24px;
+  fill: #1b391b;
+}
+.navBtn {
+  background-color: #def2de;
+}
+.navBtn:hover {
+  background-color: #f2f2f2;
+}
+.navBtn:focus {
+  background-color: #8dd18c;
+}
+.navBtn:disabled {
+  background-color: #f2f2f2;
+  opacity: 0.4;
 }
 .allStoriesBtnMobile {
   display: flex;
