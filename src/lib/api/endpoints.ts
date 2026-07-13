@@ -6,9 +6,9 @@ export const endpoints = {
     current: '/auth/current',
   },
   stories: {
-    list: '/stories',
+    list: '/articles',
     popular: '/stories/popular',
-    byId: (id: string) => `/stories/${id}`,
+    byId: (id: string) => `/articles/${id}`,
     create: '/stories',
     save: (id: string) => `/stories/${id}/save`,
   },
