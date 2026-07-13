@@ -1,15 +1,23 @@
 'use client';
 
-import css from '@/app/components/AddStoryForm/AddStoryForm.module.css';
-import { ChangeEvent, useState, useRef } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import css from '@/app/components/addStoryForm/addStoryForm.module.css';
+import { ChangeEvent, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import toast from 'react-hot-toast';
 
 type AddStoryFormValues = {
   title: string;
   category: string;
   article: string;
 };
+
+type Category = {
+  _id: string;
+  category: string;
+};
+
 const initialValues: AddStoryFormValues = {
   title: '',
   category: '',
@@ -21,17 +29,14 @@ const validationSchema = Yup.object({
     .min(2, 'Заголовок має містити щонайменше 2 символи.')
     .max(40, 'Заголовок має містити не більше 40 символів.')
     .required("Заголовок є обов'язковим."),
+
   category: Yup.string().required("Категорія є обов'язковою."),
+
   article: Yup.string()
     .min(12, 'Текст історії має містити щонайменше 12 символів.')
     .max(3000, 'Текст історії має містити не більше 3000 символів.')
     .required("Текст історії є обов'язковим."),
 });
-
-type Category = {
-  _id: string;
-  category: string;
-};
 
 const categories: Category[] = [
   {
@@ -65,8 +70,12 @@ const categories: Category[] = [
 ];
 
 export default function AddStoryForm() {
+  const router = useRouter();
+
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [preview, setPreview] = useState('');
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -77,9 +86,11 @@ export default function AddStoryForm() {
       setPreview('');
       return;
     }
+
     setImageFile(file);
     setPreview(URL.createObjectURL(file));
   };
+
   const handleResetImage = () => {
     setImageFile(null);
     setPreview('');
@@ -89,13 +100,85 @@ export default function AddStoryForm() {
     }
   };
 
+  const handleSubmit = async (
+    values: AddStoryFormValues,
+    actions: FormikHelpers<AddStoryFormValues>,
+  ) => {
+    if (!imageFile) {
+      toast.error('Оберіть фото для обкладинки.');
+      actions.setSubmitting(false);
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+
+      formData.append('title', values.title);
+      formData.append('category', values.category);
+      formData.append('article', values.article);
+      formData.append('img', imageFile);
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/stories`,
+        {
+          method: 'POST',
+          body: formData,
+          credentials: 'include',
+        },
+      );
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        let errorMessage = data?.message || 'Помилка при створенні історії.';
+
+        if (
+          response.status === 401 ||
+          data?.message === 'Missing access token'
+        ) {
+          errorMessage = 'Будь ласка, увійдіть в акаунт, щоб створити історію.';
+        }
+
+        throw new Error(errorMessage);
+      }
+
+      const storyId = data?.data?._id || data?._id || data?.story?._id;
+
+      toast.success(data?.message || 'Історію успішно створено.');
+
+      if (storyId) {
+        router.push(`/stories/${storyId}`);
+      } else {
+        router.push('/stories');
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error('Помилка при створенні історії.');
+      }
+    } finally {
+      actions.setSubmitting(false);
+    }
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => {}}
+      onSubmit={handleSubmit}
     >
-      {({ dirty, isValid, resetForm, errors, touched }) => (
+      {({
+        dirty,
+        isValid,
+        resetForm,
+        errors,
+        touched,
+        isSubmitting,
+        values,
+        setFieldValue,
+        setFieldTouched,
+      }) => (
         <Form className={css.form}>
           <div className={css.coverBlock}>
             <p className={css.coverLabel}>Обкладинка статті</p>
@@ -134,27 +217,62 @@ export default function AddStoryForm() {
             <ErrorMessage name="title" component="p" className={css.error} />
           </label>
 
-          <label className={css.label}>
-            Категорія
-            <div className={css.selectWrapper}>
-              <Field
-                as="select"
-                className={`${css.input} ${
+          <div className={css.label}>
+            <span>Категорія</span>
+
+            <div className={css.customSelect}>
+              <button
+                className={`${css.selectButton} ${
                   touched.category && errors.category ? css.inputError : ''
                 }`}
-                name="category"
+                type="button"
+                disabled={isSubmitting}
+                aria-haspopup="listbox"
+                aria-expanded={isCategoryOpen}
+                onClick={() => {
+                  setFieldTouched('category', true);
+                  setIsCategoryOpen((prev) => !prev);
+                }}
               >
-                <option value="">Категорія</option>
+                <span>
+                  {categories.find((item) => item._id === values.category)
+                    ?.category || 'Категорія'}
+                </span>
 
-                {categories.map((item) => (
-                  <option key={item._id} value={item._id}>
-                    {item.category}
-                  </option>
-                ))}
-              </Field>
+                <span
+                  className={`${css.arrow} ${isCategoryOpen ? css.arrowOpen : ''}`}
+                >
+                  ⌄
+                </span>
+              </button>
+
+              {isCategoryOpen && (
+                <ul className={css.optionsList} role="listbox">
+                  {categories.map((item) => (
+                    <li key={item._id}>
+                      <button
+                        className={`${css.option} ${
+                          values.category === item._id ? css.optionSelected : ''
+                        }`}
+                        type="button"
+                        role="option"
+                        aria-selected={values.category === item._id}
+                        onClick={() => {
+                          setFieldValue('category', item._id);
+                          setFieldTouched('category', true);
+                          setIsCategoryOpen(false);
+                        }}
+                      >
+                        {item.category}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
+
             <ErrorMessage name="category" component="p" className={css.error} />
-          </label>
+          </div>
 
           <label className={css.label}>
             Текст історії
@@ -168,23 +286,34 @@ export default function AddStoryForm() {
             />
             <ErrorMessage name="article" component="p" className={css.error} />
           </label>
+
           <div className={css.buttons}>
             <button
               className={css.cancelButton}
               type="button"
+              disabled={isSubmitting}
               onClick={() => {
                 resetForm();
                 handleResetImage();
+                setIsCategoryOpen(false);
               }}
             >
               Відмінити
             </button>
+
             <button
               className={css.submitButton}
               type="submit"
-              disabled={!dirty || !isValid || !imageFile}
+              disabled={!dirty || !isValid || !imageFile || isSubmitting}
             >
-              Зберегти
+              {isSubmitting ? (
+                <span className={css.loaderText}>
+                  <span className={css.loader} aria-hidden="true" />
+                  Збереження...
+                </span>
+              ) : (
+                'Зберегти'
+              )}
             </button>
           </div>
         </Form>

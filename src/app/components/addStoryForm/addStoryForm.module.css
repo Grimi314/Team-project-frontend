@@ -68,9 +68,24 @@ width: 100%;
     font-size: 16px;
     line-height: 1.5;
     cursor: pointer;
-    width:176px;
+    width:178px;
     height: 32px;
     background-color: rgba(0, 0, 0, 0.15);
+
+    transition:
+            background-color 250ms ease,
+            color 250ms ease,
+            border-color 250ms ease,
+            opacity 250ms ease;
+}
+.uploadButton:hover,
+.uploadButton:focus{
+    background-color: #4A9849;
+        color: #FFFFFF;
+}
+.uploadButton:active{
+    background-color: #254C24;
+        color: #FFFFFF;
 }
 
 .fileInput {
@@ -107,6 +122,10 @@ width: 100%;
     outline: none;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 6px;
+    color: #1B391B;
+    font-size: 16px;
+        font-weight: 400;
+        resize: none;
 }
 .textarea:active,
 .textarea:hover,
@@ -156,7 +175,7 @@ width: 100%;
 }
 .submitButton {
     background-color: #4A9849;
-   border: none;
+border: 1px solid transparent;
     width: 100%;
     color:rgb(255, 255, 255);
     font-size: 16px;
@@ -164,6 +183,7 @@ width: 100%;
     font-weight: 500;
     border-radius: 6px;
     padding: 6px 12px;
+    cursor: pointer;
 
 transition:
         background-color 250ms ease,
@@ -173,10 +193,11 @@ transition:
 }
 .submitButton:disabled{
     opacity: 0.3;
+    cursor: not-allowed;
 }
-.submitButton:hover,
-.submitButton:focus{
-    border: 1px solid #4A9849;
+.submitButton:not(:disabled):hover,
+.submitButton:not(:disabled):focus{
+    border-color: #4A9849;
     color:#1B391B;
     background-color: #DEF2DE;
 }
@@ -195,6 +216,7 @@ transition:
         background-color: rgba(0, 0, 0, 0.05);
         border-radius: 6px;
         padding: 6px 12px;
+        cursor:pointer;
 
         transition:
                 background-color 250ms ease,
@@ -202,12 +224,17 @@ transition:
                 border-color 250ms ease,
                 opacity 250ms ease;
 }
-.cancelButton:hover,
-.cancelButton:focus{
+.cancelButton:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+.cancelButton:not(:disabled):hover,
+.cancelButton:not(:disabled):focus {
     background-color: #4A9849 ;
     color: #FFFFFF;
 }
-.cancelButton:active{
+
+.cancelButton:not(:disabled):active {
     background-color: #254C24;
     color: #FFFFFF;
 }
@@ -216,35 +243,114 @@ transition:
     width: 100%;
 }
 
-/* .select {
-    width: 100%;
-    height: 48px;
-    padding: 12px 44px 12px 16px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    background-color: transparent;
-    color: #1b391b;
-    font-size: 16px;
-    line-height: 1.5;
-    outline: none;
-    box-sizing: border-box;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
+.loaderText {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
-.select:hover,
-.select:focus {
-    border-color: #5dbe5c;
-} */
+.loader {
+    width: 14px;
+    height: 14px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 700ms linear infinite;
+}
 
-/* .selectArrow {
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.customSelect {
+    position: relative;
+    width: 100%;
+}
+
+.selectButton {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    background-color: inherit;
+    color: #1B391B;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    outline: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition:
+        border-color 250ms ease,
+        color 250ms ease,
+        background-color 250ms ease,
+        opacity 250ms ease;
+}
+
+.selectButton:hover,
+.selectButton:focus {
+    border-color: #5DBE5C;
+}
+
+.selectButton:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.optionsList {
     position: absolute;
-    top: 50%;
-    right: 16px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    font-size: 18px;
-    color: #1b391b;
-} */
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+
+    margin: 0;
+    padding: 4px;
+    list-style: none;
+
+    border: 1px solid #5DBE5C;
+    border-radius: 6px;
+    background-color: #EEF8EE;
+}
+
+.option {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #EEF8EE;
+    color: #1B391B;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    cursor: pointer;
+
+    transition: background-color 250ms ease;
+}
+
+.option:hover,
+.option:focus {
+    background-color: #F2F2F2;
+}
+
+.optionSelected {
+    background-color: #F2F2F2;
+}
+
+.arrow {
+    line-height: 1;
+    transition: transform 250ms ease;
+}
+
+.arrowOpen {
+    transform: rotate(180deg);
+}
