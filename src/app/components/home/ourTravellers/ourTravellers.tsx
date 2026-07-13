@@ -13,7 +13,11 @@ import TravellerCard from '../../travellerCard/travellerCard';
 
 import css from './ourTravellers.module.css';
 
-function splitIntoGroups(items: Traveller[], groupSize: number) {
+function splitIntoGroups(items: Traveller[], groupSize: number): Traveller[][] {
+  if (!Array.isArray(items) || groupSize <= 0) {
+    return [];
+  }
+
   const groups: Traveller[][] = [];
 
   for (let i = 0; i < items.length; i += groupSize) {
@@ -58,7 +62,7 @@ export default function OurTravellers() {
     loadTravellers();
   }, []);
 
-  const travellerGroups = useMemo(() => {
+  const travellerGroups = useMemo<Traveller[][]>(() => {
     return splitIntoGroups(travellers, isMobile ? 3 : 4);
   }, [travellers, isMobile]);
 

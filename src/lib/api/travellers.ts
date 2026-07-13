@@ -1,5 +1,4 @@
 import { api } from './axios';
-import { endpoints } from './endpoints';
 
 export type Traveller = {
   _id: string;
@@ -19,15 +18,12 @@ type TravellersResponse = {
 };
 
 export async function fetchTravellers(): Promise<Traveller[]> {
-  const response = await api.get<TravellersResponse>(
-    endpoints.travellers.list,
-    {
-      params: {
-        page: 1,
-        perPage: 12,
-      },
+  const response = await api.get<TravellersResponse>('/travellers', {
+    params: {
+      page: 1,
+      perPage: 12,
     },
-  );
+  });
 
   return response.data.users;
 }

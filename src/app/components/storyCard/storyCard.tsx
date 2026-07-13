@@ -3,15 +3,14 @@ import { AppIcon } from '@/app/components/icon/appIcon';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
 import styles from './storyCard.module.css';
 
-type StoryCardProps = {
+export type StoryCardProps = {
   story: NormalizedProfileStory;
   tab: 'saved' | 'own';
 };
 
 export function StoryCard({ story, tab }: StoryCardProps) {
   const actionIcon = tab === 'own' ? 'icon-edit' : 'icon-bookmark';
-  const actionLabel =
-    tab === 'own' ? 'Редагувати історію' : 'Зберегти історію';
+  const actionLabel = tab === 'own' ? 'Редагувати історію' : 'Зберегти історію';
 
   return (
     <article className={styles.card}>
