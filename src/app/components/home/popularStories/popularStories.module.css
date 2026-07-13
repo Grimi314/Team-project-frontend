@@ -1,0 +1,127 @@
+.popular {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  font-family: 'Montserrat', sans-serif;
+}
+.popularContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.popularTitle {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+.allStoriesBtnDesk {
+  display: none;
+}
+.swiperContainer {
+  margin-bottom: 40px;
+}
+.navSliderButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 12px;
+  width: 48px;
+  height: 48px;
+  background-color: #def2de;
+}
+.arrowSlider {
+  width: 24px;
+  height: 24px;
+  fill: #1b391b;
+}
+.navBtn {
+  background-color: #def2de;
+}
+.navBtn:hover {
+  background-color: #f2f2f2;
+}
+.navBtn:focus {
+  background-color: #8dd18c;
+}
+.navBtn:disabled {
+  background-color: #f2f2f2;
+  opacity: 0.4;
+}
+.allStoriesBtnMobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  padding: 6px 12px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #4a9849;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+.allStoriesBtnMobile:hover,
+.allStoriesBtnMobile:focus {
+  background-color: #def2de;
+  color: #1b391b;
+}
+
+@media screen and (min-width: 768px) {
+  .allStoriesBtnMobile {
+    display: none;
+  }
+  .allStoriesBtnDesk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4a9849;
+    border-radius: 6px;
+    padding: 6px 12px;
+    height: 48px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #4a9849;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+  .allStoriesBtnDesk:hover,
+  .allStoriesBtnDesk:focus {
+    background-color: #def2de;
+    color: #1b391b;
+  }
+  .popularHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .popularTitle {
+    font-size: 44px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .popular {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+  .allStoriesBtnDesk {
+    font-size: 20px;
+  }
+  .popularTitle {
+    font-size: 52px;
+  }
+}
