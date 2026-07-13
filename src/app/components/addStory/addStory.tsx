@@ -3,11 +3,11 @@ import AddStoryForm from '@/app/components/addStoryForm/addStoryForm';
 
 export default function AddStory() {
   return (
-    <main className={css.page}>
+    <section className={css.page} aria-labelledby="add-story-title">
       <div className={css.container}>
         <h1 className={css.title}>Створити нову історію</h1>
         <AddStoryForm />
       </div>
-    </main>
+    </section>
   );
 }
