@@ -1,0 +1,93 @@
+.travellerCard {
+  width: 100%;
+  min-width: 0;
+  padding: 24px;
+
+  background-color: #def2de;
+  border-radius: 12px;
+}
+
+.avatarWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 24px;
+}
+
+.avatar {
+  display: block;
+  max-width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  margin-bottom: 12px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #1b391b;
+}
+
+.articlesAmount {
+  margin-bottom: 16px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #1b391b;
+}
+
+.profileLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 48px;
+  padding: 6px 12px;
+
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(27, 57, 27, 0.2);
+  border-radius: 6px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #1b391b;
+
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease;
+}
+
+.profileLink:hover,
+.profileLink:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(27, 57, 27, 0.4);
+}
+
+@media screen and (min-width: 1440px) {
+  .name {
+    font-size: 26px;
+  }
+
+  .articlesAmount {
+    font-size: 20px;
+  }
+
+  .profileLink {
+    font-size: 20px;
+  }
+}
