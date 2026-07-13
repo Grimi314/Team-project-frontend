@@ -5,9 +5,6 @@ import { AuthProvider } from '../providers/AuthProvider';
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 
-import { AuthProvider } from '../providers/AuthProvider';
-import Footer from './components/footer/footer';
-import Header from './components/header/header';
 import './globals.css';
 
 const montserrat = Montserrat({
@@ -44,15 +41,11 @@ export default function RootLayout({
     <html lang="uk" className={montserrat.variable}>
       <body>
         <AppProviders>
-          <Header />
-
           <AuthProvider>
             <Header />
             <main>{children}</main>
             <Footer />
           </AuthProvider>
-
-          <Footer />
         </AppProviders>
       </body>
     </html>
