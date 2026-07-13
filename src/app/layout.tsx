@@ -44,7 +44,9 @@ export default function RootLayout({
           <Header />
 
           <AuthProvider>
+            <Header />
             <main>{children}</main>
+            <Footer />
           </AuthProvider>
 
           <Footer />
