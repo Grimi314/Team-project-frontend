@@ -1,0 +1,67 @@
+.sectionRecommendedStories {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.storiesList > * {
+  width: 100%;
+  min-width: 0;
+}
+
+.titleStories {
+  font-weight: 700;
+  font-size: 28px;
+
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #000000;
+  margin-bottom: 40px;
+}
+
+.storiesList {
+  display: grid;
+  gap: 16px;
+}
+
+.storiesList > :nth-child(n + 2) {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .titleStories {
+    font-size: 44px;
+  }
+
+  .storiesList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .storiesList > :nth-child(n + 2) {
+    display: block;
+  }
+
+  .storiesList > :nth-child(n + 3) {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .sectionRecommendedStories {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .titleStories {
+    font-size: 52px;
+  }
+
+  .storiesList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .storiesList > :nth-child(n + 3) {
+    display: block;
+  }
+}

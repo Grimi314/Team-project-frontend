@@ -8,7 +8,7 @@ export default function Join() {
   const { isAuth } = useAuthStore();
 
   return (
-    <section className={css.joinSection}>
+    <section className={css.joinSection} id="join">
       <div className="container">
         <div className={css.joinContent}>
           <h2 className={css.joinTitle}>

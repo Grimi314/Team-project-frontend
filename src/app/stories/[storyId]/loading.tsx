@@ -1,5 +1,5 @@
-import { Loader } from '@/app/components/loader/loader';
+import Loader from '@/app/components/loader/loader';
 
-export default function StoryLoading() {
-  return <Loader label="Завантажуємо історію..." />;
+export default function Loading() {
+  return <Loader />;
 }
