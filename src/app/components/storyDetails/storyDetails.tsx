@@ -62,7 +62,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
       </div>
 
       <div className={styles.description}>
-        <p>{story.date}</p>
+        <p className={styles.descriptionText}>{story.date}</p>
       </div>
     </section>
   );
