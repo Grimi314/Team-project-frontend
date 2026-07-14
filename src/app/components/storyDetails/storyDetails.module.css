@@ -17,6 +17,11 @@
 @media screen and (min-width: 1440px) {
   .mainContentWrapper {
     padding: 48px 64px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
   }
 }
 
@@ -46,6 +51,24 @@
   gap: 24px;
 }
 
+.imageWrapper {
+  order: 1;
+}
+
+.infoWrapper {
+  order: 2;
+}
+
+@media screen and (min-width: 1440px) {
+  .imageWrapper {
+    order: 2;
+  }
+
+  .infoWrapper {
+    order: 1;
+  }
+}
+
 .backLink {
   border-radius: 12px;
   width: 109px;
@@ -53,7 +76,7 @@
 }
 
 .backIcon {
-  fill: 'none';
+  fill: none;
   width: 24px;
   height: 24px;
 }
