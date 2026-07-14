@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   description: 'Еко-мандри, історії та мандрівники України.',
   openGraph: {
     title: 'Природні Мандри',
-    description: 'Відкрий Україну заново — еко-мандри для натхнення.',
     type: 'website',
+    description: 'Відкрий Україну заново — еко-мандри для натхнення.',
   },
 };
 
