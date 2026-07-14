@@ -8,12 +8,16 @@ type LoaderProps = {
   className?: string;
 };
 
-export function Loader({
+export default function Loader({
   label = 'Завантаження...',
   className,
 }: LoaderProps) {
   return (
-    <div className={clsx(styles.loader, className)} role="status" aria-live="polite">
+    <div
+      className={clsx(styles.loader, className)}
+      role="status"
+      aria-live="polite"
+    >
       <span className={styles.spinner} />
       <span className={styles.label}>{label}</span>
     </div>
