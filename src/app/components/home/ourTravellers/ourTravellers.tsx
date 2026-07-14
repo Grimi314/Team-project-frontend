@@ -32,8 +32,10 @@ export default function OurTravellers() {
 
   const [travellers, setTravellers] = useState<Traveller[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMounted, setIsMounted] = useState(false); // Захист від помилок гідратації SSR в Next.js
 
   useEffect(() => {
+    setIsMounted(true);
     const mediaQuery = window.matchMedia('(max-width: 767px)');
 
     const updateScreen = () => {
@@ -52,8 +54,8 @@ export default function OurTravellers() {
   useEffect(() => {
     const loadTravellers = async () => {
       try {
-        const data = await fetchTravellers();
-        setTravellers(data);
+        const data = await fetchTravellers(1, 12);
+        setTravellers(data.users || []);
       } catch (error) {
         console.error('Не вдалося завантажити мандрівників:', error);
       }
@@ -63,8 +65,15 @@ export default function OurTravellers() {
   }, []);
 
   const travellerGroups = useMemo<Traveller[][]>(() => {
-    return splitIntoGroups(travellers, isMobile ? 3 : 4);
-  }, [travellers, isMobile]);
+    // Поки сервер рендерить сторінку, використовуємо десктопний розмір (4)
+    const size = isMounted && isMobile ? 3 : 4;
+    return splitIntoGroups(travellers, size);
+  }, [travellers, isMobile, isMounted]);
+
+  // Запобігає блиманню верстки та помилкам гідратації
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <section className={css.ourTravellersSection}>
