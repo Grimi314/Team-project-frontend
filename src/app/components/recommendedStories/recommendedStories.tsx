@@ -55,7 +55,7 @@ export default function RecommendedStories({
 
         <div className={css.storiesList}>
           {stories.map((story) => (
-            <StoryCard key={story.id} story={story} tab="saved" />
+            <StoryCard key={story.id} story={story} tab="recommended" />
           ))}
         </div>
       </div>
