@@ -17,8 +17,10 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
       <div className={styles.mainContentWrapper}>
         <div className={styles.imageWrapper}>
           <Image
-            src={story.image}
+            src={story.img}
             alt={story.title}
+            fill
+
             className={styles.image}
             priority
           />
@@ -42,13 +44,13 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
               <div className={styles.authorBlock}>
                 <span className={styles.metaLabel}>Автор статті</span>
 
-                <span className={styles.metaValue}>{story.author}</span>
+                <span className={styles.metaValue}>{story.article}</span>
               </div>
 
               <div className={styles.dateBlock}>
                 <span className={styles.metaLabel}>Опубліковано</span>
 
-                <span className={styles.metaValue}>{story.publishedAt}</span>
+                <span className={styles.metaValue}>{story.rate}</span>
               </div>
             </div>
 
@@ -60,7 +62,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
       </div>
 
       <div className={styles.description}>
-        <p>{story.description}</p>
+        <p>{story.date}</p>
       </div>
     </section>
   );

@@ -6,11 +6,13 @@ import { api } from '@/lib/api/axios';
 import { PageTitle } from '@/app/components/PageTitle/PageTitle';
 import { TravellersStories } from '@/app/components/travellersStories/travellersStories';
 import { TravellerInfo } from '@/app/components/travellerInfo/travellerInfo';
-import { Loader } from '@/app/components/loader/loader';
+import Loader from '@/app/components/loader/loader';
 import styles from './travellerPage.module.css';
 import { MessageNoStories } from '@/app/components/messageNoStories/messageNoStories';
 import { getTravellerByIdServer } from '@/lib/api/travellers';
 import { type Traveller } from '@/lib/api/travellers';
+
+import Story from '../travelPageRender/travelPageRender';
 
 export default function TravellerPage() {
   const params = useParams();
