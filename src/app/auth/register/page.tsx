@@ -8,7 +8,6 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import styles from './registerPage.module.css';
 import { AuthBar } from '@/app/components/authBar/authBar';
-import { useFormik } from 'formik';
 
 interface FormValues {
   name: string;
