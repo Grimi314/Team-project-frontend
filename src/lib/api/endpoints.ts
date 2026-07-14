@@ -10,7 +10,7 @@ export const endpoints = {
     popular: '/stories/popular',
     byId: (id: string) => `/stories/${id}`,
     create: '/stories',
-    save: (id: string) => `/stories/${id}/save`,
+    save: (id: string) => '/stories/' + id + '/saved',
   },
   travellers: {
     list: '/travellers',
