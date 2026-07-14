@@ -1,0 +1,96 @@
+.saveStory {
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  padding: 32px 16px;
+  width: 335px;
+  height: 217px;
+  background: #def2de;
+}
+
+@media screen and (min-width: 768px) {
+  .saveStory {
+    padding: 32px 32px;
+    width: 704px;
+    height: 193px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .saveStory {
+    width: 866px;
+    height: 207px;
+  }
+}
+
+.title {
+  margin-bottom: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+
+@media screen and (min-width: 1440px) {
+  .title {
+    font-size: 26px;
+  }
+}
+
+.description {
+  margin-bottom: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
+}
+
+@media screen and (min-width: 1440px) {
+  .description {
+    font-size: 18px;
+  }
+}
+
+.button {
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  padding: 6px 12px;
+  width: 100%;
+  height: 48px;
+  background: #4a9849;
+
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #fff;
+}
+
+@media screen and (min-width: 1440px) {
+  .button {
+    width: 103px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .button {
+    font-size: 20px;
+    width: 123px;
+  }
+}
+
+.button:hover {
+  background: #def2de;
+}
+
+.button:active {
+  background: #4a9849;
+}
+
+.button:disabled {
+  background: #4a9849;
+  opacity: 0.3;
+}
