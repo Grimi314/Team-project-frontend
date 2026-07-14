@@ -39,7 +39,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  /* gap: 4px; */
 }
 
 .name {
@@ -67,8 +67,8 @@
 /* Фіксуємо чесні 130px (132px з урахуванням border-box) для аватара в картці на мобілках */
 .card .avatar,
 .card .avatarFallback {
-  width: 132px;
-  height: 132px;
+  width: 130px;
+  height: 130px;
   margin-bottom: 24px;
 }
 
