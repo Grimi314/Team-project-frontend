@@ -15,6 +15,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    ' https://team-project-frontend-a3edjtpzh-grimi314s-projects.vercel.app',
+  ),
   title: {
     default: 'Природні Мандри',
     template: '%s | Природні Мандри',
@@ -27,8 +30,8 @@ export const metadata: Metadata = {
   description: 'Еко-мандри, історії та мандрівники України.',
   openGraph: {
     title: 'Природні Мандри',
-    description: 'Відкрий Україну заново — еко-мандри для натхнення.',
     type: 'website',
+    description: 'Відкрий Україну заново — еко-мандри для натхнення.',
   },
 };
 

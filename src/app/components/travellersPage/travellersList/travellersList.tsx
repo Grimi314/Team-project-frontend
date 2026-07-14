@@ -7,7 +7,7 @@ import styles from './travellersList.module.css';
 import { fetchTravellers, type Traveller } from '@/lib/api/travellers';
 import CardTravellers from '@/app/components/CardTravellers/cardTravellers';
 
-import { Loader } from '@/app/components/loader/loader';
+import Loader from '@/app/components/loader/loader';
 import { Pagination } from '@/app/components/pagination/pagination';
 
 const PER_PAGE = 12;

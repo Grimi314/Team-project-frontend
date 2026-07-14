@@ -4,11 +4,11 @@ import type { ProfileTab } from '@/lib/api/profile';
 import styles from './messageNoStories.module.css';
 
 type MessageNoStoriesProps = {
-  tab: ProfileTab;
+  tab: ProfileTab | 'user';
 };
 
 const messageConfig: Record<
-  ProfileTab,
+  ProfileTab | 'user',
   { title: string; ctaLabel: string; href: string }
 > = {
   saved: {
@@ -22,6 +22,11 @@ const messageConfig: Record<
       'У вас ще немає власних історій, мерщій створіть вашу першу історію!',
     ctaLabel: 'Створити історію',
     href: '/addStory',
+  },
+  user: {
+    title: 'Цей користувач ще не публікував історій',
+    ctaLabel: 'Назад до історій',
+    href: '/stories',
   },
 };
 

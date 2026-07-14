@@ -19,9 +19,6 @@ export default async function StoryPage({ storyId }: Props) {
       <StoryDetails story={story} />
 
       <SaveStory storyId={story.id} />
-
-      {/* TODO: Після merge з main перевірити наявність RecommendedStories та розкоментувати компонент. */}
-      {/* <recommendedStories /> */}
     </>
   );
 }

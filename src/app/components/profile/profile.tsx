@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Loader } from '@/app/components/loader/loader';
+import Loader from '@/app/components/loader/loader';
 import { MessageNoStories } from '@/app/components/messageNoStories/messageNoStories';
 import { ProfileTabs } from '@/app/components/profileTabs/profileTabs';
 import { TravellerInfo } from '@/app/components/travellerInfo/travellerInfo';
@@ -73,7 +73,7 @@ export function Profile({ tab }: ProfileProps) {
     const handleResize = () => {
       const nextPerPage = getStoriesPerPage();
 
-      setPerPage(currentValue =>
+      setPerPage((currentValue) =>
         currentValue === nextPerPage ? currentValue : nextPerPage,
       );
     };
@@ -89,7 +89,7 @@ export function Profile({ tab }: ProfileProps) {
     let isMounted = true;
 
     const loadStories = async () => {
-      setProfileState(currentState => ({
+      setProfileState((currentState) => ({
         ...currentState,
         stories: [],
         page: 1,
@@ -123,7 +123,7 @@ export function Profile({ tab }: ProfileProps) {
           return;
         }
 
-        setProfileState(currentState => ({
+        setProfileState((currentState) => ({
           ...currentState,
           stories: [],
           page: 1,
@@ -149,7 +149,7 @@ export function Profile({ tab }: ProfileProps) {
       return;
     }
 
-    setProfileState(currentState => ({
+    setProfileState((currentState) => ({
       ...currentState,
       isLoadingMore: true,
     }));
@@ -160,7 +160,7 @@ export function Profile({ tab }: ProfileProps) {
         perPage,
       });
 
-      setProfileState(currentState => ({
+      setProfileState((currentState) => ({
         ...currentState,
         user: response.user ? getProfileUser(response.user) : currentState.user,
         stories: [...currentState.stories, ...response.stories],
@@ -174,7 +174,7 @@ export function Profile({ tab }: ProfileProps) {
         return;
       }
 
-      setProfileState(currentState => ({
+      setProfileState((currentState) => ({
         ...currentState,
         isLoadingMore: false,
       }));
