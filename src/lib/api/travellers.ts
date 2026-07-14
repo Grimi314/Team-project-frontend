@@ -17,15 +17,18 @@ type TravellersResponse = {
   users: Traveller[];
 };
 
-export async function fetchTravellers(): Promise<Traveller[]> {
+export async function fetchTravellers(
+  page = 1,
+  perPage = 12,
+): Promise<TravellersResponse> {
   const response = await api.get<TravellersResponse>('/travellers', {
     params: {
-      page: 1,
-      perPage: 12,
+      page,
+      perPage,
     },
   });
 
-  return response.data.users;
+  return response.data;
 }
 
 export const getTravellerByIdServer = async (
