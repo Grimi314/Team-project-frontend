@@ -1,9 +1,21 @@
+'use client';
+
+import clsx from 'clsx';
 import styles from './loader.module.css';
 
-export default function Loader() {
+type LoaderProps = {
+  label?: string;
+  className?: string;
+};
+
+export function Loader({
+  label = 'Завантаження...',
+  className,
+}: LoaderProps) {
   return (
-    <div className={styles.loaderWrapper}>
-      <div className={styles.loader}></div>
+    <div className={clsx(styles.loader, className)} role="status" aria-live="polite">
+      <span className={styles.spinner} />
+      <span className={styles.label}>{label}</span>
     </div>
   );
 }
