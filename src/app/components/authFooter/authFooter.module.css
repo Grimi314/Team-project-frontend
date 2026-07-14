@@ -1,0 +1,29 @@
+.footer {
+  text-align: center;
+  margin-top: 32px;
+  padding: 16px 0;
+margin-top: auto;
+}
+
+.mobileText {
+  display: block;
+  font-size: 14px;
+  color: black;
+}
+
+.desktopText {
+  display: none; 
+}
+
+
+@media screen and (min-width: 1312px) {
+  .mobileText {
+    display: none; 
+  }
+
+  .desktopText {
+    display: block; 
+    font-size: 14px;
+    color:black;
+  }
+}
