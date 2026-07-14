@@ -15,6 +15,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    ' https://team-project-frontend-a3edjtpzh-grimi314s-projects.vercel.app',
+  ),
   title: {
     default: 'Природні Мандри',
     template: '%s | Природні Мандри',

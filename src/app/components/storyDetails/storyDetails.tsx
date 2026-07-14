@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Icon } from '../icon/icon';
+import { Icon } from '../icon/svgIcon';
 
 import { Story } from '@/types/story';
 

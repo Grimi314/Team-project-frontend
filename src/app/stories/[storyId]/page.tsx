@@ -7,10 +7,11 @@ type Props = {
 };
 
 export default async function Story({ params }: Props) {
-   const { storyId } = await params;
+  const { storyId } = await params;
   return (
     <div>
-     <StoryPage storyId={storyId} />
+      <StoryPage storyId={storyId} />
       <RecommendedStories categoryId="6966a5cdbc1b90f344c2e0be" />
     </div>
   );
+}
