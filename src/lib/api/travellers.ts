@@ -27,3 +27,11 @@ export async function fetchTravellers(): Promise<Traveller[]> {
 
   return response.data.users;
 }
+
+export const getTravellerByIdServer = async (
+  id: string,
+): Promise<Traveller> => {
+  // Типізуємо відповідь відповідно до реальної структури з бекенду
+  const { data } = await api.get<{ user: Traveller }>(`/users/${id}`);
+  return data.user; // <- Повертаємо саме вкладений об'єкт користувача
+};

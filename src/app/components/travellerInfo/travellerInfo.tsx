@@ -11,7 +11,7 @@ export function TravellerInfo({
   name,
   storiesCount,
 }: TravellerInfoProps) {
-  const avatarLabel = name.trim().charAt(0).toUpperCase() || 'М';
+  const avatarLabel = name?.trim().charAt(0).toUpperCase() || 'М';
 
   return (
     <div className={styles.profile}>
