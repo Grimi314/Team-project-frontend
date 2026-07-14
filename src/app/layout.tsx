@@ -1,23 +1,20 @@
-import { AppProviders } from '@/providers/appProviders';
-import Header from './components/header/header';
-import Footer from './components/footer/footer';
-import { AuthProvider } from '../providers/AuthProvider';
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
+import { AppProviders } from '@/providers/appProviders';
+import './globals.css';
+import Header from './components/header/header';
+import { AuthProvider } from '../providers/AuthProvider';
 
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-montserrat',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    ' https://team-project-frontend-a3edjtpzh-grimi314s-projects.vercel.app',
-  ),
   title: {
     default: 'Природні Мандри',
     template: '%s | Природні Мандри',
@@ -30,24 +27,21 @@ export const metadata: Metadata = {
   description: 'Еко-мандри, історії та мандрівники України.',
   openGraph: {
     title: 'Природні Мандри',
-    type: 'website',
     description: 'Відкрий Україну заново — еко-мандри для натхнення.',
+    type: 'website',
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="uk" className={montserrat.variable}>
       <body>
         <AppProviders>
+          <Header></Header>
           <AuthProvider>
-            <Header />
             <main>{children}</main>
-            <Footer />
           </AuthProvider>
         </AppProviders>
       </body>

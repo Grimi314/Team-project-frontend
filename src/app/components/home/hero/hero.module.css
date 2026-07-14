@@ -1,7 +1,6 @@
 .hero {
   padding-top: 64px;
   padding-bottom: 64px;
-  font-family: 'Montserrat', sans-serif;
 }
 .heroContainer {
   display: flex;

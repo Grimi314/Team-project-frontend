@@ -1,21 +1,17 @@
 .container {
-width: 375px;
-
+max-width: 375px;
+min-width: 320px;
 padding: 16px 20px 16px 20px;
 display: flex;
 align-items: center;
 justify-content: space-between;
-margin: 0 auto;
-}
-
-.desktopAuthBlock {
-    display: none;
 }
 
 .logo{
     height: 36px;
     width: 124px;
-    fill: #1B391B;
+    fill: black;
+    color: black;
 }
 
 
@@ -39,7 +35,6 @@ border: 1px solid rgba(0, 0, 0, 0.15);
     height: 32px;
     background-color: rgba(0, 0, 0, 0.05);
     transition: all 250ms ease;
-    cursor: pointer;
   
 }
 
@@ -69,16 +64,9 @@ border: 1px solid rgba(0, 0, 0, 0.15);
     display: none;
 }
 
-.navText {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #1b391b;
-}
-
 @media screen and (min-width: 768px){
 .container {
-       width: 768px;
+        max-width: 768px;
         padding: 16px 32px ;
     
     }
@@ -141,15 +129,8 @@ font-family: "Montserrat", sans-serif;
 }
 
 @media screen and (min-width: 1440px){
-    .desktopAuthBlock {
-            display: block;
-        }
-
-    .button {
-            display: none;
-        }
 .container {
-width: 1440px;
+max-width: 1440px;
 padding: 16px 64px;
 
     }
@@ -234,13 +215,3 @@ font-family: "Montserrat", sans-serif;
 
 
 
-
-.button:active {
-    border: 1px solid rgba(255, 255, 255, 0);
-    background-color: #254c24;
-    color: #fff;
-}
-
-.button:active .menu {
-    fill: #fff;
-}
