@@ -1,21 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { api } from '@/lib/api/axios';
 import { endpoints } from '@/lib/api/endpoints';
-import { StoryCard } from '../../storyCard/storyCard';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { StoryCard } from '../../storyCard/storyCard';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 
 import css from './popularStories.module.css';
-import { BsArrowLeftShort } from 'react-icons/bs';
-import { BsArrowRightShort } from 'react-icons/bs';
 
 export default function PopularStories() {
   const [popularStories, setPopularStories] = useState<
