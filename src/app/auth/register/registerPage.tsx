@@ -16,10 +16,6 @@ interface FormValues {
   password: string;
 }
 
-interface RegFormProps {
-  onClose?: () => void;
-}
-
 const initialValues: FormValues = {
   name: '',
   email: '',
@@ -43,7 +39,7 @@ const RegisterFormSchema = Yup.object().shape({
     .required('Це поле є обов’язковим'),
 });
 
-export default function RegistrationForm({ onClose }: RegFormProps) {
+export default function RegistrationForm() {
   const router = useRouter();
 
   const { mutate, isPending } = useMutation({
@@ -53,8 +49,6 @@ export default function RegistrationForm({ onClose }: RegFormProps) {
     },
     onSuccess: () => {
       toast.success('Реєстрація успішна!');
-      if (onClose) onClose();
-      router.push('/');
     },
     onError: (error: any) => {
       const errorMsg =
