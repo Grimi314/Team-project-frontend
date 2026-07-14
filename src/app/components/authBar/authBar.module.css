@@ -1,0 +1,29 @@
+.bar {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0 14px;
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.tab:hover {
+  color: var(--color-primary);
+}
+
+.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}

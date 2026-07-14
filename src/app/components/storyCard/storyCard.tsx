@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useState } from "react";
+import Link from 'next/link';
+import { useState } from 'react';
 
-import { AppIcon } from "@/app/components/icon/appIcon";
-import type { NormalizedProfileStory } from "@/lib/api/profile";
-import { removeSavedStory, saveStory } from "@/lib/api/savedStories";
+import { AppIcon } from '@/app/components/icon/appIcon';
+import type { NormalizedProfileStory } from '@/lib/api/profile';
+import { removeSavedStory, saveStory } from '@/lib/api/savedStories';
 
-import styles from "./storyCard.module.css";
+import styles from './storyCard.module.css';
 
 export type StoryCardProps = {
   story: NormalizedProfileStory;
-  tab: "saved" | "own" | "recommended";
+  tab: 'saved' | 'own' | 'recommended';
 };
 
 export function StoryCard({ story, tab }: StoryCardProps) {
-  const [isSaved, setIsSaved] = useState(tab === "saved");
+  const [isSaved, setIsSaved] = useState(tab === 'saved');
   const [isLoading, setIsLoading] = useState(false);
 
-  const isOwnStory = tab === "own";
+  const isOwnStory = tab === 'own';
 
-  const actionIcon = isOwnStory ? "icon-edit" : "icon-bookmark";
+  const actionIcon = isOwnStory ? 'icon-edit' : 'icon-bookmark';
 
   const actionLabel = isOwnStory
-    ? "Редагувати історію"
+    ? 'Редагувати історію'
     : isSaved
-      ? "Видалити зі збережених"
-      : "Зберегти історію";
+      ? 'Видалити зі збережених'
+      : 'Зберегти історію';
 
   const handleBookmark = async () => {
     if (isOwnStory || isLoading) {
@@ -44,7 +44,7 @@ export function StoryCard({ story, tab }: StoryCardProps) {
 
       setIsSaved((previous) => !previous);
     } catch (error) {
-      console.error("Не вдалося змінити стан збереження:", error);
+      console.error('Не вдалося змінити стан збереження:', error);
     } finally {
       setIsLoading(false);
     }
