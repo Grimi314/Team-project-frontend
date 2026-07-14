@@ -18,7 +18,7 @@ export function TravellerInfo({
   children,
   variant = 'profile',
 }: TravellerInfoProps) {
-  const avatarLabel = name.trim().charAt(0).toUpperCase() || 'М';
+  const avatarLabel = name?.trim().charAt(0).toUpperCase() || 'М';
 
   return (
     <div className={`${styles.profile} ${styles[variant]}`}>
