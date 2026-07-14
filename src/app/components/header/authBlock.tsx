@@ -1,5 +1,17 @@
+import Image from 'next/image';
 import css from './authBlock.module.css';
-import { AppIcon } from '../icon/appIcon';
+import { Icon } from '../icon/icon';
+
+type AuthBlockProps = {
+  user: {
+    name?: string;
+    avatar?: string;
+  };
+  onLogout: () => void;
+};
+
+// { user, onLogout }: AuthBlockProps
+// onClick = { onLogout };
 
 export default function AuthBlock() {
   return (
@@ -17,7 +29,7 @@ export default function AuthBlock() {
 
       <span className={css.name}>name</span>
       <button type="button" className={css.buttonLogout}>
-        <AppIcon className={css.logoutSvg} icon="icon-logout" />
+        <Icon className={css.logoutSvg} icon="icon-logout"></Icon>
       </button>
     </div>
   );

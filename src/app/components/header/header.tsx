@@ -1,98 +1,89 @@
 'use client';
 import { useAuthStore } from '@/auth/model/authStore';
-import HeaderModal from './heder-modal/header-modal';
-import { useEffect, useState } from 'react';
+import { logoutUser } from '@/auth/api/authApi';
 
 import Link from 'next/link';
 import css from './header.module.css';
-import { AppIcon } from '../icon/appIcon';
+import { Icon } from '../icon/icon';
 
 import AuthBlock from './authBlock';
 
+import { usePathname } from 'next/navigation';
+
 export default function Header() {
-  const { isAuth } = useAuthStore();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const openMenu = () => setIsMenuOpen(true);
-  const closeMenu = () => setIsMenuOpen(false);
+  // Потрібно для відображення правильного хедара на сторінці logig, register
+  const  pathname = usePathname();
+  if (pathname?.startsWith('/auth')) {
+    return null;
+  }
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1440) {
-        setIsMenuOpen(false);
-      }
-    };
+  const travellerId = null;
 
-    window.addEventListener('resize', handleResize);
+  const { user, isAuth, logout } = useAuthStore();
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } finally {
+      logout();
+    }
+  };
 
-  return isMenuOpen ? (
-    <HeaderModal onClose={closeMenu} />
-  ) : (
+  return (
     <header className={css.container}>
       <Link href="/">
-        <AppIcon icon="icon-Company-Logo" className={css.logo} />
+        <Icon icon="icon-Company-Logo" className={css.logo} />
       </Link>
 
       <nav className={css.wrapper}>
         <ul className={css.navList}>
           <li className={css.navListItem}>
-            <Link className={css.navText} href="/" prefetch={false}>
+            <Link href="/" prefetch={false}>
               Головна
             </Link>
           </li>
           <li className={css.navListItem}>
-            <Link className={css.navText} href="/stories" prefetch={false}>
+            <Link href="/stories" prefetch={false}>
               Статті
             </Link>
           </li>
           <li className={css.navListItem}>
-            <Link className={css.navText} href="/travellers" prefetch={false}>
+            <Link href=" /travellers" prefetch={false}>
               Еко-Мандрівники
             </Link>
           </li>
           <li className={css.navListItem}>
-            <Link className={css.navText} href="/profile" prefetch={false}>
+            <Link href={`/traveller/${travellerId}`} prefetch={false}>
               Мій Профіль
             </Link>
           </li>
         </ul>
 
         <div className={css.buttonContainer}>
-          {isAuth ? (
+          {true ? (
             <>
-              <Link href="/stories/new" className={css.buttonEddStory}>
+              <Link href={'/stories/enw'} className={css.buttonEddStory}>
                 Опублікувати статтю
               </Link>
 
-              <div className={css.desktopAuthBlock}>
-                <AuthBlock />
-              </div>
+              <button className={css.button}>
+                <Icon icon="icon-menu" className={css.menu} />
+              </button>
+
+              <AuthBlock />
             </>
           ) : (
             <>
-              <Link href="/auth/login" className={css.buttonLogin}>
+              <Link href={'/api/auth'} className={css.buttonLogin}>
                 Вхід
               </Link>
 
-              <Link href="/auth/register" className={css.buttonRegister}>
+              <Link href={'/api/auth'} className={css.buttonRegister}>
                 Реєстрація
               </Link>
             </>
           )}
-
-          <button
-            type="button"
-            className={css.button}
-            onClick={openMenu}
-            aria-label="Відкрити меню"
-          >
-            <AppIcon icon="icon-menu" className={css.menu} />
-          </button>
         </div>
       </nav>
     </header>
