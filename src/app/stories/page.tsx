@@ -1,22 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getStories } from '@/lib/api/stories';
-import styles from './storiesPage.module.css';
-import type { NormalizedProfileStory } from '@/lib/api/profile';
 import { StoryCard } from '@/app/components/storyCard/storyCard';
-
-const categories = [
-  'Всі статті',
-  'Маршрути',
-  'Еко-поради',
-  'Природа',
-  'Культура',
-  'Локальні продукти',
-];
+import type { NormalizedProfileStory } from '@/lib/api/profile';
+import { getCategories, getStories, type Category } from '@/lib/api/stories';
+import styles from './storiesPage.module.css';
 
 export default function StoriesPage() {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState('');
+  const [selectedCategoryName, setSelectedCategoryName] =
+    useState('Всі статті');
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [stories, setStories] = useState<NormalizedProfileStory[]>([]);
   const [page, setPage] = useState(1);
@@ -24,12 +19,32 @@ export default function StoriesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category);
+  const handleCategorySelect = (categoryId: string, categoryName: string) => {
+    if (categoryId === selectedCategoryId) {
+      setIsDropdownOpen(false);
+      return;
+    }
+
+    setSelectedCategoryId(categoryId);
+    setSelectedCategoryName(categoryName);
     setPage(1);
     setStories([]);
+    setTotalPages(1);
     setIsDropdownOpen(false);
   };
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch {
+        setError('Не вдалося завантажити категорії');
+      }
+    };
+
+    void loadCategories();
+  }, []);
 
   useEffect(() => {
     const loadStories = async () => {
@@ -37,11 +52,12 @@ export default function StoriesPage() {
         setIsLoading(true);
         setError('');
 
-        const data = await getStories(page, 6, selectedCategory);
+        const data = await getStories(page, 6, selectedCategoryId);
 
-        setStories((prev) =>
-          page === 1 ? data.stories : [...prev, ...data.stories],
+        setStories((previousStories) =>
+          page === 1 ? data.stories : [...previousStories, ...data.stories],
         );
+
         setTotalPages(data.pagination.totalPages);
       } catch {
         setError('Не вдалося завантажити статті');
@@ -50,8 +66,10 @@ export default function StoriesPage() {
       }
     };
 
-    loadStories();
-  }, [page, selectedCategory]);
+    void loadStories();
+  }, [page, selectedCategoryId]);
+
+  const hasMoreStories = page < totalPages;
 
   return (
     <main className={styles.page}>
@@ -60,16 +78,32 @@ export default function StoriesPage() {
 
         <div className={styles.filtersWrapper}>
           <ul className={styles.filters}>
+            <li>
+              <button
+                className={`${styles.filterButton} ${
+                  selectedCategoryId === '' ? styles.activeFilter : ''
+                }`}
+                type="button"
+                onClick={() => handleCategorySelect('', 'Всі статті')}
+              >
+                Всі статті
+              </button>
+            </li>
+
             {categories.map((category) => (
-              <li key={category}>
+              <li key={category._id}>
                 <button
                   className={`${styles.filterButton} ${
-                    selectedCategory === category ? styles.activeFilter : ''
+                    selectedCategoryId === category._id
+                      ? styles.activeFilter
+                      : ''
                   }`}
                   type="button"
-                  onClick={() => handleCategorySelect(category)}
+                  onClick={() =>
+                    handleCategorySelect(category._id, category.category)
+                  }
                 >
-                  {category}
+                  {category.category}
                 </button>
               </li>
             ))}
@@ -83,11 +117,13 @@ export default function StoriesPage() {
                 isDropdownOpen ? styles.dropdownButtonOpen : ''
               }`}
               type="button"
-              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              onClick={() => setIsDropdownOpen((previous) => !previous)}
               aria-expanded={isDropdownOpen}
               aria-controls="categories-list"
             >
-              <span className={styles.dropdownValue}>{selectedCategory}</span>
+              <span className={styles.dropdownValue}>
+                {selectedCategoryName}
+              </span>
 
               <svg
                 className={styles.selectIcon}
@@ -106,18 +142,34 @@ export default function StoriesPage() {
 
             {isDropdownOpen && (
               <ul className={styles.dropdownList} id="categories-list">
+                <li>
+                  <button
+                    className={`${styles.dropdownOption} ${
+                      selectedCategoryId === ''
+                        ? styles.dropdownOptionActive
+                        : ''
+                    }`}
+                    type="button"
+                    onClick={() => handleCategorySelect('', 'Всі статті')}
+                  >
+                    Всі статті
+                  </button>
+                </li>
+
                 {categories.map((category) => (
-                  <li key={category}>
+                  <li key={category._id}>
                     <button
                       className={`${styles.dropdownOption} ${
-                        selectedCategory === category
+                        selectedCategoryId === category._id
                           ? styles.dropdownOptionActive
                           : ''
                       }`}
                       type="button"
-                      onClick={() => handleCategorySelect(category)}
+                      onClick={() =>
+                        handleCategorySelect(category._id, category.category)
+                      }
                     >
-                      {category}
+                      {category.category}
                     </button>
                   </li>
                 ))}
@@ -133,16 +185,22 @@ export default function StoriesPage() {
             stories.map((story) => (
               <StoryCard key={story.id} story={story} tab="saved" />
             ))}
+
+          {!error && !isLoading && stories.length === 0 && (
+            <p className={styles.placeholder}>Статей не знайдено</p>
+          )}
         </section>
 
-        <button
-          className={styles.loadMore}
-          type="button"
-          onClick={() => setPage((prev) => prev + 1)}
-          disabled={isLoading || page >= totalPages}
-        >
-          {isLoading ? 'Завантаження...' : 'Показати ще'}
-        </button>
+        {hasMoreStories && (
+          <button
+            className={styles.loadMore}
+            type="button"
+            onClick={() => setPage((previousPage) => previousPage + 1)}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Завантаження...' : 'Показати ще'}
+          </button>
+        )}
       </section>
     </main>
   );

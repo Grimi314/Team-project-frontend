@@ -12,6 +12,11 @@ export type StoriesResponse = {
   pagination: NormalizedPagination;
 };
 
+export type Category = {
+  _id: string;
+  category: string;
+};
+
 const isRecord = (value: unknown): value is UnknownRecord =>
   typeof value === 'object' && value !== null;
 
@@ -182,9 +187,9 @@ export const getStories = async (
     perPage: perPage.toString(),
   });
 
-  if (category && category !== 'Всі статті') {
-    params.append('category', category);
-  }
+  if (category) {
+  params.append('category', category);
+}
 
   const { data } = await api.get(
     `${endpoints.stories.list}?${params.toString()}`,
@@ -203,4 +208,20 @@ export const getStories = async (
     stories,
     pagination,
   };
+};
+
+export const getCategories = async (): Promise<Category[]> => {
+  const { data } = await api.get(endpoints.categories.list);
+
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  return data
+    .filter(isRecord)
+    .map(item => ({
+      _id: toStringValue(item._id) ?? '',
+      category: toStringValue(item.category) ?? '',
+    }))
+    .filter(item => item._id && item.category);
 };
