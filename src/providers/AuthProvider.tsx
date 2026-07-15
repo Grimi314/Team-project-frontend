@@ -1,30 +1,32 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import { getCurrentUser } from '@/auth/api/authApi';
 import { useAuthStore } from '@/auth/model/authStore';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const setUser = useAuthStore((state) => state.setUser);
+  const setAuthInitialized = useAuthStore((state) => state.setAuthInitialized);
 
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setUser(null);
-        return;
-      }
       try {
-        const data = await getCurrentUser();
+        const response = await getCurrentUser();
 
-        setUser(data.user ?? data.data ?? data);
+        const user =
+          response.data?.user ?? response.user ?? response.data ?? response;
+
+        setUser(user);
       } catch {
         setUser(null);
+      } finally {
+        setAuthInitialized(true);
       }
     };
 
     checkAuth();
-  }, [setUser]);
+  }, [setUser, setAuthInitialized]);
 
   return <>{children}</>;
 }

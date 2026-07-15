@@ -10,8 +10,11 @@ import { AppIcon } from '../icon/appIcon';
 import AuthBlock from './authBlock';
 
 export default function Header() {
-  const { isAuth } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const user = useAuthStore((state) => state.user);
+  const isAuth = Boolean(user);
+
+  const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
 
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
@@ -29,6 +32,10 @@ export default function Header() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  if (!isAuthInitialized) {
+    return null;
+  }
 
   return isMenuOpen ? (
     <HeaderModal onClose={closeMenu} />
@@ -55,15 +62,17 @@ export default function Header() {
               Еко-Мандрівники
             </Link>
           </li>
-          <li className={css.navListItem}>
-            <Link className={css.navText} href="/profile" prefetch={false}>
-              Мій Профіль
-            </Link>
-          </li>
+          {isAuth && user && (
+            <li className={css.navListItem}>
+              <Link className={css.navText} href="/profile" prefetch={false}>
+                Мій Профіль
+              </Link>
+            </li>
+          )}
         </ul>
 
         <div className={css.buttonContainer}>
-          {isAuth ? (
+          {isAuth && user ? (
             <>
               <Link href="/stories/new" className={css.buttonEddStory}>
                 Опублікувати статтю
