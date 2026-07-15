@@ -1,9 +1,10 @@
 export type Story = {
-  id: string;
+  _id: string;
+  img: string;
   title: string;
-  description: string;
-  image: string;
-  author: string;
+  article: string;
   category: string;
-  publishedAt: string;
+  rate: number;
+  ownerId: string;
+  date: string;
 };

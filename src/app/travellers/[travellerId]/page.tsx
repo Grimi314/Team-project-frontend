@@ -11,6 +11,8 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from './travellerPage.module.css';
 
+import Story from '../travelPageRender/travelPageRender';
+
 export default function TravellerPage() {
   const params = useParams();
   const travellerId = params?.travellerId as string;
