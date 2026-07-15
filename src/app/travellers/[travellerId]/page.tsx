@@ -1,16 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import { api } from '@/lib/api/axios';
-import { PageTitle } from '@/app/components/PageTitle/PageTitle';
-import { TravellersStories } from '@/app/components/travellersStories/travellersStories';
-import { TravellerInfo } from '@/app/components/travellerInfo/travellerInfo';
 import Loader from '@/app/components/loader/loader';
-import styles from './travellerPage.module.css';
 import { MessageNoStories } from '@/app/components/messageNoStories/messageNoStories';
-import { getTravellerByIdServer } from '@/lib/api/travellers';
-import { type Traveller } from '@/lib/api/travellers';
+import { PageTitle } from '@/app/components/PageTitle/PageTitle';
+import { TravellerInfo } from '@/app/components/travellerInfo/travellerInfo';
+import { TravellersStories } from '@/app/components/travellersStories/travellersStories';
+import { api } from '@/lib/api/axios';
+import { getTravellerByIdServer, type Traveller } from '@/lib/api/travellers';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import styles from './travellerPage.module.css';
 
 import Story from '../travelPageRender/travelPageRender';
 
