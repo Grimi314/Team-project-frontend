@@ -1,20 +1,21 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { api } from '@/lib/api/axios';
 import { endpoints } from '@/lib/api/endpoints';
-import type { NormalizedProfileStory } from '@/lib/api/profile';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { StoryCard } from '../../storyCard/storyCard';
+import type { NormalizedProfileStory } from '@/lib/api/profile';
 
-import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
+import { Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 
 import css from './popularStories.module.css';
+import { BsArrowLeftShort } from 'react-icons/bs';
+import { BsArrowRightShort } from 'react-icons/bs';
 
 export default function PopularStories() {
   const [popularStories, setPopularStories] = useState<
@@ -45,7 +46,7 @@ export default function PopularStories() {
             date: story.date || null,
           }));
 
-        setPopularStories(normalizedStories); // или setPopularStories в зависимости от вашего стейта
+        setPopularStories(normalizedStories);
       } catch (err) {
         console.error('Error fetching popular stories:', err);
       }

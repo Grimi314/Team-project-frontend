@@ -18,7 +18,7 @@ export default function CardTravellers({ traveller }: Props) {
         variant="card"
       >
         <Link
-          href={`/traveller/${traveller._id}`}
+          href={`/travellers/${traveller._id}`}
           prefetch={false}
           className={styles.profileLink}
         >
