@@ -38,7 +38,7 @@ export default function HeaderModal({ onClose }: HeaderModalType) {
   return (
     <div className={css.mobileMenu}>
       <div className={css.logoButtonContainer}>
-        <Link href="/">
+        <Link href="/" onClick={onClose}>
           <AppIcon icon="icon-Company-Logo" className={css.logo} />
         </Link>
 
@@ -53,17 +53,32 @@ export default function HeaderModal({ onClose }: HeaderModalType) {
       </div>
       <ul className={css.navList}>
         <li className={css.navListItem}>
-          <Link className={css.navText} href="/" prefetch={false}>
+          <Link
+            className={css.navText}
+            href="/"
+            onClick={onClose}
+            prefetch={false}
+          >
             Головна
           </Link>
         </li>
         <li className={css.navListItem}>
-          <Link className={css.navText} href="/stories" prefetch={false}>
+          <Link
+            className={css.navText}
+            href="/stories"
+            onClick={onClose}
+            prefetch={false}
+          >
             Статті
           </Link>
         </li>
         <li className={css.navListItem}>
-          <Link className={css.navText} href="/travellers" prefetch={false}>
+          <Link
+            className={css.navText}
+            href="/travellers"
+            onClick={onClose}
+            prefetch={false}
+          >
             Еко-Мандрівники
           </Link>
         </li>
@@ -71,7 +86,11 @@ export default function HeaderModal({ onClose }: HeaderModalType) {
       <div className={css.modalWrapper}>
         {isAuth ? (
           <>
-            <Link href="/stories/new" className={css.buttonEddStory}>
+            <Link
+              href="/stories/new"
+              onClick={onClose}
+              className={css.buttonEddStory}
+            >
               Опублікувати статтю
             </Link>
             <div className={css.modalAuthBlock}>
@@ -80,11 +99,19 @@ export default function HeaderModal({ onClose }: HeaderModalType) {
           </>
         ) : (
           <>
-            <Link href="/auth/login" className={css.buttonLogin}>
+            <Link
+              href="/auth/login"
+              onClick={onClose}
+              className={css.buttonLogin}
+            >
               Вхід
             </Link>
 
-            <Link href="/auth/register" className={css.buttonRegister}>
+            <Link
+              href="/auth/register"
+              onClick={onClose}
+              className={css.buttonRegister}
+            >
               Реєстрація
             </Link>
           </>
