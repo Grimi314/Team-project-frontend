@@ -1,6 +1,4 @@
 import { api } from './axios';
-import { endpoints } from './endpoints';
-
 export type RecommendedStory = {
   _id: string;
   title: string;
@@ -28,11 +26,15 @@ type RecommendedStoriesResponse = {
   hasNextPage: boolean;
 };
 
+
+
 export async function fetchRecommendedStories(
   categoryId: string,
+  
 ): Promise<RecommendedStory[]> {
+    console.log('categoryId:', categoryId);
   const response = await api.get<RecommendedStoriesResponse>(
-    endpoints.stories.recommended,
+  '/recommended',
     {
       params: {
         category: categoryId,

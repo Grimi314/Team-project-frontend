@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Icon } from '../icon/svgIcon';
+import { AppIcon } from '../icon/appIcon';
 
 import { Story } from '@/types/story';
 
@@ -12,6 +12,11 @@ type StoryDetailsProps = {
 };
 
 export default function StoryDetails({ story }: StoryDetailsProps) {
+  const categoryName =
+    typeof story.category === 'string'
+      ? story.category
+      : (story.category?.category ?? 'Без категорії');
+
   return (
     <section className={styles.storyDetails}>
       <div className={styles.mainContentWrapper}>
@@ -19,9 +24,11 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
           <Image
             src={story.img}
             alt={story.title}
-            fill
 
+            width={800}
+            height={500}
             className={styles.image}
+
             priority
           />
         </div>
@@ -30,7 +37,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
             href="/stories" // TODO: перевірити маршрут сторінки всіх історій
             className={styles.backLink}
           >
-            <Icon icon="icon-chevron_left" className={styles.backIcon} />
+            <AppIcon icon="icon-chevron_left" className={styles.backIcon} />
 
             <span className={styles.backText}>Всі статті</span>
           </Link>
@@ -55,7 +62,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
             </div>
 
             <div className={styles.categoryWrapper}>
-              <span className={styles.category}>{story.category}</span>
+              <span className={styles.category}>{categoryName}</span>
             </div>
           </div>
         </div>
