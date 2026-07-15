@@ -7,26 +7,19 @@ import { useAuthStore } from '@/auth/model/authStore';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const setUser = useAuthStore((state) => state.setUser);
-  const setAuthInitialized = useAuthStore((state) => state.setAuthInitialized);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await getCurrentUser();
-
-        const user =
-          response.data?.user ?? response.user ?? response.data ?? response;
-
+        const user = await getCurrentUser();
         setUser(user);
       } catch {
         setUser(null);
-      } finally {
-        setAuthInitialized(true);
       }
     };
 
     checkAuth();
-  }, [setUser, setAuthInitialized]);
+  }, [setUser]);
 
   return <>{children}</>;
 }
