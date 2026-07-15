@@ -7,8 +7,9 @@ type TravellerInfoProps = {
   avatarUrl?: string | null;
   name: string;
   storiesCount: number;
-  children?: React.ReactNode; // ДОДАНО: підтримка кнопки
+  children?: React.ReactNode;
   variant?: 'card' | 'profile';
+  onEditProfile?: () => void;
 };
 
 export function TravellerInfo({
@@ -17,6 +18,7 @@ export function TravellerInfo({
   storiesCount,
   children,
   variant = 'profile',
+  onEditProfile,
 }: TravellerInfoProps) {
   const avatarLabel = name?.trim().charAt(0).toUpperCase() || 'М';
 
@@ -30,10 +32,22 @@ export function TravellerInfo({
           {avatarLabel}
         </div>
       )}
+
       <div className={styles.content}>
         <h1 className={styles.name}>{name}</h1>
         <p className={styles.meta}>Статей: {storiesCount}</p>
+
+        {variant === 'profile' && onEditProfile && (
+          <button
+            type="button"
+            className={styles.editButton}
+            onClick={onEditProfile}
+          >
+            Редагувати профіль
+          </button>
+        )}
       </div>
+
       {children && <div className={styles.actions}>{children}</div>}
     </div>
   );

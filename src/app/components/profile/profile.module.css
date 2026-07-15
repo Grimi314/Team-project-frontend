@@ -62,3 +62,233 @@
     min-height: 268px;
   }
 }
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+}
+
+.saveButton {
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background: #4f8f3c;
+  color: white;
+  cursor: pointer;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.editTitle {
+  margin: 0 32px 8px 0;
+  color: var(--color-scheme-1-text);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: var(--color-scheme-1-text);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #9bb39a;
+  border-radius: 8px;
+  background-color: #fff;
+  color: var(--color-scheme-1-text);
+  font: inherit;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #4a9849;
+  box-shadow: 0 0 0 2px rgb(74 152 73 / 20%);
+}
+
+.error {
+  margin: 0;
+  color: #b3261e;
+  font-size: 13px;
+}
+
+.saveButton {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4a9849;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    opacity 200ms ease;
+}
+
+.saveButton:hover {
+  background-color: #3d7f3c;
+}
+
+.saveButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+  .editTitle {
+    font-size: 28px;
+  }
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.editTitle {
+  margin: 0 32px 4px 0;
+  color: var(--color-scheme-1-text);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: var(--color-scheme-1-text);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: var(--color-scheme-1-text);
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.input::placeholder {
+  color: #7a7a7a;
+}
+
+.input:hover,
+.input:focus {
+  border-color: #4caf50;
+}
+
+.input:focus {
+  box-shadow: 0 0 0 1px #4caf50;
+}
+
+.inputError {
+  border-color: #e53935;
+  color: #d71919;
+}
+
+.inputError:hover,
+.inputError:focus {
+  border-color: #e53935;
+  box-shadow: 0 0 0 1px #e53935;
+}
+
+.error {
+  margin: 0;
+  color: #e53935;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.saveButton {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid #4a9849;
+  border-radius: 4px;
+  background-color: #4a9849;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    opacity 200ms ease;
+}
+
+.saveButton:hover,
+.saveButton:focus-visible {
+  border-color: #3f8d3e;
+  background-color: #3f8d3e;
+}
+
+.saveButton:active {
+  border-color: #245f28;
+  background-color: #245f28;
+}
+
+.saveButton:disabled {
+  border-color: #d8ead8;
+  background-color: #d8ead8;
+  color: #ffffff;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .editTitle {
+    font-size: 28px;
+  }
+}

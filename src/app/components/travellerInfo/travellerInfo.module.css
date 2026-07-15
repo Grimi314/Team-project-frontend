@@ -141,3 +141,24 @@
     }
   }
 }
+
+.editButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #4a9849;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 250ms ease;
+}
+
+.editButton:hover {
+  opacity: 0.8;
+}
