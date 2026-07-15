@@ -1,10 +1,14 @@
+type StoryCategory = {
+  _id: string;
+  category: string;
+};
+
 export type Story = {
   _id: string;
-  img: string;
   title: string;
+  img: string;
   article: string;
-  category: string;
   rate: number;
-  ownerId: string;
   date: string;
+  category: string | StoryCategory;
 };

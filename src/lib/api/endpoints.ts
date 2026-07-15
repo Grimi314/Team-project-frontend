@@ -5,17 +5,24 @@ export const endpoints = {
     logout: '/auth/logout',
     current: '/auth/current',
   },
+
   stories: {
-    list: '/stories',
-    popular: '/stories/popular',
-    byId: (id: string) => `/stories/${id}`,
-    create: '/stories',
-    save: (id: string) => '/stories/' + id + '/saved',
+    list: '/',
+  popular: '/popular',
+  byId: (id: string) => `/stories/${id}`,
+  create: '/stories',
+  save: (id: string) => `/stories/${id}/save`,
+},
+
+  categories: {
+    list: '/categories',
   },
+
   travellers: {
     list: '/travellers',
     byId: (id: string) => `/travellers/${id}`,
   },
+
   profile: {
     savedStories: '/profile/saved',
     ownStories: '/profile/stories',
