@@ -21,7 +21,7 @@ const messageConfig: Record<
     title:
       'У вас ще немає власних історій, мерщій створіть вашу першу історію!',
     ctaLabel: 'Створити історію',
-    href: '/addStory',
+    href: '/stories/new',
   },
   user: {
     title: 'Цей користувач ще не публікував історій',
