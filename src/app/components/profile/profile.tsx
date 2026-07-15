@@ -202,167 +202,165 @@ export function Profile({ tab }: ProfileProps) {
 
   return (
     <div className={styles.page}>
-  <section className={styles.headerSection}>
-    <div className={styles.container}>
-      <TravellerInfo
-        avatarUrl={profileState.user.avatarUrl}
-        name={profileState.user.name}
-        storiesCount={profileState.user.storiesCount}
-        onEditProfile={() => setIsEditModalOpen(true)}
-      />
+      <section className={styles.headerSection}>
+        <div className={styles.container}>
+          <TravellerInfo
+            avatarUrl={profileState.user.avatarUrl}
+            name={profileState.user.name}
+            storiesCount={profileState.user.storiesCount}
+            onEditProfile={() => setIsEditModalOpen(true)}
+          />
 
-      <Modal
-  isOpen={isEditModalOpen}
-  onClose={() => setIsEditModalOpen(false)}
->
-  <Formik
-    initialValues={{
-      name: user?.name ?? profileState.user.name,
-      email: user?.email ?? '',
-      avatar: user?.avatar ?? '',
-    }}
-    validationSchema={profileValidationSchema}
-    enableReinitialize
-    onSubmit={async (values, { setSubmitting }) => {
-  try {
-    const data: {
-      name?: string;
-      email?: string;
-      avatar?: string | null;
-    } = {};
+          <Modal
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+          >
+            <Formik
+              initialValues={{
+                name: user?.name ?? profileState.user.name,
+                email: user?.email ?? '',
+                avatar: user?.avatarUrl ?? '',
+              }}
+              validationSchema={profileValidationSchema}
+              enableReinitialize
+              onSubmit={async (values, { setSubmitting }) => {
+                try {
+                  const data: {
+                    name?: string;
+                    email?: string;
+                    avatar?: string | null;
+                  } = {};
 
-    const trimmedName = values.name.trim();
-    const trimmedEmail = values.email.trim();
-    const trimmedAvatar = values.avatar.trim();
+                  const trimmedName = values.name.trim();
+                  const trimmedEmail = values.email.trim();
+                  const trimmedAvatar = values.avatar.trim();
 
-    if (trimmedName && trimmedName !== user?.name) {
-      data.name = trimmedName;
-    }
+                  if (trimmedName && trimmedName !== user?.name) {
+                    data.name = trimmedName;
+                  }
 
-    if (trimmedEmail && trimmedEmail !== user?.email) {
-      data.email = trimmedEmail;
-    }
+                  if (trimmedEmail && trimmedEmail !== user?.email) {
+                    data.email = trimmedEmail;
+                  }
 
-    if (trimmedAvatar !== (user?.avatar ?? '')) {
-      data.avatar = trimmedAvatar || null;
-    }
+                  if (trimmedAvatar !== (user?.avatarUrl ?? '')) {
+                    data.avatar = trimmedAvatar || null;
+                  }
 
-    if (Object.keys(data).length === 0) {
-      toast.error('Немає змін для збереження');
-      setSubmitting(false);
-      return;
-    }
+                  if (Object.keys(data).length === 0) {
+                    toast.error('Немає змін для збереження');
+                    setSubmitting(false);
+                    return;
+                  }
 
-    const response = await updateUserProfile(data);
-    const updatedUser = response.data;
+                  const response = await updateUserProfile(data);
+                  const updatedUser = response.data;
 
-    setUser({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      avatar: updatedUser.avatar ?? undefined,
-    });
+                  setUser({
+                    _id: updatedUser._id,
+                    name: updatedUser.name,
+                    email: updatedUser.email,
+                    avatarUrl: updatedUser.avatar ?? undefined,
+                  });
 
-    setProfileState((currentState) => ({
-      ...currentState,
-      user: {
-        ...currentState.user,
-        name: updatedUser.name,
-        avatarUrl: updatedUser.avatar ?? null,
-      },
-    }));
+                  setProfileState((currentState) => ({
+                    ...currentState,
+                    user: {
+                      ...currentState.user,
+                      name: updatedUser.name,
+                      avatarUrl: updatedUser.avatar ?? null,
+                    },
+                  }));
 
-    toast.success(
-      updatedUser.pendingEmail
-        ? 'Профіль оновлено. Підтвердьте новий email у листі.'
-        : 'Профіль успішно оновлено.',
-    );
+                  toast.success(
+                    updatedUser.pendingEmail
+                      ? 'Профіль оновлено. Підтвердьте новий email у листі.'
+                      : 'Профіль успішно оновлено.',
+                  );
 
-    setIsEditModalOpen(false);
-  } catch (error) {
-    console.error('Profile update error:', error);
-    toast.error('Не вдалося оновити профіль');
-  } finally {
-    setSubmitting(false);
-  }
-}}
-  
-  >
-    {({ isSubmitting, errors, touched }) => (
-  <Form className={styles.editForm}>
-    <h2 className={styles.editTitle}>Редагування профілю</h2>
+                  setIsEditModalOpen(false);
+                } catch (error) {
+                  console.error('Profile update error:', error);
+                  toast.error('Не вдалося оновити профіль');
+                } finally {
+                  setSubmitting(false);
+                }
+              }}
+            >
+              {({ isSubmitting, errors, touched }) => (
+                <Form className={styles.editForm}>
+                  <h2 className={styles.editTitle}>Редагування профілю</h2>
 
-    <div className={styles.fieldGroup}>
-      <label className={styles.label} htmlFor="name">
-        Ім’я
-      </label>
-      <Field
-  id="name"
-  className={`${styles.input} ${
-    touched.name && errors.name ? styles.inputError : ''
-  }`}
-  name="name"
-  type="text"
-/>
-      <ErrorMessage
-        name="name"
-        component="p"
-        className={styles.error}
-      />
-    </div>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.label} htmlFor="name">
+                      Ім’я
+                    </label>
+                    <Field
+                      id="name"
+                      className={`${styles.input} ${
+                        touched.name && errors.name ? styles.inputError : ''
+                      }`}
+                      name="name"
+                      type="text"
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="p"
+                      className={styles.error}
+                    />
+                  </div>
 
-    <div className={styles.fieldGroup}>
-      <label className={styles.label} htmlFor="email">
-        Email
-      </label>
-      <Field
-  id="email"
-  className={`${styles.input} ${
-    touched.email && errors.email ? styles.inputError : ''
-  }`}
-  name="email"
-  type="email"
-/>
-      <ErrorMessage
-        name="email"
-        component="p"
-        className={styles.error}
-      />
-    </div>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.label} htmlFor="email">
+                      Email
+                    </label>
+                    <Field
+                      id="email"
+                      className={`${styles.input} ${
+                        touched.email && errors.email ? styles.inputError : ''
+                      }`}
+                      name="email"
+                      type="email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="p"
+                      className={styles.error}
+                    />
+                  </div>
 
-    <div className={styles.fieldGroup}>
-      <label className={styles.label} htmlFor="avatar">
-        Посилання на аватар
-      </label>
-      <Field
-  id="avatar"
-  className={`${styles.input} ${
-    touched.avatar && errors.avatar ? styles.inputError : ''
-  }`}
-  name="avatar"
-  type="url"
-/>
-      <ErrorMessage
-        name="avatar"
-        component="p"
-        className={styles.error}
-      />
-    </div>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.label} htmlFor="avatar">
+                      Посилання на аватар
+                    </label>
+                    <Field
+                      id="avatar"
+                      className={`${styles.input} ${
+                        touched.avatar && errors.avatar ? styles.inputError : ''
+                      }`}
+                      name="avatar"
+                      type="url"
+                    />
+                    <ErrorMessage
+                      name="avatar"
+                      component="p"
+                      className={styles.error}
+                    />
+                  </div>
 
-    <button
-  className={styles.saveButton}
-  type="submit"
-  disabled={isSubmitting}
->
-  {isSubmitting ? 'Зберігаємо...' : 'Зберегти'}
-</button>
-  </Form>
-)}
-    
-  </Formik>
-</Modal>
-    </div>
-  </section>
+                  <button
+                    className={styles.saveButton}
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Зберігаємо...' : 'Зберегти'}
+                  </button>
+                </Form>
+              )}
+            </Formik>
+          </Modal>
+        </div>
+      </section>
 
       <section className={styles.contentSection}>
         <div className={styles.container}>
