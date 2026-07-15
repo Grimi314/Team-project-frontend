@@ -15,6 +15,13 @@ import {
   type ProfileTab,
 } from '@/lib/api/profile';
 import styles from './profile.module.css';
+import { Modal } from '@/app/components/modal/modal';
+import { Form, Formik, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import toast from 'react-hot-toast';
+
+import { useAuthStore } from '@/auth/model/authStore';
+import { updateUserProfile } from '@/auth/api/authApi';
 
 type ProfileProps = {
   tab: ProfileTab;
@@ -64,10 +71,22 @@ const getProfileUser = (user: NormalizedProfileUser | null) => {
   };
 };
 
+const profileValidationSchema = Yup.object({
+  name: Yup.string()
+    .min(3, 'Ім’я повинно містити щонайменше 3 символи')
+    .max(32, 'Ім’я повинно містити не більше 32 символів')
+    .required('Вкажіть ім’я'),
+  email: Yup.string().email('Некоректний формат email'),
+  avatar: Yup.string().url('Вкажіть коректне посилання').nullable(),
+});
+
 export function Profile({ tab }: ProfileProps) {
   const router = useRouter();
   const [perPage, setPerPage] = useState(getStoriesPerPage);
   const [profileState, setProfileState] = useState(initialState);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     const handleResize = () => {
@@ -183,15 +202,167 @@ export function Profile({ tab }: ProfileProps) {
 
   return (
     <div className={styles.page}>
-      <section className={styles.headerSection}>
-        <div className={styles.container}>
-          <TravellerInfo
-            avatarUrl={profileState.user.avatarUrl}
-            name={profileState.user.name}
-            storiesCount={profileState.user.storiesCount}
-          />
-        </div>
-      </section>
+  <section className={styles.headerSection}>
+    <div className={styles.container}>
+      <TravellerInfo
+        avatarUrl={profileState.user.avatarUrl}
+        name={profileState.user.name}
+        storiesCount={profileState.user.storiesCount}
+        onEditProfile={() => setIsEditModalOpen(true)}
+      />
+
+      <Modal
+  isOpen={isEditModalOpen}
+  onClose={() => setIsEditModalOpen(false)}
+>
+  <Formik
+    initialValues={{
+      name: user?.name ?? profileState.user.name,
+      email: user?.email ?? '',
+      avatar: user?.avatar ?? '',
+    }}
+    validationSchema={profileValidationSchema}
+    enableReinitialize
+    onSubmit={async (values, { setSubmitting }) => {
+  try {
+    const data: {
+      name?: string;
+      email?: string;
+      avatar?: string | null;
+    } = {};
+
+    const trimmedName = values.name.trim();
+    const trimmedEmail = values.email.trim();
+    const trimmedAvatar = values.avatar.trim();
+
+    if (trimmedName && trimmedName !== user?.name) {
+      data.name = trimmedName;
+    }
+
+    if (trimmedEmail && trimmedEmail !== user?.email) {
+      data.email = trimmedEmail;
+    }
+
+    if (trimmedAvatar !== (user?.avatar ?? '')) {
+      data.avatar = trimmedAvatar || null;
+    }
+
+    if (Object.keys(data).length === 0) {
+      toast.error('Немає змін для збереження');
+      setSubmitting(false);
+      return;
+    }
+
+    const response = await updateUserProfile(data);
+    const updatedUser = response.data;
+
+    setUser({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      avatar: updatedUser.avatar ?? undefined,
+    });
+
+    setProfileState((currentState) => ({
+      ...currentState,
+      user: {
+        ...currentState.user,
+        name: updatedUser.name,
+        avatarUrl: updatedUser.avatar ?? null,
+      },
+    }));
+
+    toast.success(
+      updatedUser.pendingEmail
+        ? 'Профіль оновлено. Підтвердьте новий email у листі.'
+        : 'Профіль успішно оновлено.',
+    );
+
+    setIsEditModalOpen(false);
+  } catch (error) {
+    console.error('Profile update error:', error);
+    toast.error('Не вдалося оновити профіль');
+  } finally {
+    setSubmitting(false);
+  }
+}}
+  
+  >
+    {({ isSubmitting, errors, touched }) => (
+  <Form className={styles.editForm}>
+    <h2 className={styles.editTitle}>Редагування профілю</h2>
+
+    <div className={styles.fieldGroup}>
+      <label className={styles.label} htmlFor="name">
+        Ім’я
+      </label>
+      <Field
+  id="name"
+  className={`${styles.input} ${
+    touched.name && errors.name ? styles.inputError : ''
+  }`}
+  name="name"
+  type="text"
+/>
+      <ErrorMessage
+        name="name"
+        component="p"
+        className={styles.error}
+      />
+    </div>
+
+    <div className={styles.fieldGroup}>
+      <label className={styles.label} htmlFor="email">
+        Email
+      </label>
+      <Field
+  id="email"
+  className={`${styles.input} ${
+    touched.email && errors.email ? styles.inputError : ''
+  }`}
+  name="email"
+  type="email"
+/>
+      <ErrorMessage
+        name="email"
+        component="p"
+        className={styles.error}
+      />
+    </div>
+
+    <div className={styles.fieldGroup}>
+      <label className={styles.label} htmlFor="avatar">
+        Посилання на аватар
+      </label>
+      <Field
+  id="avatar"
+  className={`${styles.input} ${
+    touched.avatar && errors.avatar ? styles.inputError : ''
+  }`}
+  name="avatar"
+  type="url"
+/>
+      <ErrorMessage
+        name="avatar"
+        component="p"
+        className={styles.error}
+      />
+    </div>
+
+    <button
+  className={styles.saveButton}
+  type="submit"
+  disabled={isSubmitting}
+>
+  {isSubmitting ? 'Зберігаємо...' : 'Зберегти'}
+</button>
+  </Form>
+)}
+    
+  </Formik>
+</Modal>
+    </div>
+  </section>
 
       <section className={styles.contentSection}>
         <div className={styles.container}>
