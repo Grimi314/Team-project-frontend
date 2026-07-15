@@ -3,6 +3,7 @@ import SaveStory from '../saveStory/saveStory';
 // import RecommendedStories from "../recommendedStories/recommendedStories";
 
 import { api } from '@/lib/api/axios';
+import type { Story } from '@/types/story';
 
 import axios from 'axios';
 
@@ -12,7 +13,7 @@ type Props = {
 
 export default async function StoryPage({ storyId }: Props) {
   try {
-    const response = await api.get(
+    const response = await api.get<{ story: Story }>(
       `https://team-project-backend-ezbf.onrender.com/stories/${storyId}`,
     );
 
