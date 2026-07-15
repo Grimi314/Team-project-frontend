@@ -8,6 +8,8 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import styles from './registerPage.module.css';
 import { AuthBar } from '@/app/components/authBar/authBar';
+// 1. Імпортуємо твоє Zustand-сховище
+import { useAuthStore } from '@/auth/model/authStore'; 
 
 interface FormValues {
   name: string;
@@ -40,14 +42,31 @@ const RegisterFormSchema = Yup.object().shape({
 
 export default function RegistrationForm() {
   const router = useRouter();
+  // 2. Дістаємо функцію setUser зі сховища Zustand
+  const setUser = useAuthStore((state) => state.setUser);
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: FormValues) => {
       const response = await api.post('/auth/register', values);
-      return response.data;
+      return response.data; // Бекенд має повернути { token: '...', user: {...} } або схожу структуру
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.success('Реєстрація успішна!');
+
+      // 3. Зберігаємо токен у localStorage, щоб AuthProvider бачив його при перезавантаженні сторінки
+      const token = data.token ?? data.accessToken ?? data.data?.token;
+      if (token) {
+        localStorage.setItem('token', token);
+      }
+
+      // 4. Одразу записуємо дані користувача у Zustand-стан, щоб інтерфейс (хедер) миттєво оновився
+      const userData = data.user ?? data.data ?? data;
+      if (userData) {
+        setUser(userData);
+      }
+
+      // 5. Перенаправляємо на головну сторінку
+      router.push('/');
     },
     onError: (error: any) => {
       const errorMsg =

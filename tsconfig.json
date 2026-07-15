@@ -37,7 +37,7 @@
     "**/*.mts",
     "src/app/auth/register",
     "src/app/auth/register"
-  ],
+, "src/app/components/authHeader"  ],
   "exclude": [
     "node_modules"
   ]

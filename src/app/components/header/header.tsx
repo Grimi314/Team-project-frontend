@@ -7,6 +7,8 @@ import Link from 'next/link';
 import css from './header.module.css';
 import { AppIcon } from '../icon/appIcon';
 
+import { usePathname } from 'next/navigation';
+
 import AuthBlock from './authBlock';
 
 export default function Header() {
@@ -15,6 +17,10 @@ export default function Header() {
   const isAuth = Boolean(user);
 
   const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
+
+
+
+const pathname = usePathname()
 
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
@@ -33,7 +39,7 @@ export default function Header() {
     };
   }, []);
 
-  if (!isAuthInitialized) {
+  if (pathname.startsWith('/auth')) {
     return null;
   }
 
