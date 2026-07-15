@@ -4,14 +4,17 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query'; 
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { api } from '@/lib/api/axios';
 import { endpoints } from '@/lib/api/endpoints';
 import { AuthBar } from '@/app/components/authBar/authBar';
 import styles from './loginPage.module.css';
+
 import { useAuthStore } from '@/auth/model/authStore';
+
+
 
 type LoginValues = {
   email: string;
@@ -20,12 +23,10 @@ type LoginValues = {
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .trim('Email не повинен містити пробіли на початку/в кінці')
     .email('Введіть коректний email')
     .max(64, 'Максимум 64 символи')
     .required("Обов'язкове поле"),
   password: Yup.string()
-    .trim('Пароль не повинен містити пробіли на початку/в кінці')
     .min(8, 'Мінімум 8 символів')
     .max(128, 'Максимум 128 символів')
     .required("Обов'язкове поле"),
@@ -34,15 +35,25 @@ const validationSchema = Yup.object({
 export default function LoginPage() {
   const setUser = useAuthStore((state) => state.setUser);
   const router = useRouter();
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient(); 
   const [showPassword, setShowPassword] = useState(false);
+  
+ 
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: LoginValues) => {
       const { data } = await api.post(endpoints.auth.login, values);
-      return data;
+      return data; 
     },
-    onSuccess: async () => {
+
+onSuccess: async (data) => {
+      toast.success('Успішний вхід!');
+
+      const token = data.token ?? data.accessToken ?? data.data?.token;
+      if (token) {
+        localStorage.setItem('token', token);
+      }
+
       try {
         const response = await api.get('/users/me');
 

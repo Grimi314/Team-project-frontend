@@ -1,8 +1,18 @@
+'use client'
+
 import css from './footer.module.css';
 import { AppIcon } from '../icon/appIcon';
 import Link from 'next/link';
+import {  usePathname } from 'next/navigation';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
+   if (pathname?.startsWith('/auth')) {
+    return null
+  }
+
 
   return (
     <div className={css.container}>
