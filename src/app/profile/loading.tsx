@@ -1,4 +1,4 @@
-import { Loader } from '@/app/components/loader/loader';
+import Loader from '@/app/components/loader/loader';
 import styles from '@/app/components/profile/profile.module.css';
 
 export default function ProfileLoadingPage() {

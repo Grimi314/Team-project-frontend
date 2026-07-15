@@ -1,16 +1,54 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
+
 import { AppIcon } from '@/app/components/icon/appIcon';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
+import { removeSavedStory, saveStory } from '@/lib/api/savedStories';
+
 import styles from './storyCard.module.css';
 
 export type StoryCardProps = {
   story: NormalizedProfileStory;
-  tab: 'saved' | 'own';
+  tab: 'saved' | 'own' | 'recommended';
 };
 
 export function StoryCard({ story, tab }: StoryCardProps) {
-  const actionIcon = tab === 'own' ? 'icon-edit' : 'icon-bookmark';
-  const actionLabel = tab === 'own' ? 'Редагувати історію' : 'Зберегти історію';
+  const [isSaved, setIsSaved] = useState(tab === 'saved');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const isOwnStory = tab === 'own';
+
+  const actionIcon = isOwnStory ? 'icon-edit' : 'icon-bookmark';
+
+  const actionLabel = isOwnStory
+    ? 'Редагувати історію'
+    : isSaved
+      ? 'Видалити зі збережених'
+      : 'Зберегти історію';
+
+  const handleBookmark = async () => {
+    if (isOwnStory || isLoading) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      if (isSaved) {
+        await removeSavedStory(story.id);
+      } else {
+        await saveStory(story.id);
+      }
+
+      setIsSaved((previous) => !previous);
+    } catch (error) {
+      console.error('Не вдалося змінити стан збереження:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <article className={styles.card}>
@@ -26,6 +64,7 @@ export function StoryCard({ story, tab }: StoryCardProps) {
         <div className={styles.meta}>
           <span className={styles.author}>{story.author.name}</span>
           <span className={styles.dot}>•</span>
+
           <span className={styles.rating}>
             {story.rating}
             <AppIcon icon="icon-bookmark" className={styles.metaIcon} />
@@ -43,6 +82,9 @@ export function StoryCard({ story, tab }: StoryCardProps) {
             type="button"
             className={styles.bookmarkAction}
             aria-label={actionLabel}
+            aria-pressed={!isOwnStory ? isSaved : undefined}
+            disabled={isLoading}
+            onClick={handleBookmark}
           >
             <AppIcon icon={actionIcon} className={styles.actionIcon} />
           </button>

@@ -3,25 +3,34 @@ import SaveStory from '../saveStory/saveStory';
 // import RecommendedStories from "../recommendedStories/recommendedStories";
 
 import { api } from '@/lib/api/axios';
-import { endpoints } from '@/lib/api/endpoints';
 
-import { Story } from '@/types/story';
+import axios from 'axios';
 
 type Props = {
   storyId: string;
 };
 
 export default async function StoryPage({ storyId }: Props) {
-  const { data: story } = await api.get<Story>(endpoints.stories.byId(storyId));
+  try {
+    const response = await api.get(
+      `https://team-project-backend-ezbf.onrender.com/stories/${storyId}`,
+    );
 
-  return (
-    <>
-      <StoryDetails story={story} />
+    console.log('Backend response:', response.data);
 
-      <SaveStory storyId={story.id} />
+    const story = response.data.story;
 
-      {/* TODO: Після merge з main перевірити наявність RecommendedStories та розкоментувати компонент. */}
-      {/* <recommendedStories /> */}
-    </>
-  );
+    return (
+      <>
+        <StoryDetails story={story} />
+        <SaveStory storyId={story._id} />
+      </>
+    );
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log('Status:', error.response?.status);
+      console.log('Backend error:', error.response?.data);
+      console.log('Request URL:', error.config?.url);
+    }
+  }
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import css from '@/app/components/addStoryForm/addStoryForm.module.css';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
@@ -77,6 +77,24 @@ export default function AddStoryForm() {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const categorySelectRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        categorySelectRef.current &&
+        !categorySelectRef.current.contains(event.target as Node)
+      ) {
+        setIsCategoryOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.currentTarget.files?.[0];
@@ -169,155 +187,184 @@ export default function AddStoryForm() {
       onSubmit={handleSubmit}
     >
       {({
-        dirty,
-        isValid,
         resetForm,
         errors,
-        touched,
         isSubmitting,
         values,
         setFieldValue,
         setFieldTouched,
-      }) => (
-        <Form className={css.form}>
-          <div className={css.coverBlock}>
-            <p className={css.coverLabel}>Обкладинка статті</p>
+        submitCount,
+      }) => {
+        const isSubmitDisabled =
+          !values.title.trim() ||
+          !values.category ||
+          !values.article.trim() ||
+          !imageFile ||
+          isSubmitting;
 
-            <div className={css.cover}>
-              <img
-                className={css.coverImage}
-                src={preview || '/images/Placeholder_Image.jpg'}
-                alt="Обкладинка статті"
-              />
+        return (
+          <Form className={css.form}>
+            <div className={css.coverBlock}>
+              <p className={css.coverLabel}>Обкладинка статті</p>
+
+              <div className={css.cover}>
+                <img
+                  className={css.coverImage}
+                  src={preview || '/images/Placeholder_Image.jpg'}
+                  alt="Обкладинка статті"
+                />
+              </div>
             </div>
-          </div>
 
-          <label className={css.uploadButton}>
-            Завантажити фото
-            <input
-              ref={fileInputRef}
-              className={css.fileInput}
-              type="file"
-              name="img"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </label>
+            <label className={css.uploadButton}>
+              Завантажити фото
+              <input
+                ref={fileInputRef}
+                className={css.fileInput}
+                type="file"
+                name="img"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </label>
 
-          <label className={css.label}>
-            Заголовок
-            <Field
-              className={`${css.input} ${
-                touched.title && errors.title ? css.inputError : ''
-              }`}
-              type="text"
-              name="title"
-              placeholder="Введіть заголовок історії"
-            />
-            <ErrorMessage name="title" component="p" className={css.error} />
-          </label>
-
-          <div className={css.label}>
-            <span>Категорія</span>
-
-            <div className={css.customSelect}>
-              <button
-                className={`${css.selectButton} ${
-                  touched.category && errors.category ? css.inputError : ''
+            <label className={css.label}>
+              Заголовок
+              <Field
+                className={`${css.input} ${
+                  submitCount > 0 && errors.title ? css.inputError : ''
                 }`}
+                type="text"
+                name="title"
+                placeholder="Введіть заголовок історії"
+              />
+              {submitCount > 0 && errors.title && (
+                <ErrorMessage
+                  name="title"
+                  component="p"
+                  className={css.error}
+                />
+              )}
+            </label>
+
+            <div className={css.label}>
+              <span>Категорія</span>
+
+              <div ref={categorySelectRef} className={css.customSelect}>
+                <button
+                  className={`${css.selectButton} ${
+                    submitCount > 0 && errors.category ? css.inputError : ''
+                  }`}
+                  type="button"
+                  disabled={isSubmitting}
+                  aria-haspopup="listbox"
+                  aria-expanded={isCategoryOpen}
+                  onClick={() => {
+                    setFieldTouched('category', true);
+                    setIsCategoryOpen((prev) => !prev);
+                  }}
+                >
+                  <span>
+                    {categories.find((item) => item._id === values.category)
+                      ?.category || 'Категорія'}
+                  </span>
+
+                  <span
+                    className={`${css.arrow} ${
+                      isCategoryOpen ? css.arrowOpen : ''
+                    }`}
+                  >
+                    ⌄
+                  </span>
+                </button>
+
+                {isCategoryOpen && (
+                  <ul className={css.optionsList} role="listbox">
+                    {categories.map((item) => (
+                      <li key={item._id}>
+                        <button
+                          className={`${css.option} ${
+                            values.category === item._id
+                              ? css.optionSelected
+                              : ''
+                          }`}
+                          type="button"
+                          role="option"
+                          aria-selected={values.category === item._id}
+                          onClick={() => {
+                            setFieldValue('category', item._id);
+                            setFieldTouched('category', true);
+                            setIsCategoryOpen(false);
+                          }}
+                        >
+                          {item.category}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              {submitCount > 0 && errors.category && (
+                <ErrorMessage
+                  name="category"
+                  component="p"
+                  className={css.error}
+                />
+              )}
+            </div>
+
+            <label className={css.label}>
+              Текст історії
+              <Field
+                as="textarea"
+                className={`${css.textarea} ${
+                  submitCount > 0 && errors.article ? css.inputError : ''
+                }`}
+                name="article"
+                placeholder="Ваша історія тут"
+              />
+              {submitCount > 0 && errors.article && (
+                <ErrorMessage
+                  name="article"
+                  component="p"
+                  className={css.error}
+                />
+              )}
+            </label>
+
+            <div className={css.buttons}>
+              <button
+                className={css.cancelButton}
                 type="button"
                 disabled={isSubmitting}
-                aria-haspopup="listbox"
-                aria-expanded={isCategoryOpen}
                 onClick={() => {
-                  setFieldTouched('category', true);
-                  setIsCategoryOpen((prev) => !prev);
+                  resetForm();
+                  handleResetImage();
+                  setIsCategoryOpen(false);
                 }}
               >
-                <span>
-                  {categories.find((item) => item._id === values.category)
-                    ?.category || 'Категорія'}
-                </span>
-
-                <span
-                  className={`${css.arrow} ${isCategoryOpen ? css.arrowOpen : ''}`}
-                >
-                  ⌄
-                </span>
+                Відмінити
               </button>
 
-              {isCategoryOpen && (
-                <ul className={css.optionsList} role="listbox">
-                  {categories.map((item) => (
-                    <li key={item._id}>
-                      <button
-                        className={`${css.option} ${
-                          values.category === item._id ? css.optionSelected : ''
-                        }`}
-                        type="button"
-                        role="option"
-                        aria-selected={values.category === item._id}
-                        onClick={() => {
-                          setFieldValue('category', item._id);
-                          setFieldTouched('category', true);
-                          setIsCategoryOpen(false);
-                        }}
-                      >
-                        {item.category}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <button
+                className={css.submitButton}
+                type="submit"
+                disabled={isSubmitDisabled}
+              >
+                {isSubmitting ? (
+                  <span className={css.loaderText}>
+                    <span className={css.loader} aria-hidden="true" />
+                    Збереження...
+                  </span>
+                ) : (
+                  'Зберегти'
+                )}
+              </button>
             </div>
-
-            <ErrorMessage name="category" component="p" className={css.error} />
-          </div>
-
-          <label className={css.label}>
-            Текст історії
-            <Field
-              as="textarea"
-              className={`${css.textarea} ${
-                touched.article && errors.article ? css.inputError : ''
-              }`}
-              name="article"
-              placeholder="Ваша історія тут"
-            />
-            <ErrorMessage name="article" component="p" className={css.error} />
-          </label>
-
-          <div className={css.buttons}>
-            <button
-              className={css.cancelButton}
-              type="button"
-              disabled={isSubmitting}
-              onClick={() => {
-                resetForm();
-                handleResetImage();
-                setIsCategoryOpen(false);
-              }}
-            >
-              Відмінити
-            </button>
-
-            <button
-              className={css.submitButton}
-              type="submit"
-              disabled={!dirty || !isValid || !imageFile || isSubmitting}
-            >
-              {isSubmitting ? (
-                <span className={css.loaderText}>
-                  <span className={css.loader} aria-hidden="true" />
-                  Збереження...
-                </span>
-              ) : (
-                'Зберегти'
-              )}
-            </button>
-          </div>
-        </Form>
-      )}
+          </Form>
+        );
+      }}
     </Formik>
   );
 }

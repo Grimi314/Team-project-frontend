@@ -46,7 +46,7 @@ export default function PopularStories() {
             date: story.date || null,
           }));
 
-        setPopularStories(normalizedStories); // или setPopularStories в зависимости от вашего стейта
+        setPopularStories(normalizedStories);
       } catch (err) {
         console.error('Error fetching popular stories:', err);
       }
