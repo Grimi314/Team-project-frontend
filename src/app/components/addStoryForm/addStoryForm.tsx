@@ -88,7 +88,6 @@ export default function AddStoryForm() {
         setIsCategoryOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
