@@ -269,7 +269,7 @@ width: 335px;
 
         .modalAuthBlockTablet {
             display: flex;
-            
+             margin: 0 auto;
             justify-self: center;
         }
 
