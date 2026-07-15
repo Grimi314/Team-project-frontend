@@ -36,7 +36,7 @@ export default function HeaderModal({ onClose }: HeaderModalType) {
     };
   }, []);
   return (
-    <div className={css.container}>
+    <div className={css.mobileMenu}>
       <div className={css.logoButtonContainer}>
         <Link href="/">
           <AppIcon icon="icon-Company-Logo" className={css.logo} />

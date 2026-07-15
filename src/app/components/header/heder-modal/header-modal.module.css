@@ -1,9 +1,34 @@
-.container {
+/* .container {
     padding: 0 20px;
-    min-width: 320px;
-    max-width: 375px;
-    margin: 0 auto;
-    align-items: center;
+    position: fixed;
+        inset: 0;
+    
+        width: 100vw;
+        height: 100vh;
+    
+        background-color: #ffffff;
+    
+        z-index: 9999;
+    
+        overflow-y: auto;
+    
+} */
+
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+
+    width: 100%;
+    height: 100vh;
+
+    background: #fff;
+
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .logo {
@@ -35,6 +60,10 @@ fill: #1B391B;
     transition: all 250ms ease;
 
 }
+
+/* .logoButtonContainer{
+    align-items: top;
+} */
 
 .closeButton:hover,
 .closeButton:focus {
@@ -131,6 +160,7 @@ width: 335px;
     flex-direction: column;
     gap: 28px;
     align-items: center;
+    
 }
 
 .buttonLogin {
@@ -213,7 +243,7 @@ width: 335px;
     }
     .modalWrapper{
         position: absolute;
-        top: 20px;
+        top: 40px;
         right: 80px;
         flex-direction: row;
     }
