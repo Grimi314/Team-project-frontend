@@ -13,9 +13,17 @@ import styles from './travellerPage.module.css';
 
 import Story from '../travelPageRender/travelPageRender';
 
+type CurrentUserType = {
+  _id: string;
+  name: string;
+  savedArticles: string[];
+} | null;
+
 export default function TravellerPage() {
   const params = useParams();
   const travellerId = params?.travellerId as string;
+
+  const [currentUser, setCurrentUser] = useState<CurrentUserType>(null);
 
   const [travellerInfo, setTravellerInfo] = useState<Traveller>({
     _id: '',
@@ -28,6 +36,19 @@ export default function TravellerPage() {
   const [hasMore, setHasMore] = useState<boolean>(false);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
   const [isInitialLoading, setIsInitialLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const res = await api.get('/users/me');
+        setCurrentUser(res.data); 
+      } catch (error) {
+        setCurrentUser(null); 
+      }
+    };
+  
+    fetchCurrentUser();
+  }, []);
 
   const loadStoriesData = async (
     targetPage: number,
@@ -110,7 +131,6 @@ export default function TravellerPage() {
 
   return (
     <div className="container">
-      {/* TravellerInfo буде працювати після виправлення коду на бекенді. Отримати юзера за айді - роут: users/userId: не працює на бекенді */}
       <section className={styles.sectionInfo}>
         <TravellerInfo
           name={travellerInfo.name}
@@ -132,11 +152,12 @@ export default function TravellerPage() {
           </div>
         ) : (
           <TravellersStories
-            tab="own"
+            tab="user" 
             stories={stories}
             hasMore={hasMore}
             isLoadingMore={isLoadingMore}
             onShowMore={handleShowMore}
+            currentUser={currentUser} 
           />
         )}
       </section>

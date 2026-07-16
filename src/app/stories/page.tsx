@@ -5,12 +5,13 @@ import { StoryCard } from '@/app/components/storyCard/storyCard';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
 import { getCategories, getStories, type Category } from '@/lib/api/stories';
 import styles from './storiesPage.module.css';
+import { api } from '@/lib/api/axios';
+import type { CurrentUserType } from '@/app/components/storyCard/storyCard';
 
 export default function StoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
-  const [selectedCategoryName, setSelectedCategoryName] =
-    useState('Всі статті');
+  const [selectedCategoryName, setSelectedCategoryName] = useState('Всі статті');
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [stories, setStories] = useState<NormalizedProfileStory[]>([]);
@@ -18,6 +19,19 @@ export default function StoriesPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [currentUser, setCurrentUser] = useState<CurrentUserType>(null);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const res = await api.get('/users/me');
+        setCurrentUser(res.data);
+      } catch {
+        setCurrentUser(null);
+      }
+    };
+    fetchCurrentUser();
+  }, []);
 
   const handleCategorySelect = (categoryId: string, categoryName: string) => {
     if (categoryId === selectedCategoryId) {
@@ -182,9 +196,19 @@ export default function StoriesPage() {
           {error && <p className={styles.placeholder}>{error}</p>}
 
           {!error &&
-            stories.map((story) => (
-              <StoryCard key={story.id} story={story} tab="saved" />
-            ))}
+            stories.map((story) => {
+              const isStorySaved = currentUser?.savedArticles?.includes(story.id) || false;
+
+              return (
+                <StoryCard
+                  key={story.id}
+                  story={story}
+                  tab="recommended"
+                  initialIsSaved={isStorySaved}
+                  currentUser={currentUser}
+                />
+              );
+            })}
 
           {!error && !isLoading && stories.length === 0 && (
             <p className={styles.placeholder}>Статей не знайдено</p>

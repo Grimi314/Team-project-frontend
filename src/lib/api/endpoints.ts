@@ -11,7 +11,7 @@ export const endpoints = {
   popular: '/popular',
   byId: (id: string) => `/stories/${id}`,
   create: '/stories',
-  save: (id: string) => `/stories/${id}/save`,
+  save: (id: string) => `/stories/${id}/saved`,
 },
 
   categories: {

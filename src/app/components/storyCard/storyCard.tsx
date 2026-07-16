@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import { AppIcon } from '@/app/components/icon/appIcon';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
@@ -9,17 +11,31 @@ import { removeSavedStory, saveStory } from '@/lib/api/savedStories';
 
 import styles from './storyCard.module.css';
 
+export type CurrentUserType = {
+  _id: string;
+  name: string;
+  savedArticles: string[];
+} | null;
+
 export type StoryCardProps = {
   story: NormalizedProfileStory;
-  tab: 'saved' | 'own' | 'recommended';
+  tab: 'saved' | 'own' | 'recommended' | 'user'; 
+  initialIsSaved?: boolean; 
+  currentUser?: CurrentUserType;
 };
 
-export function StoryCard({ story, tab }: StoryCardProps) {
-  const [isSaved, setIsSaved] = useState(tab === 'saved');
+export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCardProps) {
+  const router = useRouter(); 
+  const [isSaved, setIsSaved] = useState(initialIsSaved !== undefined ? initialIsSaved : tab === 'saved');
   const [isLoading, setIsLoading] = useState(false);
 
-  const isOwnStory = tab === 'own';
+  useEffect(() => {
+    if (initialIsSaved !== undefined) {
+      setIsSaved(initialIsSaved);
+    }
+  }, [initialIsSaved]);
 
+  const isOwnStory = tab === 'own';
   const actionIcon = isOwnStory ? 'icon-edit' : 'icon-bookmark';
 
   const actionLabel = isOwnStory
@@ -33,18 +49,26 @@ export function StoryCard({ story, tab }: StoryCardProps) {
       return;
     }
 
+    if (!currentUser) {
+      router.push('/auth/login');
+      return;
+    }
+
     try {
       setIsLoading(true);
 
       if (isSaved) {
         await removeSavedStory(story.id);
+        setIsSaved(false); 
+        toast.success('Статтю видалено зі збережених');
       } else {
         await saveStory(story.id);
+        setIsSaved(true); 
+        toast.success('Статтю збережено');
       }
-
-      setIsSaved((previous) => !previous);
     } catch (error) {
-      console.error('Не вдалося змінити стан збереження:', error);
+      console.error('Не вдалося змінити стан збереження на бекенді:', error);
+      toast.error('Не вдалося змінити стан збереження');
     } finally {
       setIsLoading(false);
     }
@@ -80,7 +104,7 @@ export function StoryCard({ story, tab }: StoryCardProps) {
 
           <button
             type="button"
-            className={styles.bookmarkAction}
+            className={`${styles.bookmarkAction} ${!isOwnStory && isSaved ? styles.activeBookmark : ''}`}
             aria-label={actionLabel}
             aria-pressed={!isOwnStory ? isSaved : undefined}
             disabled={isLoading}
