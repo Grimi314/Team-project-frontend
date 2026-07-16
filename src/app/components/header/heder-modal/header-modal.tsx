@@ -82,6 +82,18 @@ export default function HeaderModal({ onClose }: HeaderModalType) {
             Еко-Мандрівники
           </Link>
         </li>
+        {isAuth && (
+          <li className={css.navListItem}>
+            <Link
+              className={css.navText}
+              href="/profile"
+              onClick={onClose}
+              prefetch={false}
+            >
+              Мій Профіль
+            </Link>
+          </li>
+        )}
       </ul>
       <div className={css.modalWrapper}>
         {isAuth ? (
