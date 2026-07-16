@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import { AppIcon } from '@/app/components/icon/appIcon';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
@@ -10,7 +11,7 @@ import { removeSavedStory, saveStory } from '@/lib/api/savedStories';
 
 import styles from './storyCard.module.css';
 
-type CurrentUserType = {
+export type CurrentUserType = {
   _id: string;
   name: string;
   savedArticles: string[];
@@ -24,7 +25,7 @@ export type StoryCardProps = {
 };
 
 export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCardProps) {
-  const router = useRouter(); // 🌟 Ініціалізуємо роутер
+  const router = useRouter(); 
   const [isSaved, setIsSaved] = useState(initialIsSaved !== undefined ? initialIsSaved : tab === 'saved');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -59,12 +60,15 @@ export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCard
       if (isSaved) {
         await removeSavedStory(story.id);
         setIsSaved(false); 
+        toast.success('Статтю видалено зі збережених');
       } else {
         await saveStory(story.id);
         setIsSaved(true); 
+        toast.success('Статтю збережено');
       }
     } catch (error) {
       console.error('Не вдалося змінити стан збереження на бекенді:', error);
+      toast.error('Не вдалося змінити стан збереження');
     } finally {
       setIsLoading(false);
     }
