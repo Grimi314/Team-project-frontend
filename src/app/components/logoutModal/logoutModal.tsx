@@ -1,6 +1,7 @@
 'use client';
 
 import styles from './logoutModal.module.css';
+import { useEffect } from 'react';
 
 interface LogoutModalProps {
   onClose: () => void;
