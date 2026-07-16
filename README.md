@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Природні Мандри Frontend
 
-## Getting Started
+Frontend частина вебзастосунку **«Природні Мандри»**.
 
-First, run the development server:
+Проєкт створений для мандрівників, які хочуть ділитися власними історіями, знаходити натхнення в досвіді інших користувачів, зберігати цікаві матеріали та формувати власну добірку подорожей.
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Axios
+- TanStack React Query
+- Formik + Yup
+- Zustand
+- CSS Modules
+
+## Features
+
+- Реєстрація та авторизація користувача
+- Перегляд історій мандрівників
+- Фільтрація історій за категоріями
+- Перегляд популярних історій
+- Перегляд рекомендованих історій
+- Детальна сторінка історії
+- Збереження історій у профіль
+- Видалення історій зі збережених
+- Перегляд власних історій
+- Створення нової історії
+- Редагування профілю користувача
+- Перегляд інших мандрівників
+
+## Pages
+
+- `/` — головна сторінка
+- `/stories` — список історій
+- `/stories/:storyId` — детальна сторінка історії
+- `/stories/new` — створення історії
+- `/profile` — збережені історії користувача
+- `/profile/own` — власні історії користувача
+- `/travellers` — список мандрівників
+- `/travellers/:travellerId` — сторінка мандрівника
+- `/auth/register` — реєстрація
+- `/auth/login` — вхід
+
+## Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+  app/                  # pages and routing
+  app/components/       # reusable UI components
+  auth/                 # auth API and auth state
+  lib/api/              # API client and requests
+  providers/            # global providers
+  types/                # shared TypeScript types
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Frontend взаємодіє з backend API через Axios.  
+Основні API-запити винесені в окремі модулі в `src/lib/api`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Frontend задеплоєний на **Vercel**.
