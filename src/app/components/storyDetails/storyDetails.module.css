@@ -92,7 +92,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 109px;
+width: 109px;
 
   height: 24px;
   text-decoration: none;
@@ -108,10 +108,10 @@
 
 .backText {
   font-family: Montserrat, sans-serif;
-  font-weight: 500;
+font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-
+  
   color: #000;
 }
 
@@ -142,11 +142,13 @@
   .title {
     font-size: 56px;
   }
-  .backLink {
-    width: 128px;
-
-    height: 30px;
-  }
+    .backLink {
+      
+      width: 128px;
+  
+      height: 30px;
+      
+    }
 }
 
 /* ---------- Meta ---------- */
@@ -242,7 +244,7 @@
   margin: 0 auto;
 
   font-family: Montserrat, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 150%;
   color: #1b391b;

@@ -11,9 +11,4 @@ export type Story = {
   rate: number;
   date: string;
   category: string | StoryCategory;
-  ownerId: {
-    _id: string;
-    name: string;
-    avatarUrl: string;
-  };
 };
