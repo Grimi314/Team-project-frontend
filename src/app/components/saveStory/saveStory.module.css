@@ -5,7 +5,8 @@
   padding: 32px 16px;
   width: 335px;
   height: 217px;
-  background: #def2de;
+  background: #d9f3d9;
+  margin: auto;
 }
 
 @media screen and (min-width: 768px) {
@@ -14,6 +15,10 @@
     width: 704px;
     height: 193px;
   }
+
+  .textContainer {
+     width: 704px;
+}
 }
 
 @media screen and (min-width: 1440px) {
@@ -21,6 +26,10 @@
     width: 866px;
     height: 207px;
   }
+
+  .textContainer {
+    width: 866px;
+}
 }
 
 .title {
@@ -71,19 +80,20 @@
 
 @media screen and (min-width: 1440px) {
   .button {
-    width: 103px;
+    width: fit-content;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .button {
     font-size: 20px;
-    width: 123px;
+    width: fit-content;
   }
 }
 
 .button:hover {
   background: #def2de;
+  color: #000;
 }
 
 .button:active {

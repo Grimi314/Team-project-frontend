@@ -1,3 +1,7 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import StoryDetails from '../storyDetails/storyDetails';
 import SaveStory from '../saveStory/saveStory';
 
@@ -26,4 +30,15 @@ export default async function StoryPage({ storyId }: Props) {
   } catch {
     return <p>Не вдалося завантажити історію</p>;
   }
+
+  if (!story) {
+    return null;
+  }
+
+  return (
+    <>
+      <StoryDetails story={story} />
+      <SaveStory storyId={story._id} currentUser={currentUser} />
+    </>
+  );
 }

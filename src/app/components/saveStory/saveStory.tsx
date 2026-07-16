@@ -67,6 +67,6 @@ export default function SaveStory({ storyId }: SaveStoryProps) {
       {feedbackMessage && (
         <p className={styles.message}>{feedbackMessage}</p>
       )}
-    </>
+    </div>
   );
 }

@@ -75,7 +75,6 @@
   font-weight: 700;
   line-height: 1.5;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
 }
 
 .actions {
@@ -137,6 +136,23 @@
   background: #254c24;
   border-color: #254c24;
   color: #fff;
+}
+
+.bookmarkAction.activeBookmark {
+  background: #4a9849;
+  border-color: #4a9849;
+  color: #fff;
+}
+
+.bookmarkAction.activeBookmark:hover,
+.bookmarkAction.activeBookmark:focus-visible {
+  background: #397638;
+  border-color: #397638;
+}
+
+.bookmarkAction.activeBookmark:active {
+  background: #254c24;
+  border-color: #254c24;
 }
 
 .primaryAction[aria-disabled='true'],
