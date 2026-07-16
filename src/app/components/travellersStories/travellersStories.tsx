@@ -14,7 +14,7 @@ type TravellersStoriesProps = {
   hasMore: boolean;
   isLoadingMore: boolean;
   onShowMore: () => void;
-  currentUser: CurrentUserType;
+  currentUser?: CurrentUserType;
 };
 
 export function TravellersStories({

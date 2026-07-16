@@ -21,7 +21,7 @@ export type StoryCardProps = {
   story: NormalizedProfileStory;
   tab: 'saved' | 'own' | 'recommended' | 'user'; 
   initialIsSaved?: boolean; 
-  currentUser: CurrentUserType;
+  currentUser?: CurrentUserType;
 };
 
 export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCardProps) {
