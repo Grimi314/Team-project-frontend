@@ -1,0 +1,151 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px); 
+}
+
+.modal {
+  position: relative;
+  background-color: #EEF8EE; 
+  border-radius: 24px;
+  padding: 64px 16px 16px;
+  width: 335px;
+  height: 382px;
+  max-width: 768px;
+  animation: scaleUp 0.25s ease-out; 
+  text-align: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #333333;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  padding: 4px;
+}
+
+.closeButton:hover {
+  color: #000000;
+  transform: scale(1.15);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 120%;
+}
+
+.description {
+  font-weight: 400;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginBtn,
+.registerBtn {
+  border: 1px solid #d3dad3;
+  border-radius: 6px;
+  padding: 6px 12px;
+  width: 303px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.loginBtn {
+  background-color: #e5ebe5;
+}
+
+.registerBtn {
+  background-color: #459b4c; 
+  color: #ffffff;
+}
+
+.loginBtn:hover {
+  background-color: #459b4c; 
+  color: #ffffff;
+}
+
+.registerBtn:hover {
+  background-color: #e5ebe5;
+  color: #000000;
+}
+
+@media screen and (min-width: 768px) {
+    .modal {
+  padding: 64px;
+  width: 704px;
+  height: 310px;
+  max-width: 768px;
+}
+
+.title {
+  font-size: 32px;
+}
+
+.actions {
+  flex-direction: row;
+}
+
+.loginBtn,
+.registerBtn {
+  width: 203px;
+}
+}
+
+@media screen and (min-width: 1440px) {
+    .modal {
+width: 768px;
+height: 400px;
+max-width: 768px;
+}
+
+.title {
+  font-size: 48px;
+}
+
+.description {
+    font-size: 20px;
+}
+
+.actions {
+  flex-direction: row;
+}
+
+.loginBtn,
+.registerBtn {
+  font-size: 20px;
+}
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
