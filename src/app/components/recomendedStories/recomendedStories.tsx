@@ -16,7 +16,7 @@ export default function RecomendedStories({ stories }: RecomendedStoriesProps) {
 
       <div className={styles.grid}>
         {stories.map((story) => (
-          <StoryCard key={story.id} story={story} tab="saved" />
+          <StoryCard key={story.id} story={story} tab="recommended" />
         ))}
       </div>
     </section>

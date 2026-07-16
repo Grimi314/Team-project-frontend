@@ -116,6 +116,12 @@
   padding: 6px;
 }
 
+.bookmarkAction[aria-pressed='true'] {
+  background: #4a9849;
+  border-color: #4a9849;
+  color: #fff;
+}
+
 .primaryAction:hover,
 .primaryAction:focus-visible,
 .bookmarkAction:hover,

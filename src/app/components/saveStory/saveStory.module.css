@@ -94,3 +94,11 @@
   background: #4a9849;
   opacity: 0.3;
 }
+
+.message {
+  margin-top: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 150%;
+  color: #1b391b;
+}

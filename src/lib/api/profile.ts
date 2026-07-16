@@ -42,10 +42,10 @@ export type ProfileStoriesResponse = {
   pagination: NormalizedPagination;
 };
 
-const profileEndpoints: Record<ProfileTab, string> = {
-  saved: endpoints.profile.savedStories,
-  own: endpoints.profile.ownStories,
-};
+const getProfileStoriesEndpoint = (tab: ProfileTab, userId: string) =>
+  tab === 'own'
+    ? endpoints.profile.ownStories(userId)
+    : endpoints.profile.savedStories;
 
 const isRecord = (value: unknown): value is UnknownRecord =>
   typeof value === 'object' && value !== null;
@@ -254,10 +254,7 @@ const normalizeStory = (
   };
 };
 
-const pickUserSource = (
-  payload: unknown,
-  stories: UnknownRecord[],
-): UnknownRecord | null => {
+const pickUserSource = (payload: unknown): UnknownRecord | null => {
   if (isRecord(payload)) {
     const directUser =
       pickNestedRecord(payload, ['user', 'profile', 'currentUser', 'traveller']) ??
@@ -281,20 +278,24 @@ const pickUserSource = (
     }
   }
 
-  const firstStory = stories[0];
-
-  if (!firstStory) {
-    return null;
-  }
-
-  return pickNestedRecord(firstStory, ['author', 'ownerId', 'owner']);
+  return null;
 };
 
 export async function fetchProfileStories(
   tab: ProfileTab,
   options: { page: number; perPage: number },
 ): Promise<ProfileStoriesResponse> {
-  const response = await api.get(profileEndpoints[tab], {
+  const currentUserResponse = await api.get(endpoints.profile.currentUser);
+  const currentUser = normalizeUser(
+    isRecord(currentUserResponse.data) ? currentUserResponse.data : null,
+    0,
+  );
+
+  if (!currentUser) {
+    throw new Error('Current user is missing');
+  }
+
+  const response = await api.get(getProfileStoriesEndpoint(tab, currentUser.id), {
     params: {
       page: options.page,
       perPage: options.perPage,
@@ -302,15 +303,18 @@ export async function fetchProfileStories(
   });
 
   const storiesSource = pickStoriesArray(response.data);
-  const userSource = pickUserSource(response.data, storiesSource);
+  const userSource = pickUserSource(response.data);
   const pagination = normalizePagination(
     response.data,
     options.page,
     options.perPage,
     storiesSource.length,
   );
-  const user = normalizeUser(userSource, pagination.totalItems);
-  const stories = storiesSource.map(story => normalizeStory(story, user));
+  const user = normalizeUser(userSource, pagination.totalItems) ?? currentUser;
+  const storyFallbackUser = tab === 'own' ? user : null;
+  const stories = storiesSource.map(story =>
+    normalizeStory(story, storyFallbackUser),
+  );
 
   return {
     user,

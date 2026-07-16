@@ -204,12 +204,18 @@ export function Profile({ tab }: ProfileProps) {
     <div className={styles.page}>
       <section className={styles.headerSection}>
         <div className={styles.container}>
-          <TravellerInfo
-            avatarUrl={profileState.user.avatarUrl}
-            name={profileState.user.name}
-            storiesCount={profileState.user.storiesCount}
-            onEditProfile={() => setIsEditModalOpen(true)}
-          />
+          {isPageLoading ? (
+            <div className={styles.loaderState}>
+              <Loader label="Завантажуємо профіль..." />
+            </div>
+          ) : (
+            <TravellerInfo
+              avatarUrl={profileState.user.avatarUrl}
+              name={profileState.user.name}
+              storiesCount={profileState.user.storiesCount}
+              onEditProfile={() => setIsEditModalOpen(true)}
+            />
+          )}
 
           <Modal
             isOpen={isEditModalOpen}
@@ -255,12 +261,14 @@ export function Profile({ tab }: ProfileProps) {
 
                   const response = await updateUserProfile(data);
                   const updatedUser = response.data;
+                  const updatedAvatarUrl =
+                    updatedUser.avatarUrl ?? updatedUser.avatar ?? null;
 
                   setUser({
                     _id: updatedUser._id,
                     name: updatedUser.name,
                     email: updatedUser.email,
-                    avatarUrl: updatedUser.avatar ?? undefined,
+                    avatarUrl: updatedAvatarUrl ?? undefined,
                   });
 
                   setProfileState((currentState) => ({
@@ -268,7 +276,7 @@ export function Profile({ tab }: ProfileProps) {
                     user: {
                       ...currentState.user,
                       name: updatedUser.name,
-                      avatarUrl: updatedUser.avatar ?? null,
+                      avatarUrl: updatedAvatarUrl,
                     },
                   }));
 

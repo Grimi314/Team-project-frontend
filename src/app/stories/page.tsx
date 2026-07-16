@@ -183,7 +183,7 @@ export default function StoriesPage() {
 
           {!error &&
             stories.map((story) => (
-              <StoryCard key={story.id} story={story} tab="saved" />
+              <StoryCard key={story.id} story={story} tab="recommended" />
             ))}
 
           {!error && !isLoading && stories.length === 0 && (
