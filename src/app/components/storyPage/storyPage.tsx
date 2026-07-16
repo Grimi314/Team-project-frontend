@@ -8,6 +8,7 @@ import { api } from '@/lib/api/axios';
 import type { Story } from '@/types/story';
 import type { CurrentUserType } from '@/app/components/storyCard/storyCard';
 import Loader from '../loader/loader';
+type CurrentUser = Exclude<CurrentUserType, null>;
 
 type Props = {
   storyId: string;
@@ -17,14 +18,23 @@ export default function StoryPage({ storyId }: Props) {
   const [currentUser, setCurrentUser] = useState<CurrentUserType>(null);
   const [story, setStory] = useState<Story | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isUserLoading, setIsUserLoading] = useState(true);
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const res = await api.get('/users/me');
-        setCurrentUser(res.data);
+        const { data } = await api.get<CurrentUser>(
+          'https://team-project-backend-ezbf.onrender.com/users/me',
+        );
+        setCurrentUser(data);
       } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status !== 401) {
+          console.error('Помилка отримання користувача:', error.response?.data);
+        }
+
         setCurrentUser(null);
+      } finally {
+        setIsUserLoading(false);
       }
     };
 
@@ -66,7 +76,11 @@ export default function StoryPage({ storyId }: Props) {
   return (
     <>
       <StoryDetails story={story} />
-      <SaveStory storyId={story._id} currentUser={currentUser} />
+      <SaveStory
+        storyId={story._id}
+        currentUser={currentUser}
+        isUserLoading={isUserLoading}
+      />
     </>
   );
 }

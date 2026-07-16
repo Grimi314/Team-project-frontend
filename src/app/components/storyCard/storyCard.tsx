@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+
 import toast from 'react-hot-toast';
 
 import { AppIcon } from '@/app/components/icon/appIcon';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
 import { removeSavedStory, saveStory } from '@/lib/api/savedStories';
 import ErrorWhileSavingModal from '../errorWhileSavingModal/errorWhileSavingModal';
-
+import axios from 'axios';
 import styles from './storyCard.module.css';
 
 export type CurrentUserType = {
@@ -20,22 +20,38 @@ export type CurrentUserType = {
 
 export type StoryCardProps = {
   story: NormalizedProfileStory;
-  tab: 'saved' | 'own' | 'recommended' | 'user'; 
-  initialIsSaved?: boolean; 
+  tab: 'saved' | 'own' | 'recommended' | 'user';
+  initialIsSaved?: boolean;
   currentUser?: CurrentUserType;
+  isUserLoading?: boolean;
 };
 
-export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCardProps) {
-  const router = useRouter(); 
-  const [isSaved, setIsSaved] = useState(initialIsSaved !== undefined ? initialIsSaved : tab === 'saved');
+export function StoryCard({
+  story,
+  tab,
+  initialIsSaved,
+  currentUser,
+  isUserLoading = false,
+}: StoryCardProps) {
+  const [isSaved, setIsSaved] = useState(
+    initialIsSaved !== undefined ? initialIsSaved : tab === 'saved',
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (initialIsSaved !== undefined) {
       setIsSaved(initialIsSaved);
+      return;
     }
-  }, [initialIsSaved]);
+
+    if (currentUser) {
+      setIsSaved(currentUser.savedArticles.includes(story.id));
+      return;
+    }
+
+    setIsSaved(tab === 'saved');
+  }, [initialIsSaved, currentUser, story.id, tab]);
 
   const isOwnStory = tab === 'own';
   const actionIcon = isOwnStory ? 'icon-edit' : 'icon-bookmark';
@@ -47,7 +63,7 @@ export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCard
       : 'Зберегти історію';
 
   const handleBookmark = async () => {
-    if (isOwnStory || isLoading) {
+    if (isOwnStory || isLoading || isUserLoading) {
       return;
     }
 
@@ -61,15 +77,21 @@ export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCard
 
       if (isSaved) {
         await removeSavedStory(story.id);
-        setIsSaved(false); 
+        setIsSaved(false);
         toast.success('Статтю видалено зі збережених');
       } else {
         await saveStory(story.id);
-        setIsSaved(true); 
+        setIsSaved(true);
         toast.success('Статтю збережено');
       }
     } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        setShowModal(true);
+        return;
+      }
+
       console.error('Не вдалося змінити стан збереження на бекенді:', error);
+
       toast.error('Не вдалося змінити стан збереження');
     } finally {
       setIsLoading(false);
@@ -106,19 +128,21 @@ export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCard
 
           <button
             type="button"
-            className={`${styles.bookmarkAction} ${!isOwnStory && isSaved ? styles.activeBookmark : ''}`}
+            className={`${styles.bookmarkAction} ${
+              !isOwnStory && isSaved ? styles.activeBookmark : ''
+            }`}
             aria-label={actionLabel}
             aria-pressed={!isOwnStory ? isSaved : undefined}
-            disabled={isLoading}
+            disabled={isLoading || isUserLoading}
             onClick={handleBookmark}
           >
             <AppIcon icon={actionIcon} className={styles.actionIcon} />
           </button>
         </div>
       </div>
-    {showModal && (
-            <ErrorWhileSavingModal onClose={() => setShowModal(false)} />
-          )}
+      {showModal && (
+        <ErrorWhileSavingModal onClose={() => setShowModal(false)} />
+      )}
     </article>
   );
 }

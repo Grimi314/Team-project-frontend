@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
+
 import { api } from '@/lib/api/axios';
 import { endpoints } from '@/lib/api/endpoints';
-import { StoryCard } from '../../storyCard/storyCard';
+import { StoryCard, type CurrentUserType } from '../../storyCard/storyCard';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,13 +16,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import css from './popularStories.module.css';
-import { BsArrowLeftShort } from 'react-icons/bs';
-import { BsArrowRightShort } from 'react-icons/bs';
+import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
 
 export default function PopularStories() {
   const [popularStories, setPopularStories] = useState<
     NormalizedProfileStory[]
   >([]);
+  const [currentUser, setCurrentUser] = useState<CurrentUserType>(null);
+  const [isUserLoading, setIsUserLoading] = useState(true);
 
   useEffect(() => {
     async function fetchPopularStories() {
@@ -40,7 +43,7 @@ export default function PopularStories() {
             rating: story.rate || 0,
             author: {
               id: story.ownerId?._id || 'unknown',
-              name: story.ownerId?.name || 'Aнонім',
+              name: story.ownerId?.name || 'Анонім',
               avatarUrl: story.ownerId?.avatarUrl || null,
             },
             date: story.date || null,
@@ -51,7 +54,29 @@ export default function PopularStories() {
         console.error('Error fetching popular stories:', err);
       }
     }
+
     fetchPopularStories();
+  }, []);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const { data } =
+          await api.get<Exclude<CurrentUserType, null>>('/users/me');
+
+        setCurrentUser(data);
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status !== 401) {
+          console.error('Помилка отримання користувача:', error.response?.data);
+        }
+
+        setCurrentUser(null);
+      } finally {
+        setIsUserLoading(false);
+      }
+    };
+
+    fetchCurrentUser();
   }, []);
 
   return (
@@ -59,6 +84,7 @@ export default function PopularStories() {
       <div className={'container ' + css.popularContainer}>
         <div className={css.popularHeader}>
           <h2 className={css.popularTitle}>Популярні статті</h2>
+
           <Link href="/stories" className={css.allStoriesBtnDesk}>
             Всі статті
           </Link>
@@ -82,23 +108,40 @@ export default function PopularStories() {
             >
               {popularStories.map((story) => (
                 <SwiperSlide key={story.id}>
-                  <StoryCard story={story} tab="recommended" />
+                  <StoryCard
+                    story={story}
+                    tab="recommended"
+                    currentUser={currentUser}
+                    isUserLoading={isUserLoading}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
 
             <div className={css.navSlider}>
               <div className={css.navSliderButtons}>
-                <button id="swiper-prev" className={css.navBtn}>
+                <button
+                  id="swiper-prev"
+                  className={css.navBtn}
+                  type="button"
+                  aria-label="Попередня стаття"
+                >
                   <BsArrowLeftShort className={css.arrowSlider} />
                 </button>
-                <button id="swiper-next" className={css.navBtn}>
+
+                <button
+                  id="swiper-next"
+                  className={css.navBtn}
+                  type="button"
+                  aria-label="Наступна стаття"
+                >
                   <BsArrowRightShort className={css.arrowSlider} />
                 </button>
               </div>
             </div>
           </div>
         )}
+
         <Link href="/stories" className={css.allStoriesBtnMobile}>
           Всі статті
         </Link>
