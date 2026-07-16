@@ -196,19 +196,9 @@ export default function StoriesPage() {
           {error && <p className={styles.placeholder}>{error}</p>}
 
           {!error &&
-            stories.map((story) => {
-              const isStorySaved = currentUser?.savedArticles?.includes(story.id) || false;
-
-              return (
-                <StoryCard
-                  key={story.id}
-                  story={story}
-                  tab="recommended"
-                  initialIsSaved={isStorySaved}
-                  currentUser={currentUser}
-                />
-              );
-            })}
+            stories.map((story) => (
+              <StoryCard key={story.id} story={story} tab="recommended" />
+            ))}
 
           {!error && !isLoading && stories.length === 0 && (
             <p className={styles.placeholder}>Статей не знайдено</p>

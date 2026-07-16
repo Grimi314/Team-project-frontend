@@ -24,7 +24,8 @@ export const endpoints = {
   },
 
   profile: {
-    savedStories: '/profile/saved',
-    ownStories: '/profile/stories',
+    currentUser: '/users/me',
+    savedStories: '/users/saved',
+    ownStories: (userId: string) => `/users/${userId}/stories`,
   },
 };
