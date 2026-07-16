@@ -31,7 +31,7 @@ export default function AuthBlock() {
     return null;
   }
 
-  const avatar = user.avatarUrl || '/images/default-avatar.png';
+  const avatar = user.avatarUrl || '/default.png';
 
   return (
     <div className={css.authBlokContainer}>

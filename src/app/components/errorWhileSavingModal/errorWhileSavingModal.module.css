@@ -1,40 +1,53 @@
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4); 
+  inset: 0;
+  z-index: 10000;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(2px); 
+
+  padding: 16px;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+
+  overflow-y: auto;
 }
 
 .modal {
   position: relative;
-  background-color: #EEF8EE; 
-  border-radius: 24px;
+
+  width: 100%;
+  max-width: 335px;
+  min-height: 382px;
+
   padding: 64px 16px 16px;
-  width: 335px;
-  height: 382px;
-  max-width: 768px;
-  animation: scaleUp 0.25s ease-out; 
+
+  background-color: #eef8ee;
+  border-radius: 24px;
   text-align: center;
+
+  animation: scaleUp 0.25s ease-out;
 }
 
 .closeButton {
   position: absolute;
   top: 24px;
   right: 24px;
+
+  padding: 4px;
+
   background: none;
   border: none;
-  font-size: 20px;
+
   color: #333333;
+  font-size: 20px;
   cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
-  padding: 4px;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .closeButton:hover {
@@ -43,34 +56,44 @@
 }
 
 .title {
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 26px;
-  line-height: 120%;
+  line-height: 1.2;
 }
 
 .description {
-  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
   margin-top: 16px;
   margin-bottom: 32px;
+
+  font-weight: 400;
 }
 
 .actions {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  gap: 24px;
 }
 
 .loginBtn,
 .registerBtn {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  max-width: 303px;
+  min-height: 48px;
+
+  padding: 6px 12px;
+
   border: 1px solid #d3dad3;
   border-radius: 6px;
-  padding: 6px 12px;
-  width: 303px;
-  height: 48px;
+
   font-weight: 500;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .loginBtn {
@@ -78,12 +101,12 @@
 }
 
 .registerBtn {
-  background-color: #459b4c; 
+  background-color: #459b4c;
   color: #ffffff;
 }
 
 .loginBtn:hover {
-  background-color: #459b4c; 
+  background-color: #459b4c;
   color: #ffffff;
 }
 
@@ -93,50 +116,44 @@
 }
 
 @media screen and (min-width: 768px) {
-    .modal {
-  padding: 64px;
-  width: 704px;
-  height: 310px;
-  max-width: 768px;
-}
+  .modal {
+    max-width: 704px;
+    min-height: 310px;
+    padding: 64px;
+  }
 
-.title {
-  font-size: 32px;
-}
+  .title {
+    font-size: 32px;
+  }
 
-.actions {
-  flex-direction: row;
-}
+  .actions {
+    flex-direction: row;
+  }
 
-.loginBtn,
-.registerBtn {
-  width: 203px;
-}
+  .loginBtn,
+  .registerBtn {
+    width: 203px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-    .modal {
-width: 768px;
-height: 400px;
-max-width: 768px;
-}
+  .modal {
+    max-width: 768px;
+    min-height: 400px;
+  }
 
-.title {
-  font-size: 48px;
-}
+  .title {
+    font-size: 48px;
+  }
 
-.description {
+  .description {
     font-size: 20px;
-}
+  }
 
-.actions {
-  flex-direction: row;
-}
-
-.loginBtn,
-.registerBtn {
-  font-size: 20px;
-}
+  .loginBtn,
+  .registerBtn {
+    font-size: 20px;
+  }
 }
 
 @keyframes scaleUp {
@@ -144,6 +161,7 @@ max-width: 768px;
     transform: scale(0.9);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;

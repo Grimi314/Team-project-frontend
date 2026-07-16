@@ -34,17 +34,19 @@ export function MessageNoStories({ tab }: MessageNoStoriesProps) {
   const currentMessage = messageConfig[tab];
 
   return (
-    <div className={styles.message}>
-      <p className={styles.title}>{currentMessage.title}</p>
-      <Link
-        className={clsx(
-          styles.action,
-          tab === 'saved' ? styles.savedAction : styles.ownAction,
-        )}
-        href={currentMessage.href}
-      >
-        {currentMessage.ctaLabel}
-      </Link>
+    <div className={styles.overlay}>
+      <div className={styles.message}>
+        <p className={styles.title}>{currentMessage.title}</p>
+        <Link
+          className={clsx(
+            styles.action,
+            tab === 'saved' ? styles.savedAction : styles.ownAction,
+          )}
+          href={currentMessage.href}
+        >
+          {currentMessage.ctaLabel}
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,32 +1,42 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { saveStory, removeSavedStory } from '@/lib/api/savedStories';
+import axios from 'axios';
+
+import { removeSavedStory, saveStory } from '@/lib/api/savedStories';
 import type { CurrentUserType } from '@/app/components/storyCard/storyCard';
-import styles from './saveStory.module.css';
+
 import ErrorWhileSavingModal from '../errorWhileSavingModal/errorWhileSavingModal';
+import styles from './saveStory.module.css';
 
 interface SaveStoryProps {
   storyId: string;
   currentUser: CurrentUserType;
+  isUserLoading: boolean;
 }
 
-export default function SaveStory({ storyId, currentUser }: SaveStoryProps) {
-  const router = useRouter();
+export default function SaveStory({
+  storyId,
+  currentUser,
+  isUserLoading,
+}: SaveStoryProps) {
   const [isSaved, setIsSaved] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (currentUser && currentUser.savedArticles) {
+    if (currentUser) {
       setIsSaved(currentUser.savedArticles.includes(storyId));
+    } else {
+      setIsSaved(false);
     }
   }, [currentUser, storyId]);
 
   const handleSaveAction = async () => {
-    if (isLoading) return;
+    if (isLoading || isUserLoading) {
+      return;
+    }
 
     if (!currentUser) {
       setShowModal(true);
@@ -46,7 +56,12 @@ export default function SaveStory({ storyId, currentUser }: SaveStoryProps) {
         toast.success('Статтю збережено');
       }
     } catch (error) {
-      console.error('Помилка при зміні стану збереження:', error);
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        setShowModal(true);
+        return;
+      }
+
+      console.error('Помилка Save Story:', error);
       toast.error('Не вдалося виконати дію');
     } finally {
       setIsLoading(false);
@@ -60,25 +75,28 @@ export default function SaveStory({ storyId, currentUser }: SaveStoryProps) {
           <h3 className={styles.title}>
             {isSaved ? 'Історію збережено' : 'Збережіть собі історію'}
           </h3>
+
           <p className={styles.description}>
-            {isSaved
-              ? 'Вона доступна у вашому профілі у розділі збережене'
-              : 'Вона буде доступна у вашому профілі у розділі збережене'}
+            Вона буде доступна у вашому профілі у розділі збережене
           </p>
+
           <button
             type="button"
             className={`${styles.button} ${isSaved ? styles.buttonSaved : ''}`}
             onClick={handleSaveAction}
-            disabled={isLoading}
+            disabled={isLoading || isUserLoading}
           >
-            {isLoading
-              ? 'Завантаження'
-              : isSaved
-                ? 'Видалити зі збережених'
-                : 'Зберегти'}
+            {isUserLoading
+              ? 'Перевірка авторизації'
+              : isLoading
+                ? 'Завантаження'
+                : isSaved
+                  ? 'Видалити зі збережених'
+                  : 'Зберегти'}
           </button>
         </div>
       </div>
+
       {showModal && (
         <ErrorWhileSavingModal onClose={() => setShowModal(false)} />
       )}

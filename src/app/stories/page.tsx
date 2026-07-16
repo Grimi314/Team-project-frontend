@@ -11,7 +11,8 @@ import type { CurrentUserType } from '@/app/components/storyCard/storyCard';
 export default function StoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
-  const [selectedCategoryName, setSelectedCategoryName] = useState('Всі статті');
+  const [selectedCategoryName, setSelectedCategoryName] =
+    useState('Всі статті');
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [stories, setStories] = useState<NormalizedProfileStory[]>([]);
@@ -197,7 +198,12 @@ export default function StoriesPage() {
 
           {!error &&
             stories.map((story) => (
-              <StoryCard key={story.id} story={story} tab="recommended" />
+              <StoryCard
+                key={story.id}
+                story={story}
+                tab="recommended"
+                currentUser={currentUser}
+              />
             ))}
 
           {!error && !isLoading && stories.length === 0 && (
