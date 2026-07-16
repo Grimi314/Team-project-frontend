@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { AppIcon } from '@/app/components/icon/appIcon';
 import type { NormalizedProfileStory } from '@/lib/api/profile';
 import { removeSavedStory, saveStory } from '@/lib/api/savedStories';
+import ErrorWhileSavingModal from '../errorWhileSavingModal/errorWhileSavingModal';
 
 import styles from './storyCard.module.css';
 
@@ -28,6 +29,7 @@ export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCard
   const router = useRouter(); 
   const [isSaved, setIsSaved] = useState(initialIsSaved !== undefined ? initialIsSaved : tab === 'saved');
   const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (initialIsSaved !== undefined) {
@@ -50,7 +52,7 @@ export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCard
     }
 
     if (!currentUser) {
-      router.push('/auth/login');
+      setShowModal(true);
       return;
     }
 
@@ -114,6 +116,9 @@ export function StoryCard({ story, tab, initialIsSaved, currentUser }: StoryCard
           </button>
         </div>
       </div>
+    {showModal && (
+            <ErrorWhileSavingModal onClose={() => setShowModal(false)} />
+          )}
     </article>
   );
 }
