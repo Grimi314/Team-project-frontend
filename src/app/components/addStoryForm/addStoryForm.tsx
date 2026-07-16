@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
+import axios from 'axios';
+import { api } from '@/lib/api/axios';
 
 type AddStoryFormValues = {
   title: string;
@@ -135,29 +137,7 @@ export default function AddStoryForm() {
       formData.append('article', values.article);
       formData.append('img', imageFile);
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/stories`,
-        {
-          method: 'POST',
-          body: formData,
-          credentials: 'include',
-        },
-      );
-
-      const data = await response.json().catch(() => null);
-
-      if (!response.ok) {
-        let errorMessage = data?.message || 'Помилка при створенні історії.';
-
-        if (
-          response.status === 401 ||
-          data?.message === 'Missing access token'
-        ) {
-          errorMessage = 'Будь ласка, увійдіть в акаунт, щоб створити історію.';
-        }
-
-        throw new Error(errorMessage);
-      }
+      const { data } = await api.post('/stories', formData);
 
       const storyId = data?.data?._id || data?._id || data?.story?._id;
 
@@ -169,8 +149,18 @@ export default function AddStoryForm() {
         router.push('/stories');
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
+      if (axios.isAxiosError<{ message?: string }>(error)) {
+        let errorMessage =
+          error.response?.data?.message || 'Помилка при створенні історії.';
+
+        if (
+          error.response?.status === 401 ||
+          error.response?.data?.message === 'Missing access token'
+        ) {
+          errorMessage = 'Будь ласка, увійдіть в акаунт, щоб створити історію.';
+        }
+
+        toast.error(errorMessage);
       } else {
         toast.error('Помилка при створенні історії.');
       }
