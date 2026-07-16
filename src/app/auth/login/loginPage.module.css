@@ -38,9 +38,11 @@
 }
 
 .field {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding-bottom: 18px;
 }
 
 .label {
@@ -76,7 +78,11 @@
 }
 
 .errorText {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   font-size: 12px;
+  line-height: 16px;
   color: var(--color-error);
 }
 

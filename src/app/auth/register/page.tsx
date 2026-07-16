@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import styles from './registerPage.module.css';
 import { AuthBar } from '@/app/components/authBar/authBar';
 // 1. Імпортуємо твоє Zustand-сховище
-import { useAuthStore } from '@/auth/model/authStore'; 
+import { useAuthStore } from '@/auth/model/authStore';
 
 interface FormValues {
   name: string;
@@ -69,9 +69,7 @@ export default function RegistrationForm() {
       router.push('/');
     },
     onError: (error: any) => {
-      const errorMsg =
-        error.response?.data?.message ||
-        'Помилка реєстрації. Спробуйте пізніше.';
+      const errorMsg = 'Помилка реєстрації. Спробуйте пізніше.';
       toast.error(errorMsg);
     },
   });
@@ -98,62 +96,86 @@ export default function RegistrationForm() {
           validationSchema={RegisterFormSchema}
           onSubmit={handleSubmit}
         >
-          {({ isValid, dirty }) => (
-            <Form className={styles.form}>
-              <div className={styles.field}>
-                <label className={styles.label}>Імʼя та Прізвище*</label>
-                <Field
-                  type="text"
-                  name="name"
-                  placeholder="Ваше імʼя та прізвище"
-                  className={styles.input}
-                />
-                <ErrorMessage
-                  name="name"
-                  component="span"
-                  className={styles.error}
-                />
-              </div>
+          {({ isValid, dirty, errors, touched }) => {
+            const nameError = touched.name && errors.name;
+            const emailError = touched.email && errors.email;
+            const passwordError = touched.password && errors.password;
 
-              <div className={styles.field}>
-                <label className={styles.label}>Пошта*</label>
-                <Field
-                  type="email"
-                  name="email"
-                  placeholder="hello@podorozhnyky.ua"
-                  className={styles.input}
-                />
-                <ErrorMessage
-                  name="email"
-                  component="span"
-                  className={styles.error}
-                />
-              </div>
+            return (
+              <Form className={styles.form} noValidate>
+                <div className={styles.field}>
+                  <label className={styles.label} htmlFor="name">
+                    Імʼя та Прізвище*
+                  </label>
 
-              <div className={styles.field}>
-                <label className={styles.label}>Пароль*</label>
-                <Field
-                  type="password"
-                  name="password"
-                  placeholder="********"
-                  className={styles.input}
-                />
-                <ErrorMessage
-                  name="password"
-                  component="span"
-                  className={styles.error}
-                />
-              </div>
+                  <Field
+                    id="name"
+                    type="text"
+                    name="name"
+                    placeholder="Ваше імʼя та прізвище"
+                    className={`${styles.input} ${
+                      nameError ? styles.inputError : ''
+                    }`}
+                    disabled={isPending}
+                  />
 
-              <button
-                type="submit"
-                className={styles.submit}
-                disabled={isPending || !(isValid && dirty)}
-              >
-                {isPending ? 'Завантаження...' : 'Зареєструватись'}
-              </button>
-            </Form>
-          )}
+                  <span className={styles.errorText}>
+                    {nameError ? errors.name : '\u00A0'}
+                  </span>
+                </div>
+
+                <div className={styles.field}>
+                  <label className={styles.label} htmlFor="email">
+                    Пошта*
+                  </label>
+
+                  <Field
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="hello@podorozhnyky.ua"
+                    className={`${styles.input} ${
+                      emailError ? styles.inputError : ''
+                    }`}
+                    disabled={isPending}
+                  />
+
+                  <span className={styles.errorText}>
+                    {emailError ? errors.email : '\u00A0'}
+                  </span>
+                </div>
+
+                <div className={styles.field}>
+                  <label className={styles.label} htmlFor="password">
+                    Пароль*
+                  </label>
+
+                  <Field
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="********"
+                    className={`${styles.input} ${
+                      passwordError ? styles.inputError : ''
+                    }`}
+                    disabled={isPending}
+                  />
+
+                  <span className={styles.errorText}>
+                    {passwordError ? errors.password : '\u00A0'}
+                  </span>
+                </div>
+
+                <button
+                  type="submit"
+                  className={styles.submit}
+                  disabled={isPending}
+                >
+                  {isPending ? 'Завантаження...' : 'Зареєструватись'}
+                </button>
+              </Form>
+            );
+          }}
         </Formik>
       </div>
     </>

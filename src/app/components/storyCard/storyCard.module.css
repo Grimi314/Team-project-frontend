@@ -71,11 +71,14 @@
 .title {
   display: -webkit-box;
   overflow: hidden;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
   color: #1b391b;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.5;
-  -webkit-box-orient: vertical;
 }
 
 .actions {

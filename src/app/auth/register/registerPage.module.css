@@ -71,12 +71,20 @@
     border-color: var(--color-primary);
 }
 
-.inputError {
+.input.inputError {
+    border-color: var(--color-error);
+}
+
+.input.inputError:focus {
     border-color: var(--color-error);
 }
 
 .errorText {
+    display: block;
+    min-height: 18px;
+    font-family: var(--font-main);
     font-size: 12px;
+    line-height: 150%;
     color: var(--color-error);
 }
 
