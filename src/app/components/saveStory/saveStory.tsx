@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 
 import { useAuthStore } from '@/auth/model/authStore';
@@ -42,7 +40,7 @@ export default function SaveStory({ storyId }: SaveStoryProps) {
   };
 
   return (
-    <>
+    <div>
       <section className={styles.saveStory}>
         <h2 className={styles.title}>Збережіть собі історію</h2>
 
@@ -64,9 +62,7 @@ export default function SaveStory({ storyId }: SaveStoryProps) {
         </button>
       </section>
 
-      {feedbackMessage && (
-        <p className={styles.message}>{feedbackMessage}</p>
-      )}
+      {feedbackMessage && <p className={styles.message}>{feedbackMessage}</p>}
     </div>
   );
 }
