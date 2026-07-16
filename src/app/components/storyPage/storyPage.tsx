@@ -4,31 +4,59 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import StoryDetails from '../storyDetails/storyDetails';
 import SaveStory from '../saveStory/saveStory';
-
 import { api } from '@/lib/api/axios';
-import { endpoints } from '@/lib/api/endpoints';
 import type { Story } from '@/types/story';
+import type { CurrentUserType } from '@/app/components/storyCard/storyCard';
+import Loader from '../loader/loader';
 
 type Props = {
   storyId: string;
 };
 
-export default async function StoryPage({ storyId }: Props) {
-  try {
-    const response = await api.get<{ story: Story }>(
-      endpoints.stories.byId(storyId),
-    );
+export default function StoryPage({ storyId }: Props) {
+  const [currentUser, setCurrentUser] = useState<CurrentUserType>(null);
+  const [story, setStory] = useState<Story | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const story = response.data.story;
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const res = await api.get('/users/me');
+        setCurrentUser(res.data);
+      } catch (error) {
+        setCurrentUser(null);
+      }
+    };
 
-    return (
-      <>
-        <StoryDetails story={story} />
-        <SaveStory storyId={story._id} />
-      </>
-    );
-  } catch {
-    return <p>Не вдалося завантажити історію</p>;
+    fetchCurrentUser();
+  }, []);
+
+  useEffect(() => {
+    const fetchStory = async () => {
+      try {
+        setIsLoading(true);
+        const response = await api.get<{ story: Story }>(
+          `https://team-project-backend-ezbf.onrender.com/stories/${storyId}`,
+        );
+        setStory(response.data.story);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          console.log('Status:', error.response?.status);
+          console.log('Backend error:', error.response?.data);
+          console.log('Request URL:', error.config?.url);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (storyId) {
+      fetchStory();
+    }
+  }, [storyId]);
+
+  if (isLoading) {
+    return <Loader />;
   }
 
   if (!story) {

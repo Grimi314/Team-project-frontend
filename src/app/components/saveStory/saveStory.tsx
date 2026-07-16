@@ -1,68 +1,87 @@
-import { useState } from 'react';
+'use client';
 
-import { useAuthStore } from '@/auth/model/authStore';
-import { removeSavedStory, saveStory } from '@/lib/api/savedStories';
-
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { saveStory, removeSavedStory } from '@/lib/api/savedStories';
+import type { CurrentUserType } from '@/app/components/storyCard/storyCard';
 import styles from './saveStory.module.css';
+import ErrorWhileSavingModal from '../errorWhileSavingModal/errorWhileSavingModal';
 
-type SaveStoryProps = {
+interface SaveStoryProps {
   storyId: string;
-};
+  currentUser: CurrentUserType;
+}
 
-export default function SaveStory({ storyId }: SaveStoryProps) {
-  const isAuthorized = useAuthStore((state) => state.isAuth);
+export default function SaveStory({ storyId, currentUser }: SaveStoryProps) {
+  const router = useRouter();
   const [isSaved, setIsSaved] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
-  const handleClick = async () => {
-    if (!isAuthorized) {
-      setFeedbackMessage('Увійдіть, щоб зберегти історію');
+  useEffect(() => {
+    if (currentUser && currentUser.savedArticles) {
+      setIsSaved(currentUser.savedArticles.includes(storyId));
+    }
+  }, [currentUser, storyId]);
+
+  const handleSaveAction = async () => {
+    if (isLoading) return;
+
+    if (!currentUser) {
+      setShowModal(true);
       return;
     }
 
     try {
       setIsLoading(true);
-      setFeedbackMessage('');
 
       if (isSaved) {
         await removeSavedStory(storyId);
+        setIsSaved(false);
+        toast.success('Статтю видалено зі збережених');
       } else {
         await saveStory(storyId);
+        setIsSaved(true);
+        toast.success('Статтю збережено');
       }
-
-      setIsSaved((prev) => !prev);
-    } catch {
-      setFeedbackMessage('Не вдалося змінити стан збереження');
+    } catch (error) {
+      console.error('Помилка при зміні стану збереження:', error);
+      toast.error('Не вдалося виконати дію');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div>
-      <section className={styles.saveStory}>
-        <h2 className={styles.title}>Збережіть собі історію</h2>
-
-        <p className={styles.description}>
-          Вона буде доступна у вашому профілі у розділі збережене
-        </p>
-
-        <button
-          type="button"
-          onClick={handleClick}
-          disabled={isLoading}
-          className={styles.button}
-        >
-          {isLoading
-            ? 'Завантаження...'
-            : isSaved
-              ? 'Видалити зі збережених'
-              : 'Зберегти'}
-        </button>
-      </section>
-
-      {feedbackMessage && <p className={styles.message}>{feedbackMessage}</p>}
+    <div className="container">
+      <div className={styles.saveStoryContainer}>
+        <div className={styles.saveStory}>
+          <h3 className={styles.title}>
+            {isSaved ? 'Історію збережено' : 'Збережіть собі історію'}
+          </h3>
+          <p className={styles.description}>
+            {isSaved
+              ? 'Вона доступна у вашому профілі у розділі збережене'
+              : 'Вона буде доступна у вашому профілі у розділі збережене'}
+          </p>
+          <button
+            type="button"
+            className={`${styles.button} ${isSaved ? styles.buttonSaved : ''}`}
+            onClick={handleSaveAction}
+            disabled={isLoading}
+          >
+            {isLoading
+              ? 'Завантаження'
+              : isSaved
+                ? 'Видалити зі збережених'
+                : 'Зберегти'}
+          </button>
+        </div>
+      </div>
+      {showModal && (
+        <ErrorWhileSavingModal onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 }
