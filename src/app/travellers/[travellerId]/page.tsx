@@ -58,9 +58,17 @@ export default function TravellerPage() {
     if (isInitial) setIsInitialLoading(true);
     setIsLoadingMore(true);
 
+  const getItemsPerPage = (): number => {
+    if (typeof window === 'undefined') return 6;
+  
+    const isTabletOrMobile = window.matchMedia('(max-width: 1439px)').matches;
+    return isTabletOrMobile ? 4 : 6;
+    };
+
     try {
+      const itemsPerPage = getItemsPerPage();
       const res = await api.get(
-        `/users/${travellerId}/stories?page=${targetPage}&perPage=6`,
+        `/users/${travellerId}/stories?page=${targetPage}&perPage=${itemsPerPage}`,
       );
 
       const rawArticles = res.data?.articles || [];
