@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMutation, useQueryClient } from '@tanstack/react-query'; 
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { api } from '@/lib/api/axios';
@@ -13,8 +13,6 @@ import { AuthBar } from '@/app/components/authBar/authBar';
 import styles from './loginPage.module.css';
 
 import { useAuthStore } from '@/auth/model/authStore';
-
-
 
 type LoginValues = {
   email: string;
@@ -35,18 +33,16 @@ const validationSchema = Yup.object({
 export default function LoginPage() {
   const setUser = useAuthStore((state) => state.setUser);
   const router = useRouter();
-  const queryClient = useQueryClient(); 
+  const queryClient = useQueryClient();
   const [showPassword, setShowPassword] = useState(false);
-  
- 
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: LoginValues) => {
       const { data } = await api.post(endpoints.auth.login, values);
-      return data; 
+      return data;
     },
 
-onSuccess: async (data) => {
+    onSuccess: async (data) => {
       toast.success('Успішний вхід!');
 
       const token = data.token ?? data.accessToken ?? data.data?.token;
@@ -75,8 +71,7 @@ onSuccess: async (data) => {
     },
     onError: (error: unknown) => {
       const message = axios.isAxiosError<{ message?: string }>(error)
-        ? (error.response?.data?.message ??
-          'Не вдалося увійти. Перевірте дані та спробуйте ще раз.')
+        ? 'Не вдалося увійти. Перевірте дані та спробуйте ще раз.'
         : 'Не вдалося увійти. Перевірте дані та спробуйте ще раз.';
       toast.error(message);
     },
