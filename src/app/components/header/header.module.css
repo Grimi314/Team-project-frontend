@@ -105,7 +105,7 @@
 
     background-color: rgba(0, 0, 0, 0.05);
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.5;
     color: #1b391b;
   }
@@ -120,6 +120,7 @@
     width: 137px;
     height: 38px;
     background-color: #4a9849;
+    color: #fff;
   }
 
   .buttonContainer {

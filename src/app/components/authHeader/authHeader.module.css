@@ -1,8 +1,8 @@
-.logo{
-    height: 36px;
-    width: 124px;
-    fill: black;
-    color: black;
+.logo {
+  height: 36px;
+  width: 124px;
+  fill: black;
+  color: black;
 }
 
 .header {
@@ -17,8 +17,8 @@
 .container {
   width: 100%;
   max-width: 335px;
-  height: 60px; 
-  padding: 0 16px;
+  height: 60px;
+  /* padding: 0 16px; */
   display: flex;
   align-items: center;
   margin: 0 auto;
@@ -56,12 +56,13 @@
 /* 704px */
 @media screen and (min-width: 704px) {
   .container {
-    max-width: 704px;
+    max-width: 768px;
     height: 68px;
-    padding: 0 24px;
+    padding: 0 32px;
   }
-  
-  .logoLine1, .logoLine2 {
+
+  .logoLine1,
+  .logoLine2 {
     font-size: 15px;
   }
 }
@@ -70,15 +71,16 @@
 @media screen and (min-width: 1312px) {
   .container {
     max-width: 1312px;
-    height: 72px; 
-    padding: 0;   
+    height: 72px;
+    padding: 0;
   }
 
   .logoIcon {
     font-size: 24px;
   }
 
-  .logoLine1, .logoLine2 {
+  .logoLine1,
+  .logoLine2 {
     font-size: 16px;
   }
 }
