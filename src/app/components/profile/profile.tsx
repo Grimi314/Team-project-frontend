@@ -19,6 +19,7 @@ import { Modal } from '@/app/components/modal/modal';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
+import { api } from '@/lib/api/axios';
 
 import { useAuthStore } from '@/auth/model/authStore';
 import { updateUserProfile } from '@/auth/api/authApi';
@@ -35,6 +36,12 @@ type ProfileState = {
   isLoading: boolean;
   isLoadingMore: boolean;
 };
+
+type CurrentUserType = {
+  _id: string;
+  name: string;
+  savedArticles: string[];
+} | null;
 
 const getStoriesPerPage = () => {
   if (typeof window === 'undefined') {
@@ -85,8 +92,22 @@ export function Profile({ tab }: ProfileProps) {
   const [perPage, setPerPage] = useState(getStoriesPerPage);
   const [profileState, setProfileState] = useState(initialState);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<CurrentUserType>(null);
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const res = await api.get('https://team-project-backend-ezbf.onrender.com/users/me');
+        setCurrentUser(res.data); 
+      } catch (error) {
+        setCurrentUser(null); 
+      }
+    };
+  
+    fetchCurrentUser();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -241,7 +262,7 @@ export function Profile({ tab }: ProfileProps) {
                   const trimmedEmail = values.email.trim();
                   const trimmedAvatar = values.avatar.trim();
 
-                  if (trimmedName && trimmedName !== user?.name) {
+                  if (trimmedName && trimmedName !== currentUser?.name) {
                     data.name = trimmedName;
                   }
 
@@ -264,11 +285,10 @@ export function Profile({ tab }: ProfileProps) {
                   const updatedAvatarUrl =
                     updatedUser.avatarUrl ?? updatedUser.avatar ?? null;
 
-                  setUser({
+                  setCurrentUser({
                     _id: updatedUser._id,
                     name: updatedUser.name,
-                    email: updatedUser.email,
-                    avatarUrl: updatedAvatarUrl ?? undefined,
+                    savedArticles: updatedUser.savedArticles || [],
                   });
 
                   setProfileState((currentState) => ({
@@ -386,6 +406,7 @@ export function Profile({ tab }: ProfileProps) {
               stories={profileState.stories}
               hasMore={profileState.hasMore}
               isLoadingMore={profileState.isLoadingMore}
+              currentUser={currentUser}
               onShowMore={() => void handleShowMore()}
             />
           )}
