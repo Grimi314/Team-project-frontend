@@ -44,6 +44,10 @@
   padding-bottom: 12px;
 }
 
+.joinLink:hover {
+  background-color: #689267;
+}
+
 .joinContent {
   background-image: url('/join-mobile.jpg');
   background-repeat: no-repeat;

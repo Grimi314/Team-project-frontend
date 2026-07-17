@@ -147,3 +147,7 @@
     width: calc((100% - 72px) / 4);
   }
 }
+
+.buttonTravelers:hover {
+  background-color: #8dd18c;
+}
