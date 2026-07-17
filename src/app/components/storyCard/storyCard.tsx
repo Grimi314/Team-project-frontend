@@ -54,7 +54,7 @@ export function StoryCard({
   }, [initialIsSaved, currentUser, story.id, tab]);
 
   const isOwnStory = tab === 'own';
-  const actionIcon = isOwnStory ? 'icon-edit' : 'icon-bookmark';
+  const actionIcon = isOwnStory ? 'icon-bookmark' : 'icon-bookmark';
 
   const actionLabel = isOwnStory
     ? 'Редагувати історію'
