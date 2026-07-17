@@ -10,13 +10,10 @@
 }
 
 .overlay {
-  position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 80px;
-  /* або 120px */
 }
 
 .title {
