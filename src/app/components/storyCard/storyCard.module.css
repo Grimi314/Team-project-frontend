@@ -87,14 +87,13 @@
   gap: 16px;
   margin-top: auto;
 }
-
-
-
 .actionIcon {
-  width: 24px;
-  height: 24px;
-  fill: #000;
+ 
+  fill: #fff;
 }
+
+
+
 
 .primaryAction,
 .bookmarkAction
@@ -116,6 +115,12 @@
     color 0.2s ease,
     opacity 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.actionIcon {
+  width: 24px;
+  height: 24px;
+  fill: #000;
 }
 
 .primaryAction {
@@ -142,7 +147,10 @@
   border-color: #4a9849;
   color: #fff;
   outline: none;
+.actionIcon {
 
+    fill: #fff;
+  }
  
 }
 
@@ -152,25 +160,39 @@
   border-color: #254c24;
   color: #fff;
 
+.actionIcon {
 
+    fill: #fff;
+  }
 }
 
 .bookmarkAction.activeBookmark {
   background: #4a9849;
   border-color: #4a9849;
   color: #fff;
+.actionIcon {
 
+    fill: #fff;
+  }
 }
 
 .bookmarkAction.activeBookmark:hover,
 .bookmarkAction.activeBookmark:focus-visible {
   background: #397638;
   border-color: #397638;
+  .actionIcon {
+  
+      fill: #fff;
+    }
 }
 
 .bookmarkAction.activeBookmark:active {
   background: #254c24;
   border-color: #254c24;
+  .actionIcon {
+  
+      fill: #fff;
+    }
 }
 
 .primaryAction[aria-disabled='true'],
@@ -182,12 +204,6 @@
 .primaryAction:focus-visible,
 .bookmarkAction:focus-visible {
   box-shadow: 0 0 0 2px rgba(74, 152, 73, 0.2);
-}
-
-.actionIcon {
-  width: 24px;
-  height: 24px;
-  fill: #000;
 }
 
 
