@@ -51,13 +51,13 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
               <div className={styles.authorBlock}>
                 <span className={styles.metaLabel}>Автор статті</span>
 
-                <span className={styles.metaValue}>{story.article}</span>
+                <span className={styles.metaValue}>{story.ownerId?.name}</span>
               </div>
 
               <div className={styles.dateBlock}>
                 <span className={styles.metaLabel}>Опубліковано</span>
 
-                <span className={styles.metaValue}>{story.rate}</span>
+                <span className={styles.metaValue}>{story.date}</span>
               </div>
             </div>
 
@@ -69,7 +69,7 @@ export default function StoryDetails({ story }: StoryDetailsProps) {
       </div>
 
       <div className={styles.description}>
-        <p className={styles.descriptionText}>{story.date}</p>
+        <p className={styles.descriptionText}>{story.article}</p>
       </div>
     </section>
   );
