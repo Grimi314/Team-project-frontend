@@ -7,7 +7,7 @@
   font-weight: 700;
   /* 52px — точне значення з макету (Display/xl), завелике для вузької картки
      на мобільному, тож тут зменшено; на 768px+ повертаю точний розмір */
-  font-size: 32px;
+  font-size: 28px;
   line-height: 120%;
   letter-spacing: -0.01em;
   color: #000000;
@@ -17,14 +17,14 @@
 
 @media (min-width: 768px) {
   .title {
-    font-size: 52px;
+    font-size: 44px;
   }
 }
 
 .subtitle {
   font-family: var(--font-main);
   font-weight: 400;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 150%;
   text-align: center;
   color: #000000;
@@ -48,7 +48,7 @@
 .label {
   font-family: var(--font-main);
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 150%;
   color: #000000;
 }
@@ -59,7 +59,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-input);
   background: var(--color-white);
-  font-size: 14px;
+  font-size: 16px;
   color: var(--color-text);
   outline: none;
   transition: border-color 0.2s ease;
@@ -126,7 +126,7 @@
   background: var(--color-primary);
   color: var(--color-white);
   font-family: var(--font-main);
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 150%;
   transition:
@@ -141,4 +141,18 @@
 .submit:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+@media (min-width: 1440px) {
+  .title {
+    font-size: 52px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+  .label {
+    font-size: 18px;
+  }
+  .submit {
+    font-size: 20px;
+  }
 }

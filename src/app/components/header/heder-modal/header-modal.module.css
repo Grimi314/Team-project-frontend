@@ -15,50 +15,48 @@
 } */
 
 .mobileMenu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
 
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 
-    background: #fff;
+  background: #fff;
 
-    z-index: 9999;
+  z-index: 9999;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
-    height: 36px;
-    width: 124px;
-fill: #1B391B;
-    margin: 16px 0;
+  height: 36px;
+  width: 124px;
+  fill: #1b391b;
+  margin: 16px 0;
 }
 
-.logoButtonContainer{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 24px;
+.logoButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
 }
 
-
-.closeButton{
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 6px;
-    padding: 4px;
-    width: 32px;
-    height: 32px;
-    background-color: rgba(0, 0, 0, 0.05);
-    transition: all 250ms ease;
-
+.closeButton {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: all 250ms ease;
 }
 
 /* .logoButtonContainer{
@@ -67,216 +65,200 @@ fill: #1B391B;
 
 .closeButton:hover,
 .closeButton:focus {
-    color: #fff;
-    background-color: #4a9849;
-    border: 1px solid #4a9849;
+  color: #fff;
+  background-color: #4a9849;
+  border: 1px solid #4a9849;
 }
 
 .closeButton:active {
-    border: 1px solid rgba(255, 255, 255, 0);
-    background-color: #254c24;
-    color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: #254c24;
+  color: #fff;
+  fill: #fff;
+
+  .closeIcon {
     fill: #fff;
-
-    .closeIcon{
-        fill: #fff;
-    }
+  }
 }
 
-.closeIcon{
-    fill: #000;
-    width: 24px;
-    height: 24px;
-    transition: all 250ms ease;
-    
+.closeIcon {
+  fill: #000;
+  width: 24px;
+  height: 24px;
+  transition: all 250ms ease;
 }
 
-
-.navList{
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    align-items: center;
-    list-style-type: none;
-     margin-bottom: 266px;
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  list-style-type: none;
+  margin-bottom: 266px;
 }
 
 .navText {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #1b391b;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1b391b;
 }
 
-.navListItem{
-font-weight: 400;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #1b391b;
-
+.navListItem {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1b391b;
 }
 
 .buttonEddStory {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #4a9849;
-    border-radius: 6px;
-    margin:0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  margin: 0 auto;
 
-width: 335px;
-    
-    height: 32px;
-    background-color: #4a9849;
+  width: 335px;
 
+  height: 32px;
+  background-color: #4a9849;
 
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #fff;
-    font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .buttonEddStory:hover,
 .buttonEddStory:focus {
-    background-color: #def2de;
-    border: 1px solid #4a9849;
-    color: #1b391b;
+  background-color: #def2de;
+  border: 1px solid #4a9849;
+  color: #1b391b;
 }
 
 .buttonEddStory:active {
-    color: #fff;
-    background-color: #4a9849;
-    border: 1px solid #4a9849;
+  color: #fff;
+  background-color: #4a9849;
+  border: 1px solid #4a9849;
 }
 
 .buttonEddStory:disabled {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
-
-.modalWrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    align-items: center;
-    
+.modalWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
 }
 
 .buttonLogin {
-    display: flex;
-        align-items: center;
-        justify-content: center;
-    
-        border: 1px solid rgba(0, 0, 0, 0.15);
-        border-radius: 6px;
-   width: 335px;
-        
-        height: 32px;
-    
-        background-color: rgba(0, 0, 0, 0.05);
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 1.5;
-        color: #1b391b;
-    transition: all 250ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  width: 335px;
+
+  height: 32px;
+
+  background-color: rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1b391b;
+  transition: all 250ms ease;
 }
 
 .buttonRegister {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    border: 1px solid #4a9849;
-    border-radius: 6px;
-width: 335px;
+  border: 1px solid #4a9849;
+  border-radius: 6px;
+  color: #fff;
+  width: 335px;
 
-    height: 32px;
-    background-color: #4a9849;
+  height: 32px;
+  background-color: #4a9849;
 
-    transition: all 250ms ease;
+  transition: all 250ms ease;
 }
-
 
 .buttonRegister:hover,
 .buttonRegister:focus {
-    background-color: #def2de;
-    border: 1px solid #4a9849;
-    color: #1b391b;
+  background-color: #def2de;
+  border: 1px solid #4a9849;
+  color: #1b391b;
 }
 
 .buttonRegister:active {
-    color: #fff;
-    background-color: #4a9849;
-    border: 1px solid #4a9849;
+  color: #fff;
+  background-color: #4a9849;
+  border: 1px solid #4a9849;
 }
 
 .buttonRegister:disabled {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .buttonLogin:hover,
 .buttonLogin:focus {
-    color: #fff;
-    background-color: #4a9849;
-    border: 1px solid #4a9849;
+  color: #fff;
+  background-color: #4a9849;
+  border: 1px solid #4a9849;
 }
 
 .buttonLogin:active {
-    border: 1px solid rgba(255, 255, 255, 0);
-    background-color: #254c24;
-    color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: #254c24;
+  color: #fff;
 }
 
-.modalAuthBlockTablet{
-    display: none;
+.modalAuthBlockTablet {
+  display: none;
 }
-
-
-
 
 @media screen and (min-width: 768px) {
-    .container {
-        padding: 0 32px 92px 32px;
-        min-width: 768px;
-        position: relative;
-    }
-    .modalWrapper{
-        position: absolute;
-        top: 40px;
-        right: 80px;
-        flex-direction: row;
-    }
+  .container {
+    padding: 0 32px 92px 32px;
+    min-width: 768px;
+    position: relative;
+  }
+  .modalWrapper {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    flex-direction: row;
+  }
 
-    .buttonEddStory{
+  .buttonEddStory {
     width: 196px;
-        height: 32px;
-    }
+    height: 32px;
+  }
 
-    .buttonLogin{
+  .buttonLogin {
     width: 56px;
-        height: 32px;
-    }
+    height: 32px;
+  }
 
-    .buttonRegister{
+  .buttonRegister {
     width: 114px;
-        height: 32px;
-    }
+    height: 32px;
+  }
 
-    .modalAuthBlock{
-       display: none;
-    }
+  .modalAuthBlock {
+    display: none;
+  }
 
-        .modalAuthBlockTablet {
-            display: flex;
-             margin: 0 auto;
-            justify-self: center;
-        }
-
-
+  .modalAuthBlockTablet {
+    display: flex;
+    margin: 0 auto;
+    justify-self: center;
+  }
 }
-
-
-
-
-
