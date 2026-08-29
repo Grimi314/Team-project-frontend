@@ -34,7 +34,7 @@
 .logo {
   height: 36px;
   width: 124px;
-  fill: #1b391b;
+  fill: var(--color-text);
   margin: 16px 0;
 }
 

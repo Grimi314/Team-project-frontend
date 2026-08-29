@@ -28,6 +28,61 @@
 
   --radius-button: 6px;
   --radius-input: 8px;
+
+  /* LIGHT/DARK THEME */
+
+  --color-background: #eef8ee;  
+  --color-text: #1b391b;
+  --nav-item-hover: #254c24;
+  --color-btn-border: #00000026;
+  --color-bg-btn-hover: #def2de;
+  --color-text-btn-hover: #1b391b;
+  --color-card-bg: #d5e8d5;
+  --color-bg-arrow: #def2de;
+  --color-bg-arrow-disabled: #f2f2f2;
+  --color-bg-arrow-hover: #f2f2f2;
+  --color-border-arrow-hover: #8dd18c;
+  --color-border-arrow: #00000026;
+  --color-btn-join: #689267;
+  --color-footer-bg: #def2de;
+  --color-auth-active: #4a9849;
+  --color-auth-hover: #4a9849;
+  --color-btn-bg-auth: #3d7e3c;
+  --color-bg-category: rgba(0, 0, 0, 0.05);
+  --color-bg-story: #d9f3d9;
+  --color-bg-btn-load: #5dbe5c;
+  --color-traveler-bg: #def2de;
+  --color-traveler-btn-border: var(--color-scheme-2-border);
+  --color-travelr-btn-text: var(--color-scheme-2-text);
+
+}
+
+.dark-theme {
+  --color-background: #254c24;
+  --color-text: #eef8ee;
+   --nav-item-hover: #eef8ee;
+  --color-btn-border: #def2de;
+  --color-bg-btn-hover: #1b391b;
+  --color-text-btn-hover: #eef8ee;
+  --color-card-bg: #1b391b;
+  --color-bg-arrow: #1b391b;
+  --color-bg-arrow-disabled: #1b391b;
+  --color-bg-arrow-hover: #1b391b;
+  --color-border-arrow-hover: #1b391b;
+  --color-border-arrow: #def2de;
+  --color-btn-join: #1b391b;
+  --color-footer-bg: #1b391b;
+   --color-auth-active: #eef8ee;
+   --color-border: transparent;
+   --color-auth-hover: none;
+   --color-btn-bg-auth: #1b391b;
+   --color-bg-category: rgba(0, 0, 0, 0.3);
+   --color-bg-story: #1b391b;
+   --color-bg-btn-load: #1b391b;
+   --color-traveler-bg: #1b391b;
+   --color-traveler-btn-border: #def2de;
+   --color-travelr-btn-text: #def2de;
+
 }
 
 @media (prefers-color-scheme: dark) {

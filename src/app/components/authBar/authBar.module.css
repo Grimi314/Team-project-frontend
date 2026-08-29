@@ -12,7 +12,7 @@
   font-family: var(--font-main);
   font-size: 16px;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   transition:
@@ -21,10 +21,10 @@
 }
 
 .tab:hover {
-  color: var(--color-primary);
+  color: var(--color-auth-hover);
 }
 
 .active {
-  color: var(--color-primary);
-  border-bottom-color: var(--color-primary);
+  color: var(--color-auth-active);
+  border-bottom-color: var(--color-auth-active);
 }

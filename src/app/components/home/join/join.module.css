@@ -1,6 +1,7 @@
 .joinSection {
   padding-top: 32px;
   padding-bottom: 32px;
+  background-color: var(--color-background);
 }
 
 .joinTitle {
@@ -45,7 +46,7 @@
 }
 
 .joinLink:hover {
-  background-color: #689267;
+  background-color: var(--color-btn-join);
 }
 
 .joinContent {

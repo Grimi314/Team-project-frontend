@@ -36,8 +36,8 @@
 }
 
 .button:hover:not(:disabled) {
-  background: var(--color-mantis-lighter);
-  color: var(--color-scheme-2-text);
+  background: var(--color-bg-arrow-hover);
+  color: var(--color-text-btn-hover);
 }
 
 .button:active:not(:disabled) {

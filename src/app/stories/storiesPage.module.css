@@ -1,5 +1,5 @@
 .page {
-  background-color: #eef8ee;
+  background-color: var(--color-background);
   color: #1b391b;
   font-family: 'Montserrat', Arial, sans-serif;
 }
@@ -8,12 +8,12 @@
   width: 100%;
   max-width: 1312px;
   margin: 0 auto;
-  padding: 48px 0 72px;
+  padding: 144px 0 72px;
 }
 
 .title {
   margin: 0 0 40px;
-  color: #000000;
+  color: var(--color-text);
   font-size: 56px;
   font-weight: 700;
   line-height: 110%;
@@ -47,7 +47,7 @@
   border: none;
   border-radius: 6px;
   background-color: transparent;
-  color: #1b391b;
+  color: var(--color-text);
   font-family: 'Montserrat', Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -61,12 +61,12 @@
 
 .filterButton:hover,
 .filterButton:focus-visible {
-  background-color: #f2f2f2;
+  background-color: var(--color-bg-arrow-hover);
   outline: none;
 }
 
 .activeFilter {
-  background-color: #f2f2f2;
+  background-color: var(--color-bg-arrow-hover);
   font-size: 20px;
   font-weight: 500;
 }
@@ -121,7 +121,7 @@
 
 .loadMore:hover,
 .loadMore:focus-visible {
-  background-color: #5dbe5c;
+  background-color: var(--color-bg-btn-load);
   border-color: #5dbe5c;
   outline: none;
 }

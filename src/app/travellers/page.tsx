@@ -24,8 +24,10 @@ export const metadata: Metadata = {
 
 const TravellersPage = () => {
   return (
+    <div className={styles.wrrap}>
     <div className={styles.travellersContainer}>
       <TravellersList />
+    </div>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 .logo {
   height: 36px;
   width: 124px;
-  fill: black;
-  color: black;
+  fill: var(--color-text);
+  color: var(--color-text);
 }
 
 .header {

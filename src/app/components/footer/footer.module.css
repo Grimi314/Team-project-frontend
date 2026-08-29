@@ -2,13 +2,13 @@
     height: 36px;
     width: 124px;
    
-    fill:#1B391B;
+    fill:var(--color-text);
     margin-bottom: 40px;
 }
 
 .container{
     width: 100%;
-    background-color: #def2de;
+    background-color: var(--color-footer-bg);
 }
 
 .footer{
@@ -51,6 +51,7 @@
 .socialIcon{
     width: 32px;
     height: 32px;
+    fill: var(--color-text);
 }
 
 .tabletWrapper {
@@ -65,7 +66,7 @@
         font-size: 12px;
         line-height: 1.5;
         text-align: center;
-        color: #1b391b;
+        color: var(--color-text);
         height: 36px;
         width: 250px;
        
@@ -73,7 +74,7 @@
 }
 
 .footerTextContainer{
-    border-top: 1px solid  #1b391b;;
+    border-top: 1px solid  var(--color-text);;
     margin-bottom: 32px;
     width: 335px;
     
@@ -83,7 +84,11 @@
 font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
-    color: #1b391b;
+    color: var(--color-text);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 4px;
+    transition: .333s ease-in-out;
 }
 
 
@@ -172,4 +177,9 @@ font-weight: 400;
         width: 1313px;
     }
 
+}
+
+
+.navText:hover {
+    border-color: var(--color-text-btn-hover);
 }

@@ -5,7 +5,7 @@
   padding: 32px 16px;
   width: 335px;
   height: 217px;
-  background: #d9f3d9;
+  background: var(--color-bg-story);
   margin: auto;
 }
 
@@ -39,7 +39,7 @@
   font-size: 18px;
   line-height: 140%;
   letter-spacing: -0.01em;
-  color: #000;
+  color: var(--color-text);
 }
 
 @media screen and (min-width: 1440px) {
@@ -54,7 +54,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-  color: #000;
+  color: var(--color-text);
 }
 
 @media screen and (min-width: 1440px) {
@@ -76,6 +76,7 @@
   font-size: 16px;
   line-height: 150%;
   color: #fff;
+  transition: .333s ease-in-out;
 }
 
 @media screen and (min-width: 1440px) {
@@ -92,8 +93,8 @@
 }
 
 .button:hover {
-  background: #def2de;
-  color: #000;
+  background: var(--color-footer-bg);
+  color: var(--color-text-btn-hover);
 }
 
 .button:active {
