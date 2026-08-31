@@ -3,7 +3,7 @@
   flex-direction: column;
   overflow: hidden;
   border-radius: 12px;
-  background: #def2de;
+  background: var(--color-card-bg);
   font-family: var(--font-main), Arial, sans-serif;
   
 }
@@ -43,7 +43,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #1b391b;
+  color: var(--color-text);
   font-size: 12px;
   line-height: 1.5;
 }
@@ -75,7 +75,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 
-  color: #1b391b;
+  color: var(--color-text);
   font-size: 18px;
   font-weight: 700;
   line-height: 1.5;
@@ -89,7 +89,7 @@
 }
 .actionIcon {
  
-  fill: #fff;
+  fill: var( --color-text-btn-hover); 
 }
 
 
@@ -102,10 +102,10 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-text);
   border-radius: 6px;
   background: rgba(0, 0, 0, 0.05);
-  color: #1b391b;
+  color: var(--color-text);
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
@@ -120,7 +120,7 @@
 .actionIcon {
   width: 24px;
   height: 24px;
-  fill: #000;
+  fill: var( --color-text-btn-hover);
 }
 
 .primaryAction {

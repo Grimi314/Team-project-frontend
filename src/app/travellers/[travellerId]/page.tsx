@@ -138,6 +138,7 @@ export default function TravellerPage() {
   };
 
   return (
+    <section className={styles.sectionTravellerPage}>
     <div className="container">
       <section className={styles.sectionInfo}>
         <TravellerInfo
@@ -170,5 +171,6 @@ export default function TravellerPage() {
         )}
       </section>
     </div>
+    </section>
   );
 }

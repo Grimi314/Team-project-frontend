@@ -1,7 +1,8 @@
 .hero {
-  padding-top: 64px;
+  padding-top: 144px;
   padding-bottom: 64px;
   font-family: 'Montserrat', sans-serif;
+  background-color: var(--color-background);
 }
 .heroContainer {
   display: flex;
@@ -28,6 +29,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
+  color: var(--color-text);
 }
 .heroBtnLink {
   display: block;
@@ -47,8 +49,8 @@
 }
 .heroBtnLink:hover,
 .heroBtnLink:focus {
-  background-color: #def2de;
-  color: #1b391b;
+  background-color: var(--color-bg-btn-hover);
+  color: var(--color-text-btn-hover);
 }
 
 @media screen and (min-width: 768px) {
@@ -63,7 +65,7 @@
 }
 @media screen and (min-width: 1440px) {
   .hero {
-    padding-top: 72px;
+    padding-top: 144px;
     padding-bottom: 72px;
   }
   .heroContainer {
